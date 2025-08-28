@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+@font-face {
+  font-family: "Inter";
+  src: url("/Inter-VariableFont_opsz,wght.ttf");
+}
+
+body {
+  min-height: 100vh;
+  margin-top: 0;
+  font-family: "Inter", sans-serif;
+  /* overflow-x: hidden; */
+}
+
+button, a{
+    cursor: pointer;
+    transition: all 200ms linear;
+}

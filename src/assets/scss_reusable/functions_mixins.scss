@@ -1,0 +1,56 @@
+@use "sass:math";
+@use "sass:map";
+
+//scss function for coverting px values to rem for accessibilty
+// e.g font-size: rem(32) compiles to 2rem
+@function rem($pxValue) {
+  @return math.div($pxValue, 16) * 1rem;
+}
+
+//MIXINS
+
+// Reusable mixin for basic flex layouts called using the @include keyword in your styles
+@mixin flex($align: stretch, $justify: stretch, $gap: rem(0), $direction: row) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+  flex-direction: $direction;
+}
+
+//Reusable mixin for basic grid layouts
+@mixin grid($column: auto, $row: auto, $gap: rem(0), $custom: "false") {
+  display: grid;
+  gap: $gap;
+  @if $custom== "true" {
+    grid-template-columns: $column;
+    grid-template-rows: $row;
+  } @else {
+    grid-template-columns: repeat($column, 1fr);
+    grid-template-rows: repeat($row, 1fr);
+  }
+}
+
+//RESPONSIVE MIXINS
+
+//standard sizes for responsive breakpoints
+$sizes: (
+  small: rem(480),
+  medium: rem(768),
+  large: rem(1024),
+  x-large: rem(1440),
+);
+
+
+//Reusable mixins for responsive styling
+@mixin media($target-value, $media-target: max-width, $custom: "false") {
+  @if $custom== "true" {
+    @media ($media-target: $target-value) {
+      @content;
+    }
+  } @else {
+    @media ($media-target: map.get($sizes, $target-value)) {
+        @content
+    }
+  }
+}

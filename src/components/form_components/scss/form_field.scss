@@ -1,0 +1,42 @@
+@use "../../../assets/scss_reusable/functions_mixins.scss" as *;
+
+.form{
+    @include flex(stretch, stretch, rem(10), column);
+    width: 100%;
+    &_labels{
+        @include flex(flex-start, center, rem(5), column);
+        width: 100%;
+        &_names{
+            color: var(--navy-800);
+            font-size: var(--font-2xl);
+            font-weight: 700;
+        }
+        &_inputs{
+            width: 100%;
+            font-size: var(--font-lg);
+            font-weight: 600;
+            padding: rem(7) rem(10);
+            box-shadow: inset 0px 0px 5px black;
+            border-radius: rem(10);
+            &::placeholder{
+                color: var(--white-800);
+            }
+        }
+        &_error{
+            color: red;
+            font-size: var(--font-md);
+            font-weight: 500;
+        }
+        div{
+            position: relative;
+            width: 100%;
+            button{
+                position: absolute;
+                top: 50%;
+                right: rem(20);
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+        }
+    }
+}
