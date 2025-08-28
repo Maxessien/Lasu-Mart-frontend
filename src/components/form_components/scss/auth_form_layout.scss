@@ -23,19 +23,6 @@
       color: var(--orange-600);
     }
   }
-  .submit_button {
-    @include flex(center, center);
-    width: 100%;
-    font-size: var(--font-md);
-    font-weight: 600;
-    padding: rem(10) rem(15);
-    background: var(--orange-700);
-    color: var(--white-300);
-    border-radius: rem(8);
-    &:hover {
-      background: var(--orange-600);
-    }
-  }
   .line_seperator {
     color: var(--white-900);
     font-size: var(--font-md);

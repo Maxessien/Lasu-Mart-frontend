@@ -1,15 +1,16 @@
 import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import "./scss/form_field.scss";
+import "./scss/auth_form_field.scss";
 import { useState } from "react";
 
-const FormField = ({
+const AuthFormField = ({
   email = false,
   password = false,
   submitFunction,
   name = false,
   phone = false,
   hasDefault = false,
+  buttonText="",
 }) => {
   const {
     register,
@@ -129,9 +130,11 @@ const FormField = ({
             )}
           </label>
         )}
+
+        <button type="submit" className="submit_button">{buttonText}</button>
       </form>
     </>
   );
 };
 
-export default FormField;
+export default AuthFormField;

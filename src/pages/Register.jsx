@@ -1,14 +1,14 @@
 import { Link } from "react-router"
-import FormField from "../components/form_components/FormField"
-import FormLayout from "../components/form_components/FormLayout"
+import AuthFormField from "../components/form_components/AuthFormField"
+import AuthFormLayout from "../components/form_components/AuthFormLayout"
 // import { useEffect } from "react"
 
 const Register = ()=>{
     return (
         <>
-        <FormLayout type={"register"}>
-            <FormField email password name phone />
-        </FormLayout>
+        <AuthFormLayout type={"register"}>
+            <AuthFormField email password name phone buttonText="Sign Up" />
+        </AuthFormLayout>
         </>
     )
 }

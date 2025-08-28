@@ -1,7 +1,7 @@
-import { Circles } from "react-loader-spinner";
+// import { Circles } from "react-loader-spinner";
 
 const variantStyles = {
-  primary: "bg-orange-700 text-gray-200 hover:bg-orange-600",
+  primary: "bg-orange-700 text-white hover:bg-orange-600",
   secondary: "text-orange-700 bg-gray-200 hover:bg-gray-300",
   tertiary: "bg-transparent text-gray-800 hover:bg-orange-200",
 };
@@ -24,17 +24,17 @@ const Button = ({
   width = "[max-content]",
   classNames = "",
 }) => {
-  const allStyles = `${baseStyles} ${sizeStyles[size]} ${variantStyles[type]} ${
-    isDisabled && "opacity-50 cursor-not-allowed"
+  const allStyles = `rounded-${rounded} ${baseStyles} ${sizeStyles[size]} ${variantStyles[type]} w-${width} ${
+    isDisabled ? "opacity-50 cursor-not-allowed" : ""
   } ${
-    isLoading && "cursor-not-allowed"
-  } rounded-${rounded} w-${width} ${classNames}`;
+    isLoading ? "cursor-not-allowed" : ""
+  } ${classNames}`;
 
   return (
     <>
       <button disabled={isDisabled} className={allStyles}>
         {children}{" "}
-        {isLoading && (
+        {/* {isLoading && (
           <Circles
             visible={true}
             width={20}
@@ -45,7 +45,7 @@ const Button = ({
             radius={2}
             wrapperClass="ml-2"
           />
-        )}
+        )} */}
       </button>
     </>
   );
