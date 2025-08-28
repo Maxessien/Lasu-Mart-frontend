@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit"
-import isLoggedinReducer from "./store_slices/loggedinSlice.js"
+import userAuthReducer from "./store_slices/userAuthSlice.js"
 
 const store = configureStore({
     reducer: {
-        isLoggedin: isLoggedinReducer
+        userAuth: userAuthReducer
     }
 })
 
