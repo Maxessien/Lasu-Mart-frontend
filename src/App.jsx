@@ -4,25 +4,27 @@ import "./assets/scss_reusable/variables.scss";
 import Register from "./pages/Register";
 import AppHeader from "./components/page_layouts/AppHeader";
 import AppFooter from "./components/page_layouts/AppFooter";
-import HomeHero from "./components/page_layouts/HomeHero";
 import { useEffect } from "react";
 import ForgotPassword from "./pages/ForgotPassword";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/fb_config";
 import { setIdToken, setIsLoggedin } from "./store_slices/userAuthSlice";
+import Home from "./pages/Home";
+import { setScreenSize } from "./store_slices/windowSizesSlice";
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, async(user) => {
+    dispatch(setScreenSize())
+    const unSubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const idToken = await user.getIdToken()
+        const idToken = await user.getIdToken();
         dispatch(setIsLoggedin(true));
-        dispatch(setIdToken(idToken))
+        dispatch(setIdToken(idToken));
       } else {
         dispatch(setIsLoggedin(false));
-        dispatch(setIdToken(""))
+        dispatch(setIdToken(""));
       }
     });
     document.body.style.background = "var(--white-400)";
@@ -34,7 +36,7 @@ const App = () => {
       <BrowserRouter>
         <AppHeader />
         <Routes>
-          <Route path={"/"} element={<HomeHero />} />
+          <Route path={"/"} element={<Home />} />
           <Route path={"/login"} element={<Login />} />
           <Route path={"/register"} element={<Register />} />
           <Route path="/reset-password" element={<ForgotPassword />} />
