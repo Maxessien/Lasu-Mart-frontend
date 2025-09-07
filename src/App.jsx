@@ -17,6 +17,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setScreenSize())
+    window.addEventListener("resize", ()=>dispatch(setScreenSize()));
     const unSubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const idToken = await user.getIdToken();
@@ -27,7 +28,7 @@ const App = () => {
         dispatch(setIdToken(""));
       }
     });
-    document.body.style.background = "var(--white-400)";
+    document.body.style.background = "var(--main-tertiary-light)";
     return () => unSubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

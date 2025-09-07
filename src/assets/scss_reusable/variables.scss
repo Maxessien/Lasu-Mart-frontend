@@ -51,8 +51,17 @@
   --font-7xl: 4.5rem;    /* 72px */
 }
 
-// @media (prefers-color-scheme: dark) {
-//   :root{
-//     --main-primary: var(--or)
-//   }
-// }
+@media (prefers-color-scheme: dark) {
+  :root{
+    --main-primary: var(--orange-600);
+    --main-primary-light: var(--orange-500);
+    --main-secondary: var(--navy-600);
+    --main-secondary-light: var(--navy-500);
+    --main-tertiary: var(--white-300);
+    --main-tertiary-light: var(--white-200);
+    --text-primary: var(--navy-900);
+    --text-primary-light: var(--navy-800);
+    --text-secondary: var(--white-300);
+    --text-secondary-light: var(--white-100);
+  }
+}

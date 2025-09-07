@@ -13,14 +13,14 @@
   h1 {
     font-weight: 700;
     font-size: var(--font-4xl);
-    color: var(--navy-700);
+    color: var(--text-primary-light);
   }
   .link {
-    color: var(--orange-500);
+    color: var(--main-primary-light);
     font-weight: 600;
     font-size: var(--font-lg);
     &:hover {
-      color: var(--orange-600);
+      color: var(--main-primary);
     }
   }
   .line_seperator {
@@ -34,14 +34,15 @@
     button{
         @include flex(center, center, rem(5));
         font-size: var(--font-lg);
-        color: var(--navy-700);
+        color: var(--text-primary-light);
         font-weight: 600;
         box-shadow: 1px 1px 5px -1.2px black;
         width: 100%;
         padding: rem(10) rem(15);
         border-radius: rem(5);
+        transition: all 150ms linear;
         &:hover{
-            background: var(--white-400);
+            background: var(--main-tertiary);
         }
         &:active{
             transform: scale(0.95);

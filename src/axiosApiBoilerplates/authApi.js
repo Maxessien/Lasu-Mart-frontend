@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const createUserAuthApi = (endpoint, token) => {
+const authApi = (token) => {
   return axios.create({
-    baseURL: `http://localhost:3000/user/${endpoint}`,
+    baseURL: `http://localhost:3000/${token.role}`,
     headers: {
       "Content-Type": "Application/json",
       Authorization: `Bearer ${token}`,
@@ -10,4 +10,4 @@ const createUserAuthApi = (endpoint, token) => {
   });
 };
 
-export default createUserAuthApi;
+export { authApi };

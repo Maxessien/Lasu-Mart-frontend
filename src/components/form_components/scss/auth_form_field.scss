@@ -7,7 +7,7 @@
         @include flex(flex-start, center, rem(5), column);
         width: 100%;
         &_names{
-            color: var(--navy-800);
+            color: var(--text-primary-light);
             font-size: var(--font-2xl);
             font-weight: 700;
         }
@@ -18,8 +18,9 @@
             padding: rem(7) rem(10);
             box-shadow: inset 0px 0px 5px black;
             border-radius: rem(10);
+            z-index: 1;
             &::placeholder{
-                color: var(--white-800);
+                color: rgb(128, 128, 128);
             }
         }
         &_error{
@@ -45,12 +46,12 @@
     font-size: var(--font-md);
     font-weight: 600;
     padding: rem(10) rem(15);
-    background: var(--orange-700);
-    color: var(--white-300);
+    background: var(--main-primary);
+    color: var(--text-secondary);
     border-radius: rem(8);
     margin-top: rem(10);
     &:hover {
-      background: var(--orange-600);
+      background: var(--main-primary-light);
     }
   }
 }

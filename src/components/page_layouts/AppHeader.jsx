@@ -1,11 +1,30 @@
-const AppHeader = ()=>{
-    return (
-        <>
-        <header className="flex items-center justify-between px-10 py-5">
+import { useSelector } from "react-redux";
+import AppHeaderMain from "./AppHeaderMain";
+import AppHeaderNavigation from "./AppHeaderNavigation";
+import { useEffect, useState } from "react";
 
-        </header>
-        </>
-    )
-}
+const AppHeader = () => {
+  const { currentSize } = useSelector((state) => state.screenSize);
+  const [showNavigation, setShowNavigation] = useState(false);
+  useEffect(() => {
+    setShowNavigation(false);
+  }, [currentSize]);
+  const navigationToggle = () => {
+    setShowNavigation(!showNavigation);
+  };
 
-export default AppHeader
+  return (
+    <>
+      <header className="w-screen space-y-2 py-3 md:py-5">
+        <AppHeaderMain navToggle={navigationToggle} navState={showNavigation} />
+        {currentSize <= 768 ? (
+          showNavigation && <AppHeaderNavigation navToggle={navigationToggle} />
+        ) : (
+          <AppHeaderNavigation />
+        )}
+      </header>
+    </>
+  );
+};
+
+export default AppHeader;
