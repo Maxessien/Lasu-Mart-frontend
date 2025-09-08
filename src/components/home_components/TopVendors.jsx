@@ -1,10 +1,6 @@
-import "./scss/top_vendors.scss"
+import "./scss/top_vendors.scss";
 
-const TopVendors = ()=>{
-    return (
-        <>
-        </>
-    )
-}
+const TopVendors = () => {
+};
 
-export default TopVendors
+export default TopVendors;
