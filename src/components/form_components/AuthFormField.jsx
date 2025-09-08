@@ -35,11 +35,15 @@ const AuthFormField = ({
     mode: "onTouched",
   });
 
+  const submitForm = (data)=>{
+    submitFunction(data)
+  }
+
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <>
-      <form className="form" onSubmit={handleSubmit(submitFunction)}>
+      <form className="form" onSubmit={handleSubmit(submitForm)}>
         {name && (
           <label className="form_labels" htmlFor="name">
             <p className="form_labels_names">Name</p>
@@ -93,6 +97,9 @@ const AuthFormField = ({
               placeholder="Enter your phone number"
               {...register("phone", {
                 required: "This field is required",
+                minLength: {value: 10, message: "Phone number must be at least 10 digits"},
+                maxLength: {value: 11, message: "Phone number cannot be more than 11 digits"},
+                pattern: {value: /^[0-9]+$/, message: "Can only contain numbers"}
               })}
             />
             {errors.phone && (

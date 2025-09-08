@@ -41,15 +41,20 @@ const fetchTopProducts = async () => {
   }
 };
 
-const fetchBySearchQuery = async(query)=>{
-    try {
-      const res = await productsApi.get(`/search?query=${query}`)
-      console.log(res)
-      return res.data
-    } catch (err) {
-      console.log(err)
-      return err
-    }
-}
+const fetchBySearchQuery = async (query) => {
+  try {
+    const res = await productsApi.get(`/search?query=${query}`);
+    console.log(res);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
 
-export { fetchAllProducts, fetchProductsByCategory, fetchTopProducts, fetchBySearchQuery };
+export {
+  fetchAllProducts,
+  fetchProductsByCategory,
+  fetchTopProducts,
+  fetchBySearchQuery,
+};
