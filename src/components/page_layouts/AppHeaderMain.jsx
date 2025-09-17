@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
 import {
+  FaArrowDown,
   FaBars,
   FaSearch,
   FaShoppingCart,
   FaTimes,
   FaUser,
 } from "react-icons/fa";
+import { MdKeyboardArrowDown } from 'react-icons/md'
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
 import Button from "../reusable_components/Buttons";
@@ -42,9 +44,9 @@ const AppHeaderMain = ({ navToggle, navState }) => {
               type="text"
               {...register("searchQuery")}
               placeholder="Search products"
-              className="rounded-full border-[--text-primary-light] border-3 lg:w-lg pl-7 py-1 text-md font-semibold text-[var(--text-primary-light)]"
+              className="rounded-full border-[--text-primary-light] border-3 lg:w-lg pl-8 py-1 text-md font-semibold text-[var(--text-primary-light)]"
             />
-            <button className="absolute top-0 h-full left-1 text-[var(--text-primary-light)] text-lg rounded-full px-1">
+            <button className="absolute top-0 h-full left-1 text-[var(--text-primary-light)] text-lg rounded-full p-2">
               <FaSearch />
             </button>
           </form>
@@ -56,9 +58,8 @@ const AppHeaderMain = ({ navToggle, navState }) => {
               <div className="flex items-center justify-end gap-3">
                 <Link
                   to={"/account"}
-                  className="flex items-center px-2 py-2 hover:bg-[var(--main-primary-light)] border-[var(--white-700)] shadow-[inset_0px_0px_5px_var(--text-primary)] rounded-md justify-center gap-2 font-semibold text-[var(--text-primary-light)] text-xl"
+                  className="flex items-center p-3 hover:bg-[var(--main-primary-light)] rounded-full hover:text-[var(--main-tertiary)] justify-center gap-[2px] font-semibold text-[var(--text-primary-light)] text-xl"
                 >
-                  <span>Account</span>
                   <span>
                     <FaUser />
                   </span>

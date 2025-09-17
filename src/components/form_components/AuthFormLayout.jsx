@@ -53,13 +53,13 @@ const AuthFormLayout = ({ children, type }) => {
           </button>
         </div>
 
-        <p className="text-lg text-center text-gray-700 font-semibold">
+        <p className="text-lg text-center text-[var(--text-primary-light)] font-semibold">
           {type == "login" ? (
             <>
               Don't have an account
               <Link
                 to={"/register"}
-                className="text-orange-700 hover:text-orange-800 cursor-pointer"
+                className="text-[var(--main-primary)] hover:text-[var(--main-primary-light)] cursor-pointer"
               >
                 {" "}
                 Sign up
@@ -70,7 +70,7 @@ const AuthFormLayout = ({ children, type }) => {
               Already have an account
               <Link
                 to={"/login"}
-                className="text-orange-700 hover:text-orange-800 cursor-pointer"
+                className="text-[var(--main-primary)] hover:text-[var(--main-primary-light)] cursor-pointer"
               >
                 {" "}
                 Sign in

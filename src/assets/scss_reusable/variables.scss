@@ -65,3 +65,17 @@
     --text-secondary-light: var(--white-100);
   }
 }
+@media (prefers-color-scheme: light) {
+  :root{
+    --main-primary: var(--orange-300);
+    --main-primary-light: var(--orange-400);
+    --main-secondary: var(--navy-300);
+    --main-secondary-light: var(--navy-200);
+    --main-tertiary: var(--navy-900);
+    --main-tertiary-light: var(--navy-800);
+    --text-primary: var(--white-300);
+    --text-primary-light: var(--white-200);
+    --text-secondary: var(--navy-800);
+    --text-secondary-light: var(--navy-700);
+  }
+}

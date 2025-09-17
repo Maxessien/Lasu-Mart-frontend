@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { replace } from "react-router";
 import AuthFormField from "../components/form_components/AuthFormField";
 import AuthFormLayout from "../components/form_components/AuthFormLayout";
 // import { useEffect } from "react"
@@ -13,6 +13,9 @@ const Login = () => {
       const user = await signInWithEmailAndPassword(auth, email, password)
       console.log(user)
       toast.success("Login Successful")
+      setTimeout(()=>{
+        replace("/home")
+      })
     } catch (err) {
       console.log(err)
       const errorInfo = findError(err.code)

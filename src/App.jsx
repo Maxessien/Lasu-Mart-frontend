@@ -9,7 +9,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/fb_config";
-import { setIdToken, setIsLoggedin } from "./store_slices/userAuthSlice";
+import { setUserAuth } from "./store_slices/userAuthSlice";
 import Home from "./pages/Home";
 import { setScreenSize } from "./store_slices/windowSizesSlice";
 
@@ -20,12 +20,12 @@ const App = () => {
     window.addEventListener("resize", ()=>dispatch(setScreenSize()));
     const unSubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const idToken = await user.getIdToken();
-        dispatch(setIsLoggedin(true));
-        dispatch(setIdToken(idToken));
+        const idToken = await user.getIdToken(auth);
+        dispatch(setUserAuth({stateProp:"isLoggedIn", value: true}));
+        dispatch(setUserAuth({stateProp:"idToken", value: idToken}));
       } else {
-        dispatch(setIsLoggedin(false));
-        dispatch(setIdToken(""));
+        dispatch(setUserAuth({stateProp:"isLoggedIn", value: false}));
+        dispatch(setUserAuth({stateProp:"idToken", value: ""}));
       }
     });
     document.body.style.background = "var(--main-tertiary-light)";

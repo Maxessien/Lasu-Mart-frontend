@@ -7,7 +7,14 @@ const AppFooter = () => {
       <div className="w-full mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* Branding */}{" "}
         <div>
-          <h2 className="text-2xl font-semibold text-yellow-500">Artisan</h2>
+          <h2 className="text-2xl font-semibold text-yellow-500">
+            <span className="text-white font-bold text-2xl">
+              Lasu
+            </span>
+            <span className="text-orange-400 font-bold text-2xl">
+              Mart
+            </span>
+          </h2>
           <p className="mt-2 text-sm text-gray-400">
             Connecting you with authentic handmade products from talented
             artisans around the world.
@@ -18,17 +25,17 @@ const AppFooter = () => {
           <h3 className="font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/shop" className="hover:text-[var(--orange-500)]">
+              <a href="/shop" className="hover:text-[var(--orange-400)]">
                 Shop All
               </a>
             </li>
             <li>
-              <a href="/categories" className="hover:text-[var(--orange-500)]">
+              <a href="/categories" className="hover:text-[var(--orange-400)]">
                 Categories
               </a>
             </li>
             <li>
-              <a href="/about" className="hover:text-[var(--orange-500)]">
+              <a href="/about" className="hover:text-[var(--orange-400)]">
                 About Us
               </a>
             </li>
@@ -39,17 +46,17 @@ const AppFooter = () => {
           <h3 className="font-semibold mb-4">Support</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/help" className="hover:text-[var(--orange-500)]">
+              <a href="/help" className="hover:text-[var(--orange-400)]">
                 Help Center
               </a>
             </li>
             <li>
-              <a href="/contact" className="hover:text-[var(--orange-500)]">
+              <a href="/contact" className="hover:text-[var(--orange-400)]">
                 Contact Us
               </a>
             </li>
             <li>
-              <a href="/returns" className="hover:text-[var(--orange-500)]">
+              <a href="/returns" className="hover:text-[var(--orange-400)]">
                 Returns
               </a>
             </li>
@@ -64,7 +71,7 @@ const AppFooter = () => {
               aria-label="Facebook"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--orange-500)] text-white"
+              className="hover:text-[var(--orange-400)] text-white"
             >
               <FaFacebook size={24} />
             </a>
@@ -73,7 +80,7 @@ const AppFooter = () => {
               aria-label="Twitter"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--orange-500)] text-white"
+              className="hover:text-[var(--orange-400)] text-white"
             >
               <FaTwitter size={24} />
             </a>
@@ -82,7 +89,7 @@ const AppFooter = () => {
               aria-label="Instagram"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--orange-500)] text-white"
+              className="hover:text-[var(--orange-400)] text-white"
             >
               <FaInstagram size={24} />
             </a>

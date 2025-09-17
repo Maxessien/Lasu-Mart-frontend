@@ -1,0 +1,48 @@
+@use "../../../assets/scss_reusable/functions_mixins.scss" as *;
+
+.home_section_header {
+  font-size: rem(30);
+  color: var(--text-primary);
+  font-weight: bold;
+}
+.home_section {
+  width: 100vw;
+  max-width: rem(1500);
+  margin: auto;
+  padding: rem(35) rem(20);
+  @include flex(center, center, rem(20), column);
+  overflow-x: hidden;
+  .trending_products_display {
+    padding: rem(10) rem(20);
+    overflow-x: auto;
+    width: 100%;
+    .no_products {
+      color: var(--text-primary-light);
+      font-size: rem(23);
+      font-weight: 600;
+      opacity: 0.7;
+    }
+  }
+  .no_product_display {
+    @include flex(center, center, rem(0), column);
+  }
+  .product_display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: rem(15);
+    @include media(rem(860), max-width, "true"){
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+      & > * {
+        min-width: rem(250);
+        max-width: rem(320);
+        flex: 1 1 rem(250);
+    @include media(rem(860), max-width, "true"){
+      max-width: rem(250);
+    }
+      }
+    // }
+  }
+}
