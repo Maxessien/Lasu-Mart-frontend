@@ -19,7 +19,7 @@ const baseStyles = "inline-flex items-center justify-center font-semibold";
 
 const Button = ({
   children,
-  buttonFn,
+  buttonFn = ()=>null,
   size = "medium",
   type = "primary",
   rounded = "full",
@@ -27,6 +27,7 @@ const Button = ({
   isDisabled = false,
   width = "[max-content]",
   classNames = "",
+  buttonType="button"
 }) => {
   const allStyles = `rounded-${rounded} ${baseStyles} ${sizeStyles[size]} ${
     variantStyles[type]
@@ -36,7 +37,7 @@ const Button = ({
 
   return (
     <>
-      <button disabled={isDisabled} onClick={()=>buttonFn()} className={allStyles}>
+      <button type={buttonType} disabled={isDisabled} onClick={()=>buttonFn()} className={allStyles}>
         {children}{" "}
         {/* {isLoading && (
           <Circles

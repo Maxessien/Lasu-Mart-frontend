@@ -1,34 +1,44 @@
 import { useQuery } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { regApi } from "../../axiosApiBoilerplates/regApi";
 import ProductCards from "../home_components/ProductCards";
-import Loader from './../reusable_components/Loader';
-import "./scss/products.scss"
+import Loader from "./../reusable_components/Loader";
+import "./scss/products.scss";
+import { useEffect } from "react";
+import { setTotalPages } from "../../store_slices/productPageSlice";
 
 const Products = ({ pageNumber }) => {
-  const { filters, active } = useSelector((state) => state.shopProductFilter);
+  const { filters } = useSelector((state) => state.shopProductFilter);
+  const dispatch = useDispatch()
+
 
   const fetchProducts = async (pageNumber) => {
     try {
-      const products = !active
-        ? await regApi.get("/product/get", { params: { page: pageNumber } })
-        : await regApi.get("/product/filtered", {
-            params: { ...filters, page: pageNumber },
-          });
-        console.log(products)
-      return products.data;
+      const products = await regApi.post("/product/get_products", { page: pageNumber, ...filters })
+      console.log(products);
+      dispatch(setTotalPages(products.data.totalPages))
+      return products.data.data;
     } catch (err) {
       console.log(err);
       throw err;
     }
   };
 
-  const { data, isPending } = useQuery({
+  const { data, isFetching, refetch } = useQuery({
     queryKey: ["products", pageNumber],
     queryFn: () => fetchProducts(pageNumber),
+    cacheTime: 0,
+    staleTime: 0,
+    refetchOnReconnect: true,
+    refetchOnWindowFocus: true,
   });
 
-  if (isPending) {
+  useEffect(()=>{
+    refetch()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters])
+
+  if (isFetching) {
     return (
       <>
         <Loader size={"min-h-[50vh] w-full"} />
@@ -42,25 +52,25 @@ const Products = ({ pageNumber }) => {
         <h2>Shop</h2>
         <div className="shop_product_display">
           {data?.length > 0 ? (
-            data.map(({ name, price, discountPercentage }, index) => {
+            data.map(({ name, price, discountPrice }, index) => {
               return (
                 <>
-                <div className="items">
                   <ProductCards
                     key={`${name}-${index}`}
                     imageUrl={`${name}.webp`}
                     name={name}
                     price={price}
-                    discount={
-                      discountPercentage > 0.0 ? discountPercentage : undefined
+                    discountP={
+                      discountPrice < price && discountPrice !==0 ? discountPrice : undefined
                     }
                   />
-                </div>
                 </>
               );
             })
           ) : (
-            <p className="flex items-center justify-center w-full font-bold text-xl text-[var(--main-secondary-light)]">No Products Listed</p>
+            <p className="flex items-center justify-center w-full font-bold text-xl text-[var(--main-secondary-light)]">
+              No Products Listed
+            </p>
           )}
         </div>
       </section>

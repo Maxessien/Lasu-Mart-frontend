@@ -1,11 +1,11 @@
 import { FaFilter } from "react-icons/fa"
 import Button from "../reusable_components/Buttons"
 
-const ShopHeader = ()=>{
+const ShopHeader = ({openFilterFn})=>{
     return (
         <>
         <div className="w-screen px-10 py-4">
-            <Button rounded="md" size="small" classNames="flex text-lg items-center justify-start font-semibold space-x-1">
+            <Button rounded="md" size="small"  buttonFn={()=>openFilterFn()} classNames="flex text-lg items-center justify-start font-semibold space-x-1">
                 <FaFilter /> <span>Filter</span>
             </Button>
         </div>

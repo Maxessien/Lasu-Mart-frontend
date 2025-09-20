@@ -27,21 +27,20 @@
     @include flex(center, center, rem(0), column);
   }
   .product_display {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: rem(15);
-    @include media(rem(860), max-width, "true") {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(rem(250), 1fr));
+    gap: rem(20);
+    @include media(large) {
+      display: flex;
       flex-wrap: nowrap;
       justify-content: flex-start;
     }
     & > * {
       min-width: rem(250);
       max-width: rem(320);
-      flex: 1 1 rem(250);
-      @include media(rem(860), max-width, "true") {
-        max-width: rem(250);
-      }
+      // @include media(rem(860), max-width, "true") {
+      //   max-width: rem(250);
+      // }
     }
     // }
   }

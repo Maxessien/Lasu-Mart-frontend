@@ -1,34 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  active: false,
   filters: {
-    categories: [],
+    category: [],
     priceRange: {
-      min: 100,
+      min: 5,
       max: 500000,
     },
-    popularity: {
-      value: false,
-      order: "desc",
-    },
-    recent: {
-      value: false,
-      order: "desc",
-    },
-    price: {
-      value: true,
-      order: "desc",
-    },
+    sortInfo: {
+      type: "createdAt",
+      order: "desc"
+    }
   },
 };
 
 const shopProductFilter = createSlice({
   name: "shopProductFilter",
   initialState,
-  reducer: {
-    updateFilter: (state, { payload }) => {
-      state.filters = { ...state.filters, payload };
+  reducers: {
+    updateFilter: (state, action) => {
+      console.log(action.payload)
+      state.filters = { ...state.filters, ...action.payload };
     },
     resetFilter: (state) => {
       state.filters = initialState;

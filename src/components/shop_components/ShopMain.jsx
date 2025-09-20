@@ -7,15 +7,17 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md"
 const ShopMain = ()=>{
     const {currentPage, totalPages} = useSelector((state)=>state.productPage)
     const dispatch = useDispatch()
+    console.log(totalPages, "tottt")
     return (
         <>
         <Products pageNumber={currentPage} />
             <div className="flex items-center pb-8 justify-center gap-3 mt-4 w-full">
-                <Button type="primary" classNames="text-lg font-bold p-2" buttonFn={()=>dispatch(nextPage())} ><MdArrowBack /></Button>
-                {Array(totalPages).map((_,page)=>{
-                    <Button size="small" rounded="md" buttonFn={()=>dispatch(setPage(page))}>{page}</Button>
+                {currentPage > 1 && <Button type="primary" classNames="text-lg font-bold p-2" buttonFn={()=>dispatch(prevPage())} ><MdArrowBack /></Button>}
+                {Array(totalPages).fill(0).map((_,page)=>{
+                    console.log(page)
+                    return <Button size="small" classNames="w-[35px] h-[35px] text-center" type={currentPage === page +1 ? "primary" : "secondary"} buttonFn={()=>dispatch(setPage(page+1))}>{page+1}</Button>
                 })}
-                <Button type="primary" classNames="text-lg font-bold" buttonFn={()=>dispatch(prevPage())} ><MdArrowForward /></Button>
+                {currentPage < totalPages && <Button type="primary" classNames="text-lg font-bold" buttonFn={()=>dispatch(nextPage())} ><MdArrowForward /></Button>}
             </div>
         </>
     )

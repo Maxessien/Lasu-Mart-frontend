@@ -3,23 +3,17 @@
 .shop_product {
   width: 100%;
   padding: rem(25) rem(20);
+  h2{
+    font-size: rem(30);
+    color: var(--text-primary);
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    margin-bottom: rem(20);
+  }
   &_display {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    & > * {
-      min-width: rem(200);
-      max-width: rem(250);
-      flex: 1 1 rem(200);
-      gap: rem(20);
-      @include media(medium) {
-        min-width: rem(150);
-        max-width: rem(200);
-      }
-      @include media(x-large) {
-        min-width: rem(200);
-        max-width: rem(250);
-      }
-    }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(rem(200), 1fr));
+    gap: rem(20);
   }
 }

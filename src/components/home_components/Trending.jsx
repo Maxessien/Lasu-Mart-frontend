@@ -40,7 +40,7 @@ const TrendingProducts = () => {
           }`}
         >
           {data && data?.length > 0 ? (
-            data.map(({ name, price, discountPercentage }, index) => {
+            data.map(({ name, price, discountPrice }, index) => {
               return (
                 <>
                   <ProductCards
@@ -48,8 +48,8 @@ const TrendingProducts = () => {
                     imageUrl={`${name}.webp`}
                     name={name}
                     price={price}
-                    discount={
-                      discountPercentage > 0.0 ? discountPercentage : undefined
+                    discountPrice={
+                      discountPrice < price && discountPrice !== 0.0 ? discountPrice : undefined
                     }
                   />
                 </>
