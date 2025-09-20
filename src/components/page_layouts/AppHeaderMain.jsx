@@ -1,24 +1,30 @@
 import { useForm } from "react-hook-form";
 import {
-  FaArrowDown,
   FaBars,
   FaSearch,
   FaShoppingCart,
   FaTimes,
   FaUser,
 } from "react-icons/fa";
-import { MdKeyboardArrowDown } from 'react-icons/md'
+import { MdKeyboardArrowDown } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
 import Button from "../reusable_components/Buttons";
+import { useEffect, useState } from "react";
 
-const AppHeaderMain = ({ navToggle, navState }) => {
+const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
+  const [accountDropDowm, setAccountDropDown] = useState(false);
   const { currentSize } = useSelector((state) => state.screenSize);
   const { isLoggedIn } = useSelector((state) => state.userAuth);
   const { register, handleSubmit } = useForm();
   const submitSearchQuery = (data) => {
     console.log(data);
   };
+
+  useEffect(()=>{
+    setAccountDropDown(false)
+  }, [isLoggedIn])
+
 
   return (
     <>
@@ -55,15 +61,41 @@ const AppHeaderMain = ({ navToggle, navState }) => {
         {currentSize >= 768 ? (
           <>
             {isLoggedIn ? (
-              <div className="flex items-center justify-end gap-3">
-                <Link
-                  to={"/account"}
+              <div className="flex items-center justify-end gap-3 relative">
+                <button
+                  onClick={() => setAccountDropDown(!accountDropDowm)}
                   className="flex items-center p-3 hover:bg-[var(--main-primary-light)] rounded-full hover:text-[var(--main-tertiary)] justify-center gap-[2px] font-semibold text-[var(--text-primary-light)] text-xl"
                 >
                   <span>
+                    <MdKeyboardArrowDown />
+                  </span>
+                  <span>
                     <FaUser />
                   </span>
-                </Link>
+                </button>
+
+                {accountDropDowm && (
+                  <div className="flex flex-col items-center justify-center absolute top-[100%] left-[-20%] z-999 gap-2 py-3 px-10 rounded-md bg-white shadow-sm">
+                    <Link
+                      to={"/account"}
+                      className="font-semibold text-md text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
+                    >
+                      Account
+                    </Link>
+                    <Link
+                      to={"/settings"}
+                      className="font-semibold text-md text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
+                    >
+                      Settings
+                    </Link>
+                    <button
+                      className="font-semibold text-md text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
+                      onClick={() => signOutFn()}
+                    >
+                      Log out
+                    </button>
+                  </div>
+                )}
 
                 <Link
                   to={"/cart"}

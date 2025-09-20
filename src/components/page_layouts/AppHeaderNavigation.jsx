@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router";
 import "./scss/app_header_navigation.scss";
 
-const AppHeaderNavigation = ({ navToggle }) => {
+const AppHeaderNavigation = ({ navToggle, signOutFn }) => {
   const { currentSize } = useSelector((state) => state.screenSize);
   const { isLoggedIn } = useSelector((state) => state.userAuth);
   return (
@@ -63,6 +63,26 @@ const AppHeaderNavigation = ({ navToggle }) => {
                   >
                     Account
                   </NavLink>
+                  <NavLink
+                    to={"/settings"}
+                    onClick={() => navToggle(false)}
+                    className={({ isActive }) => {
+                      return `header_navigation_links ${
+                        isActive ? "active" : ""
+                      }`;
+                    }}
+                  >
+                    Settings
+                  </NavLink>
+                  <button
+                    onClick={() => {
+                      navToggle(false)
+                      signOutFn()
+                    }}
+                    className={`header_navigation_links`}
+                  >
+                    Log out
+                  </button>
                 </>
               ) : (
                 <>

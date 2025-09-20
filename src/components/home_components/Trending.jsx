@@ -1,26 +1,56 @@
 import ProductCards from "./ProductCards";
 import "./scss/trending.scss";
+import { regApi } from "../../axiosApiBoilerplates/regApi.js";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../reusable_components/Loader.jsx";
 
-const TrendingProducts = ({ productArray }) => {
+const TrendingProducts = () => {
+  const fetchTrendingProducts = async () => {
+    try {
+      const products = await regApi.get("/product/trending");
+      console.log(products, "prod")
+      return products.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+
+  const { data, isPending } = useQuery({
+    queryKey: ["trendingProducts"],
+    queryFn: () => fetchTrendingProducts(),
+    refetchOnReconnect: true,
+  });
+
+  if (isPending) {
+    return (
+      <>
+        <Loader size={"h-full w-screen py-10"} />
+      </>
+    );
+  }
+
   return (
     <>
       <section className="home_section">
         <h1 className="home_section_header">Trending</h1>
         <div
           className={`trending_products_display ${
-            productArray.length > 0 ? "product_display" : "no_product_display"
+            data?.length > 0 ? "product_display" : "no_product_display"
           }`}
         >
-          {productArray.length > 0 ? (
-            productArray.map(({ title, price, discountPercentage }, index) => {
+          {data && data?.length > 0 ? (
+            data.map(({ name, price, discountPercentage }, index) => {
               return (
                 <>
                   <ProductCards
-                    key={`${title}-${index}`}
-                    imageUrl={`${title}.webp`}
-                    title={title}
+                    key={`${name}-${index}`}
+                    imageUrl={`${name}.webp`}
+                    name={name}
                     price={price}
-                    discount={discountPercentage > 0.0 ? discountPercentage : undefined}
+                    discount={
+                      discountPercentage > 0.0 ? discountPercentage : undefined
+                    }
                   />
                 </>
               );
