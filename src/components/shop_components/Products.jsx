@@ -30,7 +30,7 @@ const Products = ({ pageNumber }) => {
     cacheTime: 0,
     staleTime: 0,
     refetchOnReconnect: true,
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
   });
 
   useEffect(()=>{

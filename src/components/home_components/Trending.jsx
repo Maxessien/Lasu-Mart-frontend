@@ -20,6 +20,7 @@ const TrendingProducts = () => {
     queryKey: ["trendingProducts"],
     queryFn: () => fetchTrendingProducts(),
     refetchOnReconnect: true,
+    refetchOnWindowFocus: false,
   });
 
   if (isPending) {
@@ -41,6 +42,7 @@ const TrendingProducts = () => {
         >
           {data && data?.length > 0 ? (
             data.map(({ name, price, discountPrice }, index) => {
+            console.log(data)
               return (
                 <>
                   <ProductCards
