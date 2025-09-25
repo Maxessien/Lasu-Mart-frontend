@@ -7,7 +7,7 @@ const ShopByCategory = () => {
   const getProductCategpries = async () => {
     try {
       const categories = regApi.get("/category/get");
-      return categories.data;
+      return categories.data || [];
     } catch (err) {
       console.log(err);
       throw err;
@@ -30,7 +30,7 @@ const ShopByCategory = () => {
         <h2 className="home_section_header">Shop by category</h2>
 
         <div className="category_display">
-          {data ? data?.map((category, index) => {
+          {data && data.length > 0 ? data?.map((category, index) => {
             return (
               <>
                 <button key={index} className="category_block">

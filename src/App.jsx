@@ -6,7 +6,7 @@ import AppFooter from "./components/page_layouts/AppFooter";
 import { useEffect, useState } from "react";
 import ForgotPassword from "./pages/ForgotPassword";
 import { useDispatch, useSelector } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase/fb_config";
 import { setUserAuth } from "./store_slices/userAuthSlice";
 import Home from "./pages/Home";
@@ -15,27 +15,35 @@ import { useQuery } from "@tanstack/react-query";
 import { authApi } from "./axiosApiBoilerplates/authApi";
 import Loader from "./components/reusable_components/Loader";
 import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({});
   const { isLoggedIn } = useSelector((state) => state.userAuth);
   const fetchLoggedInUser = async (uid, token) => {
+    console.log("fetching")
     try {
+      console.log("try")
       const user = await authApi(token).get("/user/get", {
         params: { uid: uid },
       });
-      console.log(user);
+      dispatch(setUserAuth({ stateProp: "userData", value: user.data }));
+      console.log(user, "loggedin");
       return user.data;
     } catch (err) {
       console.log(err);
+      signOut(auth);
       return err;
     }
   };
   const dispatch = useDispatch();
   const { isFetching } = useQuery({
     queryKey: ["loggedInUserData", userInfo.userId],
-    queryFn: fetchLoggedInUser(userInfo.userId, userInfo.token),
+    queryFn: ()=> fetchLoggedInUser(userInfo.userId, userInfo.token),
     enabled: isLoggedIn,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false
   });
   useEffect(() => {
     dispatch(setScreenSize());
@@ -71,6 +79,12 @@ const App = () => {
         )}
 
         <Routes>
+          {/* <Route path={"*"} element={<Login />} /> */}
+          {isLoggedIn && (
+            <>
+              <Route path={"/cart"} element={<Cart />} />
+            </>
+          )}
           <Route path={"/"} element={<Home />} />
           <Route path={"/shop"} element={<Shop />} />
           {!isLoggedIn && (
@@ -83,6 +97,7 @@ const App = () => {
         </Routes>
         <AppFooter />
       </BrowserRouter>
+            <ToastContainer position="top-center" pauseOnHover theme="colored" />
     </>
   );
 };

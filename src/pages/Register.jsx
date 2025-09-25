@@ -4,6 +4,7 @@ import { regApi } from "../axiosApiBoilerplates/regApi.js";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
+import AppHeader from "../components/page_layouts/AppHeader.jsx";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ const Register = () => {
   });
   return (
     <>
+    <AppHeader />
+    <main>
       <AuthFormLayout type={"register"}>
         <AuthFormField
           submitFunction={mutateAsync}
@@ -47,6 +50,7 @@ const Register = () => {
         pauseOnHover
         theme="colored"
       />
+    </main>
     </>
   );
 };

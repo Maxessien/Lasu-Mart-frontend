@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const userAuth = createSlice({
   name: "userAuth",
-  initialState: { isLoggedIn: false, idToken: "" },
+  initialState: { isLoggedIn: false, idToken: "", userData: {} },
   reducers: {
-    setUserAuth: (state, action)=>{
-      state[action.payload.stateProp] = action.payload.value
+    setUserAuth: (state, action) => {
+      state[action.payload.stateProp] = action.payload.value;
     },
   },
 });

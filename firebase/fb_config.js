@@ -1,7 +1,6 @@
 // src/firebase/config.js
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 // Firebase config from .env
@@ -18,9 +17,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Firestore
-const db = getFirestore(app);
-
 // Auth
 const auth = getAuth(app);
 
@@ -34,8 +30,7 @@ const auth = getAuth(app);
 
 // Use emulator locally
 if (window.location.hostname === "localhost") {
-  connectFirestoreEmulator(db, "localhost", 8085);
-  connectAuthEmulator(auth, "http://localhost:9099");
+  connectAuthEmulator(auth, "http://127.0.0.1:9095");
 }
 
-export { db, auth };
+export { auth };

@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/fb_config.js";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import AppHeader from "../components/page_layouts/AppHeader.jsx";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +29,8 @@ const Login = () => {
 
   return (
     <>
+    <AppHeader />
+    <main>
       <AuthFormLayout type={"login"}>
         <AuthFormField
           submitFunction={loginFormSubmit}
@@ -37,6 +40,7 @@ const Login = () => {
         />
       </AuthFormLayout>
       <ToastContainer position="top-center" pauseOnHover theme="colored" />
+    </main>
     </>
   );
 };
