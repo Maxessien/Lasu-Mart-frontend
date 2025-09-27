@@ -36,12 +36,12 @@ const TrendingProducts = () => {
       <section className="home_section">
         <h1 className="home_section_header">Trending</h1>
         <div
-          className={`trending_products_display ${
-            data?.length > 0 ? "product_display" : "no_product_display"
+          className={`trending_products_display ${ 
+            data?.length > 0 ? "product_display" : "no_product_display" 
           }`}
         >
           {data && data?.length > 0 ? (
-            data.map(({ name, price, discountPrice }, index) => {
+            data.map(({ name, price, discountPrice, productId }, index) => {
               return (
                 <>
                   <ProductCards
@@ -52,6 +52,7 @@ const TrendingProducts = () => {
                     discountPrice={
                       discountPrice < price && discountPrice !== 0.0 ? discountPrice : undefined
                     }
+                    productId={productId}
                   />
                 </>
               );

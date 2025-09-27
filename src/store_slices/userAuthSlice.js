@@ -5,6 +5,7 @@ const userAuth = createSlice({
   initialState: { isLoggedIn: false, idToken: "", userData: {} },
   reducers: {
     setUserAuth: (state, action) => {
+      console.log(action, "action")
       state[action.payload.stateProp] = action.payload.value;
     },
   },

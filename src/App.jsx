@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Router, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Router, Routes } from "react-router";
 import Login from "./pages/Login";
 import "./assets/scss_reusable/variables.scss";
 import Register from "./pages/Register";
@@ -49,6 +49,7 @@ const App = () => {
     dispatch(setScreenSize());
     window.addEventListener("resize", () => dispatch(setScreenSize()));
     const unSubscribe = onAuthStateChanged(auth, async (user) => {
+      console.log(user)
       if (user) {
         const idToken = await user.getIdToken();
         setUserInfo({ userId: user.uid, token: idToken });
@@ -89,6 +90,7 @@ const App = () => {
           <Route path={"/shop"} element={<Shop />} />
           {!isLoggedIn && (
             <>
+            <Route path={"*"} element={<Navigate to={"/login"} replace={true} />} />
               <Route path={"/login"} element={<Login />} />
               <Route path={"/register"} element={<Register />} />
             </>

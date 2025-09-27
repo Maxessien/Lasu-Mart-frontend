@@ -15,16 +15,15 @@ import { useEffect, useState } from "react";
 const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
   const [accountDropDowm, setAccountDropDown] = useState(false);
   const { currentSize } = useSelector((state) => state.screenSize);
-  const { isLoggedIn } = useSelector((state) => state.userAuth);
+  const { isLoggedIn, userData } = useSelector((state) => state.userAuth);
   const { register, handleSubmit } = useForm();
   const submitSearchQuery = (data) => {
     console.log(data);
   };
 
-  useEffect(()=>{
-    setAccountDropDown(false)
-  }, [isLoggedIn])
-
+  useEffect(() => {
+    setAccountDropDown(false);
+  }, [isLoggedIn]);
 
   return (
     <>
@@ -99,8 +98,15 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
 
                 <Link
                   to={"/cart"}
-                  className="font-semibold p-2 rounded-full hover:bg-[var(--main-primary-light)] text-[var(--text-primary-light)] text-2xl"
+                  className="relative font-semibold p-2 rounded-full hover:bg-[var(--main-primary-light)] text-[var(--text-primary-light)] text-2xl"
                 >
+                  {userData?.cart?.length > 0 && (
+                    <span
+                      className={`rounded-full absolute top-[-5px] left-[-5px] bg-[var(--main-primary)] font-semibold text-[var(--text-secondary-light)] text-[1rem] py-1 px-2`}
+                    >
+                      {userData?.cart?.length}
+                    </span>
+                  )}
                   <FaShoppingCart />
                 </Link>
               </div>

@@ -4,34 +4,26 @@ import { FaShoppingCart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { authApi } from "../../axiosApiBoilerplates/authApi";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserAuth } from "../../store_slices/userAuthSlice";
 
-const ProductCards = ({ imageUrl, name, price, discountPrice = undefined }) => {
-  const { userData, isLoggedIn, idToken } = useSelector(
+const ProductCards = ({ imageUrl, name, price, discountPrice = undefined, productId }) => {
+  const { isLoggedIn, idToken } = useSelector(
     (state) => state.userAuth
   );
-
-  // console.log(userData, "dataaaa")
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const addToCart = async () => {
     try {
-      const res = await authApi(idToken).post("user/update/dbOnly", {
-        cart: [
-          ...userData.cart,
-          {
-            name: name,
-            price: price,
-            imageUrl: imageUrl,
-          },
-        ],
-      });
-      console.log(res);
-      userData.cart.push({
-        name: name,
-        price: price,
-        imageUrl: imageUrl,
-      });
+      const res = await authApi(idToken).post("user/cart/add", {productId: productId, quantity: 1});
+      console.log(res.data);
+      dispatch(
+        setUserAuth({
+          stateProp: "userData",
+          value: res.data,
+        })
+      );
       return res.data;
     } catch (err) {
       console.log(err);
@@ -40,10 +32,10 @@ const ProductCards = ({ imageUrl, name, price, discountPrice = undefined }) => {
     }
   };
 
-  const shopBtn = (type) => {
+  const shopBtn = async (type) => {
     if (isLoggedIn) {
-      mutateAsync();
-      type === "add" ? toast.success("Added Succesfully") : navigate("/cart");;
+      await mutateAsync();
+      type === "add" ? toast.success("Added Succesfully") : navigate("/cart");
     } else {
       navigate("register");
     }

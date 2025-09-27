@@ -23,11 +23,11 @@ const Filters = ({ closeFilterFn }) => {
   ];
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      sortType: filters.filters.sortInfo.type,
-      sortOrder: filters.filters.sortInfo.order,
-      minPrice: filters.filters.priceRange.min,
-      maxPrice: filters.filters.priceRange.max,
-      categories: filters.filters.categories,
+      sortType: filters.sortInfo.type,
+      sortOrder: filters.sortInfo.order,
+      minPrice: filters.priceRange.min,
+      maxPrice: filters.priceRange.max,
+      // categories: filters.categories,
     },
   });
 

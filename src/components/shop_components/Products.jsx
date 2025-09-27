@@ -52,7 +52,7 @@ const Products = ({ pageNumber }) => {
         <h2>Shop</h2>
         <div className="shop_product_display">
           {data?.length > 0 ? (
-            data.map(({ name, price, discountPrice }, index) => {
+            data.map(({ name, price, discountPrice,productId }, index) => {
               return (
                 <>
                   <ProductCards
@@ -63,6 +63,7 @@ const Products = ({ pageNumber }) => {
                     discountP={
                       discountPrice < price && discountPrice !==0 ? discountPrice : undefined
                     }
+                    productId={productId}
                   />
                 </>
               );
