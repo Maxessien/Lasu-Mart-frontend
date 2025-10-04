@@ -3,7 +3,7 @@ import axios from "axios";
 
 const authApi = (token) => {
   return axios.create({
-    baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
+    baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
     headers: {
       "Content-Type": "Application/json",
       Authorization: `Bearer ${token}`,

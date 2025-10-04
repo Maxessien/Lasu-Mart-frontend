@@ -8,9 +8,9 @@ import {
 } from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
 import Button from "../reusable_components/Buttons";
 import { useEffect, useState } from "react";
+import Link from "next/link"
 
 const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
   const [accountDropDowm, setAccountDropDown] = useState(false);
@@ -27,7 +27,7 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
 
   return (
     <>
-      {console.log(isLoggedIn)}
+      {console.log(currentSize)}
       <div className="flex items-center justify-between px-3 sm:px-5 md:px-10">
         <div
           className={`flex ${
@@ -76,13 +76,13 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
                 {accountDropDowm && (
                   <div className="flex flex-col items-center justify-center absolute top-[100%] left-[-20%] z-999 gap-2 py-3 px-10 rounded-md bg-white shadow-sm">
                     <Link
-                      to={"/account"}
+                      href={"/account"}
                       className="font-semibold text-md text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
                     >
                       Account
                     </Link>
                     <Link
-                      to={"/settings"}
+                      href={"/settings"}
                       className="font-semibold text-md text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
                     >
                       Settings
@@ -97,7 +97,7 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
                 )}
 
                 <Link
-                  to={"/cart"}
+                  href={"/cart"}
                   className="relative font-semibold p-2 rounded-full hover:bg-[var(--main-primary-light)] text-[var(--text-primary-light)] text-2xl"
                 >
                   {userData?.cart?.length > 0 && (
@@ -112,10 +112,10 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
               </div>
             ) : (
               <div className="flex items-center justify-end gap-3">
-                <Link to={"/register"}>
+                <Link href={"/register"}>
                   <Button>Sign Up</Button>
                 </Link>
-                <Link to={"/login"}>
+                <Link href={"/login"}>
                   <Button>Login</Button>
                 </Link>
               </div>

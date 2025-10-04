@@ -3,9 +3,9 @@ import Button from "./../reusable_components/Buttons";
 import { FaShoppingCart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { authApi } from "../../axiosApiBoilerplates/authApi";
-import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserAuth } from "../../store_slices/userAuthSlice";
+import { useRouter } from 'next/navigation';
 
 const ProductCards = ({ imageUrl, name, price, discountPrice = undefined, productId }) => {
   const { isLoggedIn, idToken } = useSelector(
@@ -13,7 +13,7 @@ const ProductCards = ({ imageUrl, name, price, discountPrice = undefined, produc
   );
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
+  const router = useRouter();
   const addToCart = async () => {
     try {
       const res = await authApi(idToken).post("user/cart/add", {productId: productId, quantity: 1});
@@ -35,7 +35,7 @@ const ProductCards = ({ imageUrl, name, price, discountPrice = undefined, produc
   const shopBtn = async (type) => {
     if (isLoggedIn) {
       await mutateAsync();
-      type === "add" ? toast.success("Added Succesfully") : navigate("/cart");
+      type === "add" ? toast.success("Added Succesfully") : router.push("/cart");
     } else {
       navigate("register");
     }

@@ -1,18 +1,26 @@
-import { useSelector } from "react-redux";
-import Filters from "../components/shop_components/Filters";
-import ShopHeader from "../components/shop_components/ShopHeader";
-import ShopMain from "../components/shop_components/ShopMain";
-import AppHeader from "./../components/page_layouts/AppHeader";
+"use client";
+
+import { useDispatch, useSelector } from "react-redux";
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Filters from './../../src/components/shop_components/Filters';
+import ShopHeader from './../../src/components/shop_components/ShopHeader';
+import ShopMain from './../../src/components/shop_components/ShopMain';
+import { useQuery } from "@tanstack/react-query";
+import { setTotalPages } from "../../src/store_slices/productPageSlice";
 
-const Shop = () => {
+const ClientShopPage = ({initialShopData}) => {
   const { currentSize } = useSelector((state) => state.screenSize);
   const [openFilter, setOpenFilter] = useState(false);
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(setTotalPages(initialShopData.totalPages))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  useQuery({queryKey: ["products", 1], initialData: initialShopData.data})
   return (
     <>
-      <AppHeader />
       <div className="block relative md:grid md:grid-cols-[25%_75%]">
         {currentSize > 768 && (
           <aside>
@@ -54,4 +62,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default ClientShopPage;

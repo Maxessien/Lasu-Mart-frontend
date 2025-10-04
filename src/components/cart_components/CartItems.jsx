@@ -1,13 +1,21 @@
+"use client"
+
 import { useDispatch, useSelector } from "react-redux";
 import CartListProductCards from "./CartListProductCards";
 import { useMutation } from "@tanstack/react-query";
 import { authApi } from "../../axiosApiBoilerplates/authApi";
 import { setUserAuth } from "../../store_slices/userAuthSlice";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
-const CartItems = () => {
+const CartItems = ({initUserData}) => {
   const { userData, idToken } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(setUserAuth({stateProp:"userData", value: initUserData}))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const clearCart = async () => {
     try {
@@ -24,17 +32,19 @@ const CartItems = () => {
     }
   };
 
+  const user = userData || initUserData
+
   const { mutateAsync } = useMutation({ mutationFn: () => clearCart() });
 
   return (
     <>
-      {console.log(userData)}
+      {console.log(user)}
       <section className="w-full px-4 py-3 bg-[var(--text-secondary-light)] shadow-[0px_2px_8px_-3px_black] rounded-md">
         <header className="flex items-center justify-between w-full">
           <h2 className="text-xl font-bold text-[var(--text-primary-light)]">
             Cart Items
           </h2>
-          {userData?.cart?.length > 0 && (
+          {user?.cart?.length > 0 && (
             <button
               onClick={() => mutateAsync()}
               className="text-md font-semibold text-[var(--main-primary)]"
@@ -43,8 +53,8 @@ const CartItems = () => {
             </button>
           )}
         </header>
-        {userData?.cart?.length > 0 ? (
-          userData?.cart.map(({ name, price, quantity, productId }, index) => {
+        {user?.cart?.length > 0 ? (
+          user?.cart.map(({ name, price, quantity, productId }, index) => {
             return (
               <>
                 <div className="mb-3">

@@ -17,7 +17,7 @@ const Filters = ({ closeFilterFn }) => {
   const categories = [
     "fashion",
     "food",
-    "electronics",
+    "electronics", 
     "sports",
     "accessories",
   ];

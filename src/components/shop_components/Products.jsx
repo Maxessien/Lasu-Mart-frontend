@@ -7,10 +7,9 @@ import "./scss/products.scss";
 import { useEffect } from "react";
 import { setTotalPages } from "../../store_slices/productPageSlice";
 
-const Products = ({ pageNumber }) => {
+const Products = ({ pageNumber=1 }) => {
   const { filters } = useSelector((state) => state.shopProductFilter);
   const dispatch = useDispatch()
-
 
   const fetchProducts = async (pageNumber) => {
     try {
@@ -34,7 +33,7 @@ const Products = ({ pageNumber }) => {
   });
 
   useEffect(()=>{
-    refetch()
+    refetch({force: true})
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters])
 

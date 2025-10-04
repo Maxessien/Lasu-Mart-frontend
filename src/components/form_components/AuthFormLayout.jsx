@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import Link from "next/link";
 import "./scss/auth_form_layout.scss";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { useEffect } from "react";
@@ -37,7 +37,7 @@ const AuthFormLayout = ({ children, type }) => {
         <h1>{type == "login" ? "Login" : "Sign Up"}</h1>
         {children}
         {type == "login" && (
-          <Link to={"/reset-password"} className="link">
+          <Link href={"/reset-password"} className="link">
             Forgot Password?
           </Link>
         )}
@@ -58,7 +58,7 @@ const AuthFormLayout = ({ children, type }) => {
             <>
               Don't have an account
               <Link
-                to={"/register"}
+                href={"/register"}
                 className="text-[var(--main-primary)] hover:text-[var(--main-primary-light)] cursor-pointer"
               >
                 {" "}
@@ -69,7 +69,7 @@ const AuthFormLayout = ({ children, type }) => {
             <>
               Already have an account
               <Link
-                to={"/login"}
+                href={"/login"}
                 className="text-[var(--main-primary)] hover:text-[var(--main-primary-light)] cursor-pointer"
               >
                 {" "}

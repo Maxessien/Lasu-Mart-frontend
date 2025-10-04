@@ -1,3 +1,5 @@
+"use client"
+
 import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import "./scss/auth_form_field.scss";

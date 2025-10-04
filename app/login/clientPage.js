@@ -1,23 +1,25 @@
-import AuthFormField from "../components/form_components/AuthFormField";
-import AuthFormLayout from "../components/form_components/AuthFormLayout";
-import { findError } from "./../../public/fbAuthErrors";
+"use client"
+
 import { toast, ToastContainer } from "react-toastify";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/fb_config.js";
-import { useNavigate } from "react-router";
 import { useState } from "react";
-import AppHeader from "../components/page_layouts/AppHeader.jsx";
+import { useRouter } from "next/navigation";
+import { auth } from "../../firebase/fb_config";
+import { findError } from './../../public/fbAuthErrors';
+import AuthFormLayout from './../../src/components/form_components/AuthFormLayout';
+import AuthFormField from './../../src/components/form_components/AuthFormField';
 
-const Login = () => {
+
+const ClientLogin = () => {
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const loginFormSubmit = async ({ email, password }) => {
     try {
       setIsLoading(true);
       const user = await signInWithEmailAndPassword(auth, email, password);
       console.log(user);
       toast.success("Login Successful");
-      navigate("/", { replace: true });
+      router.replace("/")
     } catch (err) {
       console.log(err);
       const errorInfo = findError(err.code);
@@ -29,7 +31,6 @@ const Login = () => {
 
   return (
     <>
-    <AppHeader />
     <main>
       <AuthFormLayout type={"login"}>
         <AuthFormField
@@ -45,4 +46,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ClientLogin;

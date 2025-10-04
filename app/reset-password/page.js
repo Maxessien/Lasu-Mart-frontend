@@ -1,5 +1,4 @@
-import AuthFormField from "../components/form_components/AuthFormField"
-import AuthFormLayout from "../components/form_components/AuthFormLayout"
+import AuthFormField from './../../src/components/form_components/AuthFormField';
 
 const ForgotPassword = ()=>{
     return (

@@ -11,6 +11,7 @@ body {
   margin-top: 0;
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
+  background: var(--main-tertiary-light);
 }
 
 main{

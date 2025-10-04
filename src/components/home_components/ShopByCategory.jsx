@@ -1,21 +1,15 @@
+"use client"
+
 import "./scss/shop_by_category.scss";
 import { useQuery } from "@tanstack/react-query";
-import { regApi } from "../../axiosApiBoilerplates/regApi.js";
 import Loader from "./../reusable_components/Loader";
+import { getProductCategpries } from "../../utils/productsFectchingHelpers";
 
-const ShopByCategory = () => {
-  const getProductCategpries = async () => {
-    try {
-      const categories = regApi.get("/category/get");
-      return categories.data || [];
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  };
+const ShopByCategory = ({initData}) => {
   const { data, isPending } = useQuery({
     queryKey: ["allProductCategories"],
-    queryFn: getProductCategpries,
+    queryFn: ()=> getProductCategpries(),
+    initialData: initData
   });
   if (isPending) {
     return (

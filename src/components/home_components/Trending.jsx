@@ -1,26 +1,20 @@
+"use client"
+
 import ProductCards from "./ProductCards";
 import "./scss/trending.scss";
-import { regApi } from "../../axiosApiBoilerplates/regApi.js";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../reusable_components/Loader.jsx";
+import { fetchTrendingProducts } from "../../utils/productsFectchingHelpers.js";
 
-const TrendingProducts = () => {
-  const fetchTrendingProducts = async () => {
-    try {
-      const products = await regApi.get("/product/trending");
-      console.log(products, "prod")
-      return products.data;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  };
+
+const TrendingProducts = ({initData}) => {
 
   const { data, isPending } = useQuery({
     queryKey: ["trendingProducts"],
     queryFn: () => fetchTrendingProducts(),
     refetchOnReconnect: true,
     refetchOnWindowFocus: false,
+    initialData: initData
   });
 
   if (isPending) {
@@ -45,7 +39,7 @@ const TrendingProducts = () => {
               return (
                 <>
                   <ProductCards
-                    key={`${name}-${index}`}
+                    key={`${name}-${Math.random()*index}`}
                     imageUrl={`${name}.webp`}
                     name={name}
                     price={price}

@@ -1,83 +1,64 @@
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router";
 import "./scss/app_header_navigation.scss";
+import Link from "next/link";
 
-const AppHeaderNavigation = ({ navToggle, signOutFn }) => {
+const AppHeaderNavigation = ({ navToggle = (value)=>null, signOutFn }) => {
   const { currentSize } = useSelector((state) => state.screenSize);
   const { isLoggedIn } = useSelector((state) => state.userAuth);
   return (
     <>
       <div className="nav_container">
         <nav className="header_navigation">
-          <NavLink
-            to={"/"}
+          <Link
+            href={"/"}
             onClick={() => navToggle(false)}
-            className={({ isActive }) => {
-              return `header_navigation_links ${isActive ? "active" : ""}`;
-
-            }}
+            className={`header_navigation_links`}
           >
             Home
-          </NavLink>
-          <NavLink
+          </Link>
+          <Link
             onClick={() => navToggle(false)}
-            to={"/shop"}
-            className={({ isActive }) => {
-              return `header_navigation_links ${isActive ? "active" : ""}`;
-            }}
+            href={"/shop"}
+            className={`header_navigation_links`}
           >
             Shop
-          </NavLink>
-          <NavLink
-            to={"/contact"}
+          </Link>
+          <Link
+            href={"/contact"}
             onClick={() => navToggle(false)}
-            className={({ isActive }) => {
-              return `header_navigation_links ${isActive ? "active" : ""}`;
-            }}
+            className={`header_navigation_links`}
           >
             Contact
-          </NavLink>
+          </Link>
           {currentSize <= 768 && (
             <>
               {isLoggedIn ? (
                 <>
-                  <NavLink
-                    to={"/cart"}
+                  <Link
+                    href={"/cart"}
                     onClick={() => navToggle(false)}
-                    className={({ isActive }) => {
-                      return `header_navigation_links ${
-                        isActive ? "active" : ""
-                      }`;
-                    }}
+                    className={`header_navigation_links`}
                   >
                     Cart
-                  </NavLink>
-                  <NavLink
-                    to={"/account"}
+                  </Link>
+                  <Link
+                    href={"/account"}
                     onClick={() => navToggle(false)}
-                    className={({ isActive }) => {
-                      return `header_navigation_links ${
-                        isActive ? "active" : ""
-                      }`;
-                    }}
+                    className={`header_navigation_links`}
                   >
                     Account
-                  </NavLink>
-                  <NavLink
-                    to={"/settings"}
+                  </Link>
+                  <Link
+                    href={"/settings"}
                     onClick={() => navToggle(false)}
-                    className={({ isActive }) => {
-                      return `header_navigation_links ${
-                        isActive ? "active" : ""
-                      }`;
-                    }}
+                    className={`header_navigation_links`}
                   >
                     Settings
-                  </NavLink>
+                  </Link>
                   <button
                     onClick={() => {
-                      navToggle(false)
-                      signOutFn()
+                      navToggle(false);
+                      signOutFn();
                     }}
                     className={`header_navigation_links`}
                   >
@@ -86,28 +67,20 @@ const AppHeaderNavigation = ({ navToggle, signOutFn }) => {
                 </>
               ) : (
                 <>
-                  <NavLink
-                    to={"/login"}
+                  <Link
+                    href={"/login"}
                     onClick={() => navToggle(false)}
-                    className={({ isActive }) => {
-                      return `header_navigation_links ${
-                        isActive ? "active" : ""
-                      }`;
-                    }}
+                    className={`header_navigation_links`}
                   >
                     Login
-                  </NavLink>
-                  <NavLink
-                    to={"/register"}
+                  </Link>
+                  <Link
+                    href={"/register"}
                     onClick={() => navToggle(false)}
-                    className={({ isActive }) => {
-                      return `header_navigation_links ${
-                        isActive ? "active" : ""
-                      }`;
-                    }}
+                    className={`header_navigation_links`}
                   >
                     Sign Up
-                  </NavLink>
+                  </Link>
                 </>
               )}
             </>

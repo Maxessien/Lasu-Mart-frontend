@@ -1,4 +1,4 @@
-// import React from 'react'; import { Facebook, Twitter, Instagram } from 'lucide-react';
+// import React from 'react'; import { Facebook, Twitter, Instagram } from 'lucide-react'
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const AppFooter = () => {

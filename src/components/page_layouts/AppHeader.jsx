@@ -1,3 +1,5 @@
+"use client"
+
 import { useSelector } from "react-redux";
 import AppHeaderMain from "./AppHeaderMain";
 import AppHeaderNavigation from "./AppHeaderNavigation";
@@ -5,10 +7,10 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase/fb_config";
-import { useNavigate } from "react-router";
+import { useRouter } from 'next/navigation';
 
 const AppHeader = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
   const { currentSize } = useSelector((state) => state.screenSize);
   const [showNavigation, setShowNavigation] = useState(false);
   useEffect(() => {
@@ -21,7 +23,7 @@ const AppHeader = () => {
   const logOut = async () => {
     try {
       await signOut(auth);
-      navigate("/", { replace: true });
+      router.replace("/");
     } catch (err) {
       console.log(err);
       toast.error("There was an error logging out, please try again later");
