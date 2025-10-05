@@ -13,20 +13,20 @@ const Filters = ({ closeFilterFn }) => {
   const { currentSize } = useSelector((state) => state.screenSize);
   const { filters } = useSelector((state) => state.shopProductFilter);
   const dispatch = useDispatch();
-  console.log(filters)
+  console.log(filters);
   const categories = [
     "fashion",
     "food",
-    "electronics", 
+    "electronics",
     "sports",
     "accessories",
   ];
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      sortType: filters.sortInfo.type,
-      sortOrder: filters.sortInfo.order,
-      minPrice: filters.priceRange.min,
-      maxPrice: filters.priceRange.max,
+      sortType: filters?.sortInfo?.type ?? "createdAt",
+      sortOrder: filters?.sortInfo?.order ?? "desc",
+      minPrice: filters?.priceRange?.min ?? 0,
+      maxPrice: filters?.priceRange?.max ?? 20,
       // categories: filters.categories,
     },
   });
@@ -51,17 +51,20 @@ const Filters = ({ closeFilterFn }) => {
         category: categories,
       })
     );
-    setPage(1);
+    dispatch(setPage(1));
     closeFilterFn ? closeFilterFn() : null;
   };
 
   return (
     <>
-      <form className="filter_form" onSubmit={handleSubmit(submitFilter)}>
+      <form
+        className={`filter_form`}
+        onSubmit={handleSubmit(submitFilter)}
+      >
         {currentSize <= 768 && (
           <Button
             size="small"
-            buttonFn={currentSize < 768 ? () => closeFilterFn() : null}
+            buttonFn={() => closeFilterFn ? closeFilterFn() : null}
           >
             <FaTimes />
           </Button>

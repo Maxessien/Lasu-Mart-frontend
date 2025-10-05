@@ -6,16 +6,10 @@ import { useMutation } from "@tanstack/react-query";
 import { authApi } from "../../axiosApiBoilerplates/authApi";
 import { setUserAuth } from "../../store_slices/userAuthSlice";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
 
 const CartItems = ({initUserData}) => {
   const { userData, idToken } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
-
-  useEffect(()=>{
-    dispatch(setUserAuth({stateProp:"userData", value: initUserData}))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   const clearCart = async () => {
     try {
@@ -32,7 +26,7 @@ const CartItems = ({initUserData}) => {
     }
   };
 
-  const user = userData || initUserData
+  const user = userData ?? initUserData
 
   const { mutateAsync } = useMutation({ mutationFn: () => clearCart() });
 

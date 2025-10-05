@@ -1,24 +1,19 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Button from "../reusable_components/Buttons";
-import { useRouter } from "next/router.js";
-import { useEffect } from "react";
-import { setUserAuth } from "../../store_slices/userAuthSlice";
+import { useRouter } from "next/navigation";
 
 const CheckoutSummary = ({initUserData}) => {
   const { userData } = useSelector((state) => state.userAuth);
-  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(setUserAuth({stateProp:"userData", value: initUserData}))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
   const router = useRouter();
 
+  const user = userData ?? initUserData
+
   const total =
-    userData && userData?.cart?.length > 0
-      ? userData.cart.reduce((acc, curr) => {
+    user && user?.cart?.length > 0
+      ? user.cart.reduce((acc, curr) => {
           return Number(acc) + Number(curr.price) * Number(curr.quantity);
         }, 0)
       : null;

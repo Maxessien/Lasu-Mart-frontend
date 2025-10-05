@@ -19,7 +19,7 @@ const baseStyles = "inline-flex items-center justify-center font-semibold";
 
 const Button = ({
   children,
-  buttonFn = ()=>null,
+  buttonFn = ()=> null,
   size = "medium",
   type = "primary",
   rounded = "full",

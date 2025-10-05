@@ -1,10 +1,5 @@
+const ContactInfoForm = () => {
+  return <></>;
+};
 
-
-const ContactInfoForm = ()=>{
-    return (
-        <>
-        </>
-    )
-}
-
-export default ContactInfoForm
+export default ContactInfoForm;

@@ -1,7 +1,10 @@
 import { regApi } from "../../src/axiosApiBoilerplates/regApi";
-import ClientShopPage from "./clientPage";
+import { headers } from "next/headers";
+import ClientShopPage from "./clientPage"
 
 const Shop = async () => {
+  const userAgent = (await headers()).get("user-agent");
+  const isMobile = /Mobi|Android|iPhone/i.test(userAgent);
   try {
     const products = await regApi.post("/product/get_products", {
       page: 1,
@@ -15,16 +18,23 @@ const Shop = async () => {
         order: "desc",
       },
     });
+    console.log(isMobile, "mobile")
     return (
       <>
-        <ClientShopPage initialShopData={products.data} />
+        <ClientShopPage
+          initialShopData={products.data}
+          serverSideWindowSize={isMobile}
+        />
       </>
     );
   } catch (err) {
     console.log(err);
     return (
       <>
-        <ClientShopPage initialShopData={{ totalPages: 0, data: [] }} />
+        <ClientShopPage
+          initialShopData={{ totalPages: 0, data: [] }}
+          serverSideWindowSize={isMobile}
+        />
       </>
     );
   }

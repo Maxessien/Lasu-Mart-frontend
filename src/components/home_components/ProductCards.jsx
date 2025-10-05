@@ -37,7 +37,7 @@ const ProductCards = ({ imageUrl, name, price, discountPrice = undefined, produc
       await mutateAsync();
       type === "add" ? toast.success("Added Succesfully") : router.push("/cart");
     } else {
-      navigate("register");
+      router.push("/register");
     }
   };
 

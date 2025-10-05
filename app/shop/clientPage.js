@@ -1,61 +1,44 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-// eslint-disable-next-line no-unused-vars
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import Filters from './../../src/components/shop_components/Filters';
-import ShopHeader from './../../src/components/shop_components/ShopHeader';
-import ShopMain from './../../src/components/shop_components/ShopMain';
-import { useQuery } from "@tanstack/react-query";
-import { setTotalPages } from "../../src/store_slices/productPageSlice";
+import { useState } from "react";
+import Filters from "./../../src/components/shop_components/Filters";
+import { useSelector } from "react-redux";
+import ShopHeader from "./../../src/components/shop_components/ShopHeader";
+import ShopMain from "./../../src/components/shop_components/ShopMain";
 
-const ClientShopPage = ({initialShopData}) => {
-  const { currentSize } = useSelector((state) => state.screenSize);
+const ClientShopPage = ({ initialShopData, serverSideWindowSize }) => {
   const [openFilter, setOpenFilter] = useState(false);
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(setTotalPages(initialShopData.totalPages))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  useQuery({queryKey: ["products", 1], initialData: initialShopData.data})
+	const {currentSize} = useSelector((state)=>state.screenSize)
+	const showFilter = openFilter !== undefined ? openFilter : !serverSideWindowSize;
+	const isMobile = currentSize ? currentSize < 768 : serverSideWindowSize
   return (
     <>
+      {console.log(showFilter, "filter", isMobile)}
       <div className="block relative md:grid md:grid-cols-[25%_75%]">
-        {currentSize > 768 && (
+        {!isMobile && (
           <aside>
-            <Filters />
+            <Filters closeFilterFn={() =>{
+              console.log("setting false")
+              setOpenFilter(false)
+            }} />
           </aside>
         )}
-        {currentSize <= 768 && openFilter && (
-          <AnimatePresence>
-            <motion.aside
-              initial={{
-                y: -200,
-                opacity: 0.8,
-              }}
-              animate={{
-                y: 0,
-                opacity: 1,
-              }}
-              exit={{
-                y: -200,
-                opacity: 0.3,
-              }}
-              transition={{
-                duration: 0.3,
-                ease: "linear",
-              }}
-            >
-              <Filters closeFilterFn={()=>setOpenFilter(false)} />
-            </motion.aside>
-          </AnimatePresence>
+        {isMobile && showFilter && (
+          <aside>
+            <Filters closeFilterFn={() =>{
+              console.log("setting false")
+              setOpenFilter(false)
+            }} />
+          </aside>
         )}
         <main>
-          {currentSize <= 768 && (
-            <ShopHeader openFilterFn={() => setOpenFilter(true)} />
+          {!showFilter && isMobile && (
+            <ShopHeader openFilterFn={() =>{
+              console.log("setting true")
+              setOpenFilter(true)
+            }} />
           )}
-          <ShopMain />
+          <ShopMain initialShopData={initialShopData.data} />
         </main>
       </div>
     </>

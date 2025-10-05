@@ -35,11 +35,11 @@ const TrendingProducts = ({initData}) => {
           }`}
         >
           {data && data?.length > 0 ? (
-            data.map(({ name, price, discountPrice, productId }, index) => {
+            data.map(({ name, price, discountPrice, productId }) => {
               return (
                 <>
                   <ProductCards
-                    key={`${name}-${Math.random()*index}`}
+                    key={productId}
                     imageUrl={`${name}.webp`}
                     name={name}
                     price={price}

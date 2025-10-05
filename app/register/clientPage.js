@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from 'next/navigation';
 import AuthFormLayout from './../../src/components/form_components/AuthFormLayout';
+import {regApi} from "./../../src/axiosApiBoilerplates/regApi"
 import AuthFormField from './../../src/components/form_components/AuthFormField';
 
 export const metadata = {

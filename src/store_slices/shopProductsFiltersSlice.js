@@ -23,7 +23,7 @@ const shopProductFilter = createSlice({
       state.filters = { ...state.filters, ...action.payload };
     },
     resetFilter: (state) => {
-      state.filters = initialState;
+      state.filters = initialState.filters;
     },
   },
 });

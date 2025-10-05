@@ -1,4 +1,3 @@
-import { regApi } from "../axiosApiBoilerplates/regApi";
 import { authApi } from "../axiosApiBoilerplates/authApi";
 
 
@@ -14,4 +13,4 @@ const fetchLoggedInUser = async (userId, token) => {
   }
 };
 
-export { registerUser, fetchLoggedInUser };
+export { fetchLoggedInUser };

@@ -1,16 +1,16 @@
 "use client";
 
-import { QueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setScreenSize } from "../src/store_slices/windowSizesSlice";
-import { onAuthStateChanged, onIdTokenChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { fetchLoggedInUser } from "../src/utils/userAuthHelpers";
 import { auth } from "../firebase/fb_config";
 import { setUserAuth } from "../src/store_slices/userAuthSlice";
 import Loader from "./../src/components/reusable_components/Loader";
 
-export default function AppClientWrapper({ children, initUserData }) {
+export default function AppClientWrapper({ children }) {
   const [userInfo, setUserInfo] = useState({});
   const { isLoggedIn } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
@@ -20,17 +20,15 @@ export default function AppClientWrapper({ children, initUserData }) {
     enabled: isLoggedIn,
     refetchOnWindowFocus: false,
     refetchOnReconnect: true,
-    ...(initUserData ? { initialData: initUserData } : {}),
   });
   useEffect(() => {
-    if (!initUserData) {
-      signOut(auth);
-    }
     dispatch(setScreenSize());
-    window.addEventListener("resize", () => dispatch(setScreenSize()));
-    const unSubscribeAuthStateListener = onAuthStateChanged(
+    const handleResize = () => dispatch(setScreenSize());
+    window.addEventListener("resize", handleResize);
+    const unsubscribeAuthStateListener = onAuthStateChanged(
       auth,
       async (user) => {
+        console.log("running auth");
         console.log(user);
         if (user) {
           const idToken = await user.getIdToken();
@@ -43,19 +41,9 @@ export default function AppClientWrapper({ children, initUserData }) {
         }
       }
     );
-    const unSubcribeTokenListener = onIdTokenChanged(auth, async (user) => {
-      try {
-        const token = await user.getIdToken();
-        await cookieStore.set("lasu-mart-auth-token", token);
-      } catch (err) {
-        console.log(err);
-        signOut(auth);
-      }
-    });
     return () => {
-      window.removeEventListener("resize", () => dispatch(setScreenSize()));
-      unSubscribeAuthStateListener();
-      unSubcribeTokenListener();
+      window.removeEventListener("resize", handleResize);
+      unsubscribeAuthStateListener();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

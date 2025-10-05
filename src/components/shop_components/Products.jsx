@@ -4,14 +4,13 @@ import { regApi } from "../../axiosApiBoilerplates/regApi";
 import ProductCards from "../home_components/ProductCards";
 import Loader from "./../reusable_components/Loader";
 import "./scss/products.scss";
-import { useEffect } from "react";
 import { setTotalPages } from "../../store_slices/productPageSlice";
 
-const Products = ({ pageNumber=1 }) => {
+const Products = ({ pageNumber=1, initialProductsData }) => {
   const { filters } = useSelector((state) => state.shopProductFilter);
   const dispatch = useDispatch()
 
-  const fetchProducts = async (pageNumber) => {
+  const fetchProducts = async (pageNumber, filters) => {
     try {
       const products = await regApi.post("/product/get_products", { page: pageNumber, ...filters })
       console.log(products);
@@ -23,19 +22,17 @@ const Products = ({ pageNumber=1 }) => {
     }
   };
 
-  const { data, isFetching, refetch } = useQuery({
-    queryKey: ["products", pageNumber],
-    queryFn: () => fetchProducts(pageNumber),
-    cacheTime: 0,
-    staleTime: 0,
+  const { data, isFetching } = useQuery({
+    queryKey: ["products", pageNumber, filters],
+    queryFn: () => fetchProducts(pageNumber, filters),
     refetchOnReconnect: true,
     refetchOnWindowFocus: false,
+    initialData: initialProductsData
   });
 
-  useEffect(()=>{
-    refetch({force: true})
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters])
+
+  const productsData = data ?? initialProductsData
+
 
   if (isFetching) {
     return (
@@ -50,8 +47,8 @@ const Products = ({ pageNumber=1 }) => {
       <section className="shop_product">
         <h2>Shop</h2>
         <div className="shop_product_display">
-          {data?.length > 0 ? (
-            data.map(({ name, price, discountPrice,productId }, index) => {
+          {productsData?.length > 0 ? (
+            productsData.map(({ name, price, discountPrice,productId }, index) => {
               return (
                 <>
                   <ProductCards
