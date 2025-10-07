@@ -4,8 +4,15 @@ import "../src/assets/scss_reusable/variables.scss";
 import AppHeader from "../src/components/page_layouts/AppHeader";
 import AppFooter from "../src/components/page_layouts/AppFooter";
 import AppClientWrapper from "./appClientWrapper";
+import { cookies } from "next/headers";
+import { authApi } from "../src/axiosApiBoilerplates/authApi";
 
 const RootLayout = async ({ children }) => {
+  const token = (await cookies()).get("lasu-mart-auth-token")?.value
+  let userData
+  if(token) {
+    userData = await authApi(token).get("/user/get")
+  }
   return (
     <>
       <html lang="en">
@@ -14,7 +21,7 @@ const RootLayout = async ({ children }) => {
             <AppHeader />
           </Providers>
           <Providers>
-            <AppClientWrapper>
+            <AppClientWrapper initUserData={userData.data} >
               {children}
             </AppClientWrapper>
           </Providers>

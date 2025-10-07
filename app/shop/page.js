@@ -2,6 +2,10 @@ import { regApi } from "../../src/axiosApiBoilerplates/regApi";
 import { headers } from "next/headers";
 import ClientShopPage from "./clientPage"
 
+export const metadata = {
+  title: "Lasu Mart-Shop"
+}
+
 const Shop = async () => {
   const userAgent = (await headers()).get("user-agent");
   const isMobile = /Mobi|Android|iPhone/i.test(userAgent);

@@ -2,11 +2,12 @@ import { useSelector } from "react-redux";
 import "./scss/app_header_navigation.scss";
 import Link from "next/link";
 
-const AppHeaderNavigation = ({ navToggle = (value)=>null, signOutFn }) => {
+const AppHeaderNavigation = ({ navToggle = ()=>null, signOutFn }) => {
   const { currentSize } = useSelector((state) => state.screenSize);
-  const { isLoggedIn } = useSelector((state) => state.userAuth);
+  const { isLoggedIn, userData } = useSelector((state) => state.userAuth);
   return (
     <>
+{console.log(userData)}
       <div className="nav_container">
         <nav className="header_navigation">
           <Link
@@ -35,14 +36,14 @@ const AppHeaderNavigation = ({ navToggle = (value)=>null, signOutFn }) => {
               {isLoggedIn ? (
                 <>
                   <Link
-                    href={"/cart"}
+                    href={`${userData.userId}/cart`}
                     onClick={() => navToggle(false)}
                     className={`header_navigation_links`}
                   >
                     Cart
                   </Link>
                   <Link
-                    href={"/account"}
+                    href={`${userData.userId}/account`}
                     onClick={() => navToggle(false)}
                     className={`header_navigation_links`}
                   >
