@@ -21,7 +21,7 @@ const RootLayout = async ({ children }) => {
             <AppHeader />
           </Providers>
           <Providers>
-            <AppClientWrapper initUserData={userData.data} >
+            <AppClientWrapper initUserData={userData?.data} >
               {children}
             </AppClientWrapper>
           </Providers>

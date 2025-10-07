@@ -21,7 +21,7 @@ export default function AppClientWrapper({ children, initUserData }) {
     enabled: isLoggedIn,
     refetchOnWindowFocus: false,
     refetchOnReconnect: true,
-    initialData: initUserData,
+    ...(initUserData ? {initialData: initUserData} : {}),
   });
   useEffect(() => {
 	console.log(data, "datattttt")
