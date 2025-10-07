@@ -54,7 +54,7 @@ export default function AppClientWrapper({ children, initUserData }) {
           await authApi(token).post("/user/set-cookie", {idToken: token}, {withCredentials: true})
         } catch (err) {
           console.log(err)
-          signOut(auth)
+          await signOut(auth)
         }
       }
     })

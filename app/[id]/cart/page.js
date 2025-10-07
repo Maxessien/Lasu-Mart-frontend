@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { authApi } from "../../../src/axiosApiBoilerplates/authApi";
 import CartItems from "../../../src/components/cart_components/CartItems";
 import CheckoutSummary from "../../../src/components/cart_components/CheckoutSummary";
@@ -26,6 +26,7 @@ const Cart = async () => {
     );
   } catch (err) {
     console.log(err);
+    notFound()
   }
 };
 
