@@ -76,7 +76,7 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
                 {accountDropDowm && (
                   <div className="flex flex-col items-center justify-center absolute top-[100%] left-[-20%] z-999 gap-2 py-3 px-10 rounded-md bg-white shadow-sm">
                     <Link
-                      href={`${userData?.userId}/account`}
+                      href={`/${userData?.userId}/account`}
                       className="font-semibold text-md text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
                     >
                       Account
@@ -97,7 +97,7 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
                 )}
 
                 <Link
-                  href={`${userData?.userId}/cart`}
+                  href={`/${userData?.userId}/cart`}
                   className="relative font-semibold p-2 rounded-full hover:bg-[var(--main-primary-light)] text-[var(--text-primary-light)] text-2xl"
                 >
                   {userData?.cart?.length > 0 && (
