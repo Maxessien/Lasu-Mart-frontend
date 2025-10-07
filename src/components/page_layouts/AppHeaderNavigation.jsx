@@ -36,14 +36,14 @@ const AppHeaderNavigation = ({ navToggle = ()=>null, signOutFn }) => {
               {isLoggedIn ? (
                 <>
                   <Link
-                    href={`${userData.userId}/cart`}
+                    href={`${userData?.userId}/cart`}
                     onClick={() => navToggle(false)}
                     className={`header_navigation_links`}
                   >
                     Cart
                   </Link>
                   <Link
-                    href={`${userData.userId}/account`}
+                    href={`${userData?.userId}/account`}
                     onClick={() => navToggle(false)}
                     className={`header_navigation_links`}
                   >
