@@ -27,7 +27,7 @@ const Button = ({
   isDisabled = false,
   width = "[max-content]",
   classNames = "",
-  buttonType="button"
+  buttonType="button",
 }) => {
   const allStyles = `rounded-${rounded} ${baseStyles} ${sizeStyles[size]} ${
     variantStyles[type]

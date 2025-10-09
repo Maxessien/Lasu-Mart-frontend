@@ -49,7 +49,7 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
               type="text"
               {...register("searchQuery")}
               placeholder="Search products"
-              className="rounded-full border-[--text-primary-light] border-3 lg:w-lg pl-8 py-1 text-md font-semibold text-[var(--text-primary-light)]"
+              className="rounded-full border-[--text-primary-light] border-3 lg:w-lg pl-8 py-1 text-base font-semibold text-[var(--text-primary-light)]"
             />
             <button className="absolute top-0 h-full left-1 text-[var(--text-primary-light)] text-lg rounded-full p-2">
               <FaSearch />
@@ -76,19 +76,19 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
                 {accountDropDowm && (
                   <div className="flex flex-col items-center justify-center absolute top-[100%] left-[-20%] z-999 gap-2 py-3 px-10 rounded-md bg-white shadow-sm">
                     <Link
-                      href={`/${userData?.userId}/account`}
-                      className="font-semibold text-md text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
+                      href={`/${userData?.userId}/account/profile`}
+                      className="font-semibold text-base text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
                     >
-                      Account
+                      Profile
                     </Link>
                     <Link
-                      href={"/settings"}
-                      className="font-semibold text-md text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
+                      href={"/account/settings"}
+                      className="font-semibold text-base text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
                     >
                       Settings
                     </Link>
                     <button
-                      className="font-semibold text-md text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
+                      className="font-semibold text-base text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
                       onClick={() => signOutFn()}
                     >
                       Log out

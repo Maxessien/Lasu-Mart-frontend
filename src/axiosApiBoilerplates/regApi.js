@@ -5,7 +5,7 @@ const regApi = axios.create({
 });
 
 const productsApi = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}products`,
+  baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}/products`,
 })
 
 export { regApi, productsApi };

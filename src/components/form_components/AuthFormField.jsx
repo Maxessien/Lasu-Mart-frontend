@@ -1,6 +1,6 @@
 "use client"
 
-import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import "./scss/auth_form_field.scss";
 import { useState } from "react";
@@ -126,7 +126,7 @@ const AuthFormField = ({
                   },
                 })}
               />
-              <button>
+              <button type="button">
                 {showPassword ? (
                   <FaEye className="text-xl" onClick={() => setShowPassword(false)} />
                 ) : (

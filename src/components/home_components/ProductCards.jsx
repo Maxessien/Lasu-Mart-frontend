@@ -61,7 +61,7 @@ const ProductCards = ({ imageUrl, name, price, discountPrice = undefined, produc
         <p className="text-[var(--text-primary-light)] flex flex-wrap text-lg font-bold align-left">
           {discountPrice ? (
             <>
-              <span className="line-through text-md mr-[10px]">
+              <span className="line-through text-base mr-[10px]">
                 &#8358;{price}
               </span>
               <span>&#8358;{discountPrice.toFixed(2)}</span>

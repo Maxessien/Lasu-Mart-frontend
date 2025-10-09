@@ -8,13 +8,13 @@
         width: 100%;
         &_names{
             color: var(--text-primary-light);
-            font-size: var(--font-2xl);
+            font-size: var(--font-lg);
             font-weight: 700;
         }
         &_inputs{
             width: 100%;
-            font-size: var(--font-lg);
-            font-weight: 600;
+            font-size: var(--font-md);
+            font-weight: 500;
             padding: rem(7) rem(10);
             box-shadow: inset 0px 0px 5px black;
             border-radius: rem(10);
@@ -25,7 +25,7 @@
         }
         &_error{
             color: red;
-            font-size: var(--font-md);
+            font-size: var(--font-sm);
             font-weight: 500;
         }
         div{

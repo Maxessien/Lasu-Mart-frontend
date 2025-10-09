@@ -71,18 +71,18 @@ const CartListProductCards = ({
               <div className="flex gap-4 px-3 text-[var(--text-primary)] h-10 rounded-full border-2 border-[var(--main-secondary-light)]">
                 <button
                   onClick={() => updateCartQuantity(1)}
-                  className="font-bold text-md hover:bg-[var(--main-primary-light)]"
+                  className="font-bold text-base hover:bg-[var(--main-primary-light)]"
                 >
                   <FaPlus />
                 </button>
                 <span className="font-bold text-lg flex items-center justify-center">
                   {quantity}
                 </span>
-                <button className="font-bold text-md hover:bg-[var(--main-primary-light)]">
+                <button className="font-bold text-base hover:bg-[var(--main-primary-light)]">
                   <FaMinus onClick={() => updateCartQuantity(-1)} />
                 </button>
               </div>
-              <span className="text-[var(--main-primary)] font-bold text-md">
+              <span className="text-[var(--main-primary)] font-bold text-base">
                 &#8358;{price}
               </span>
             </div>

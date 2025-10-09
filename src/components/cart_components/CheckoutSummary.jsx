@@ -41,7 +41,7 @@ const CheckoutSummary = ({initUserData}) => {
             </Button>
           </>
         ) : (
-          <p className="py-5 text-center text[var(--text-primary-light)] font-semibold text-md">
+          <p className="py-5 text-center text[var(--text-primary-light)] font-semibold text-base">
             Empty
           </p>
         )}

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setScreenSize } from "../src/store_slices/windowSizesSlice";
 import { onAuthStateChanged, onIdTokenChanged, signOut } from "firebase/auth";
-import { fetchLoggedInUser } from "../src/utils/userAuthHelpers";
 import { auth } from "../firebase/fb_config";
 import { setUserAuth } from "../src/store_slices/userAuthSlice";
 import Loader from "./../src/components/reusable_components/Loader";
@@ -15,16 +14,31 @@ export default function AppClientWrapper({ children, initUserData }) {
   const [userInfo, setUserInfo] = useState({});
   const { isLoggedIn } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
+
+  const fetchLoggedInUser = async (userId, token) => {
+    try {
+      const user = await authApi(token).get("/user/get", {
+        params: { uid: userId },
+      });
+      dispatch(setUserAuth({ stateProp: "userData", value: user.data }));
+      return user.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+
   const { isFetching, data } = useQuery({
     queryKey: ["loggedInUserData", userInfo.userId],
     queryFn: () => fetchLoggedInUser(userInfo.userId, userInfo.token),
     enabled: isLoggedIn,
     refetchOnWindowFocus: false,
     refetchOnReconnect: true,
-    ...(initUserData ? {initialData: initUserData} : {}),
+    ...(initUserData ? { initialData: initUserData } : {}),
   });
+
   useEffect(() => {
-	console.log(data, "datattttt")
+    console.log(data, "datattttt");
     dispatch(setScreenSize());
     const handleResize = () => dispatch(setScreenSize());
     window.addEventListener("resize", handleResize);
@@ -33,12 +47,11 @@ export default function AppClientWrapper({ children, initUserData }) {
       async (user) => {
         console.log("running auth");
         if (user) {
-        console.log(user);
+          console.log(user);
           const idToken = await user.getIdToken();
           setUserInfo({ userId: user.uid, token: idToken });
           dispatch(setUserAuth({ stateProp: "isLoggedIn", value: true }));
           dispatch(setUserAuth({ stateProp: "idToken", value: idToken }));
-          dispatch(setUserAuth({ stateProp: "userData", value: data }));
         } else {
           dispatch(setUserAuth({ stateProp: "isLoggedIn", value: false }));
           dispatch(setUserAuth({ stateProp: "idToken", value: "" }));
@@ -46,25 +59,33 @@ export default function AppClientWrapper({ children, initUserData }) {
         }
       }
     );
-    const unsubscribeTokenListener = onIdTokenChanged(auth, async(user)=>{
-        console.log("running idtoken");
-      if (user){
+    
+    const unsubscribeTokenListener = onIdTokenChanged(auth, async (user) => {
+      console.log("running idtoken");
+      if (user) {
         try {
           const token = await user.getIdToken();
-          await authApi(token).post("/user/set-cookie", {idToken: token}, {withCredentials: true})
+          await authApi(token).post(
+            "/user/set-cookie",
+            { idToken: token },
+            { withCredentials: true }
+          );
         } catch (err) {
-          console.log(err)
-          await signOut(auth)
+          console.log(err);
+          await signOut(auth);
         }
       }
-    })
+    });
+
     return () => {
       window.removeEventListener("resize", handleResize);
       unsubscribeAuthStateListener();
-      unsubscribeTokenListener()
+      unsubscribeTokenListener();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+
   return (
     <>
       {isFetching ? (

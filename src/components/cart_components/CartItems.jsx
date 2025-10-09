@@ -41,7 +41,7 @@ const CartItems = ({initUserData}) => {
           {user?.cart?.length > 0 && (
             <button
               onClick={() => mutateAsync()}
-              className="text-md font-semibold text-[var(--main-primary)]"
+              className="text-base font-semibold text-[var(--main-primary)]"
             >
               Clear all
             </button>
