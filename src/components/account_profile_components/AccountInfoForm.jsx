@@ -98,7 +98,7 @@ const AccountInfoForm = ()=>{
                     )}
                   </label>
                   <div className="flex gap-3">
-                <button className="bg-[var(--main-tertiary)] text-base text-[var(--text-primary)] font-semibold px-3 py-2 rounded-md" onClick={()=>editBtnFn()}>{isEditing ? "Cancel" : "Edit"}</button>
+                <button type="button" className="bg-[var(--main-tertiary)] text-base text-[var(--text-primary)] font-semibold px-3 py-2 rounded-md" onClick={()=>editBtnFn()}>{isEditing ? "Cancel" : "Edit"}</button>
                 <button disabled={!isEditing} type="submit" className="bg-[var(--main-primary)] text-base text-[var(--text-secondary)] disabled:opacity-[0.6] font-semibold px-3 py-2 rounded-md">{isPending ? "Saving...": "Save Changes"}</button>
                   </div>
               </form>

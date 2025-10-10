@@ -9,15 +9,15 @@ const AccountNavigation = () => {
   const navigationDetails = [
     {
       name: "Profile",
-      path: "/account/profile",
+      path: "profile",
     },
     {
       name: "Order History",
-      path: "/account/orders",
+      path: "orders",
     },
     {
       name: "Settings",
-      path: "/account/settings",
+      path: "settings",
     },
   ];
 

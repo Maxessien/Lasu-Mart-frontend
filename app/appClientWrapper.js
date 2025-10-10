@@ -10,7 +10,7 @@ import { setUserAuth } from "../src/store_slices/userAuthSlice";
 import Loader from "./../src/components/reusable_components/Loader";
 import { authApi } from "../src/axiosApiBoilerplates/authApi";
 
-export default function AppClientWrapper({ children, initUserData }) {
+export default function AppClientWrapper({ children }) {
   const [userInfo, setUserInfo] = useState({});
   const { isLoggedIn } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ export default function AppClientWrapper({ children, initUserData }) {
       return user.data;
     } catch (err) {
       console.log(err);
+      await signOut(auth);
       throw err;
     }
   };
@@ -34,7 +35,6 @@ export default function AppClientWrapper({ children, initUserData }) {
     enabled: isLoggedIn,
     refetchOnWindowFocus: false,
     refetchOnReconnect: true,
-    ...(initUserData ? { initialData: initUserData } : {}),
   });
 
   useEffect(() => {

@@ -1,14 +1,14 @@
 import AccountInfoForm from "./../../../../src/components/account_profile_components/AccountInfoForm";
 import EditProfilePhoto from "./../../../../src/components/account_profile_components/EditProfilePhoto";
 import ChangeAccountPasswordForm from "./../../../../src/components/account_profile_components/ChangeAccountPasswordForm";
+import {accountHeadersStyles} from "../layout.js"
 
 const ProfilePage = () => {
   const headerStyles =
     "font-bold text-xl text-[var(--text-primary)] text-left mt-4 mb-2";
   return (
     <>
-      <main className="py-3 px-5 w-full">
-        <h1 className="font-bold text-3xl text-[var(--text-primary)] text-center mb-1">
+        <h1 className={accountHeadersStyles}>
           Profile
         </h1>
 
@@ -20,7 +20,6 @@ const ProfilePage = () => {
 
         <h2 className={headerStyles}>Change Password</h2>
         <ChangeAccountPasswordForm />
-      </main>
     </>
   );
 };

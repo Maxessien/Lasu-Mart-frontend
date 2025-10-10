@@ -17,6 +17,10 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
   const { currentSize } = useSelector((state) => state.screenSize);
   const { isLoggedIn, userData } = useSelector((state) => state.userAuth);
   const { register, handleSubmit } = useForm();
+
+  const user = userData
+  const loggedIn = isLoggedIn
+
   const submitSearchQuery = (data) => {
     console.log(data);
   };
@@ -59,7 +63,7 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
 
         {currentSize >= 768 ? (
           <>
-            {isLoggedIn ? (
+            {loggedIn ? (
               <div className="flex items-center justify-end gap-3 relative">
                 <button
                   onClick={() => setAccountDropDown(!accountDropDowm)}
@@ -76,7 +80,7 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
                 {accountDropDowm && (
                   <div className="flex flex-col items-center justify-center absolute top-[100%] left-[-20%] z-999 gap-2 py-3 px-10 rounded-md bg-white shadow-sm">
                     <Link
-                      href={`/${userData?.userId}/account/profile`}
+                      href={`/${user?.userId}/account/profile`}
                       className="font-semibold text-base text-[var(--text-primary)] hover:text-[var(--main-primary-light)]"
                     >
                       Profile
@@ -97,14 +101,14 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
                 )}
 
                 <Link
-                  href={`/${userData?.userId}/cart`}
+                  href={`/${user?.userId}/cart`}
                   className="relative font-semibold p-2 rounded-full hover:bg-[var(--main-primary-light)] text-[var(--text-primary-light)] text-2xl"
                 >
-                  {userData?.cart?.length > 0 && (
+                  {user?.cart?.length > 0 && (
                     <span
                       className={`rounded-full absolute top-[-5px] left-[-5px] bg-[var(--main-primary)] font-semibold text-[var(--text-secondary-light)] text-[1rem] py-1 px-2`}
                     >
-                      {userData?.cart?.length}
+                      {user?.cart?.length}
                     </span>
                   )}
                   <FaShoppingCart />

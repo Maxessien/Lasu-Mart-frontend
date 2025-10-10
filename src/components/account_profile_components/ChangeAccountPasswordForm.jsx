@@ -78,7 +78,7 @@ const ChangeAccountPasswordForm = () => {
             <p className={errorMessage}>{errors.confirmNewPassword.message}</p>
           )}
         </label>
-          <Button buttonType="submit" rounded="md">{isPending? "Saving..." : "Change Password"}</Button>
+          <Button buttonType="submit" width={"[max-content]"} rounded="md">{isPending? "Saving..." : "Change Password"}</Button>
       </form>
     </>
   );
