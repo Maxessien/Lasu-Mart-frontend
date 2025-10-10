@@ -2,7 +2,6 @@ import React from "react";
 import { getUserServerSide } from "../../src/utils/authHelpers"
 import SignOutUser from './../../src/components/reusable_components/SignOutUser';
 
-export const dynamic = "force-dynamic"
 
 
 const UserLayout = async ({children}) => {

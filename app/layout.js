@@ -5,6 +5,8 @@ import AppFooter from "../src/components/page_layouts/AppFooter";
 import AppClientWrapper from "./appClientWrapper";
 import AppHeader from "../src/components/page_layouts/AppHeader";
 
+export const dynamic = "force-dynamic"
+
 const RootLayout = async ({ children }) => {
   return (
     <>

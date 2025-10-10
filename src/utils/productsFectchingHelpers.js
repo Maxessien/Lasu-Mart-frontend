@@ -13,7 +13,7 @@ const fetchTrendingProducts = async () => {
 
 const getProductCategpries = async () => {
   try {
-    const categories = regApi.get("/category/get_products");
+    const categories = regApi.get("/category/get");
     return categories.data || [];
   } catch (err) {
     console.log(err);
