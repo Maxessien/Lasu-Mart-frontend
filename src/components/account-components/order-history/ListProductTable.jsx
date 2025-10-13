@@ -1,5 +1,5 @@
 const StyledTd = ({children})=>{
-    return <td className="border-r-[var(--main-secondary-light)] border-r-2">{children}</td>
+    return <td className="border-r-[var(--main-secondary-light)] border-r-2 p-[10px]">{children}</td>
 }
 
 const StyledTr = ({children})=>{
@@ -9,7 +9,7 @@ const StyledTr = ({children})=>{
 const ListProductTable = ({name, price, quantityOrdered, createdAt, paymentStatus, deliveryStatus})=>{
     return (
         <>
-        <table>
+        <table className="border-collaspe">
             <tbody>
                 <StyledTr>
                     <StyledTd>Name</StyledTd>

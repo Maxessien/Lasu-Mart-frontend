@@ -15,9 +15,9 @@ const ChangeAccountPasswordForm = () => {
 
   const {formLabel, labelText, formInput, errorMessage} = formStyles
 
-  const changePassword = async (data) => {
+  const changePassword = async ({newPassword}) => {
     try {
-      const res = await authApi(idToken).post("/user/change-password", data);
+      const res = await authApi(idToken).post("/user/update", {password: newPassword}, {params: {type: "authOnly"}});
       return res.data;
     } catch (err) {
       console.log(err);
@@ -78,7 +78,7 @@ const ChangeAccountPasswordForm = () => {
             <p className={errorMessage}>{errors.confirmNewPassword.message}</p>
           )}
         </label>
-          <Button buttonType="submit" width={"[max-content]"} rounded="md">{isPending? "Saving..." : "Change Password"}</Button>
+          <Button buttonType="submit" classNames="w-full max-w-[540px]" rounded="md">{isPending? "Saving..." : "Change Password"}</Button>
       </form>
     </>
   );

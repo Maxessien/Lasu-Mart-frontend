@@ -4,9 +4,9 @@ const variantStyles = {
   primary:
     "bg-[var(--main-primary)] text-[var(--text-secondary-light)] hover:bg-[var(--main-primary-light)]",
   secondary:
-    "text-[var(--main-primary)] bg-[var(--text-secondary-light)] hover:bg-[var(--text-secondary)]",
+    "text-[var(--main-primary)] border-[2px] border-[var(--text-primary)] bg-[var(--text-secondary-light)] hover:bg-[var(--text-secondary)]",
   tertiary:
-    "bg-transparent text-[var(--text-primary-light)] hover:bg-orange-200 border-md border-[var(--text-primary-light)]",
+    "bg-transparent text-[var(--text-primary-light)] border-[2px] border-[var(--text-primary)] hover:bg-orange-200 border-md border-[var(--text-primary-light)]",
 };
 
 const sizeStyles = {

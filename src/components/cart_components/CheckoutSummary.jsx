@@ -36,7 +36,7 @@ const CheckoutSummary = ({initUserData}) => {
                 {(Number(total) + Number(total) * 0.1).toFixed(2)}
               </li>
             </ul>
-            <Button buttonFn={() => router.push("/checkout")} rounded="md">
+            <Button buttonFn={() => router.push(`/${user.userId}/checkout`)} rounded="md">
               Proceed to Checkout
             </Button>
           </>

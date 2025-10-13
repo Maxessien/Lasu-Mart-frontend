@@ -1,30 +1,28 @@
 "use client"
 
-import { useSelector } from 'react-redux';
 import ListProductTable from './ListProductTable';
 import Button from './../../reusable_components/Buttons';
 import { useRouter } from 'next/navigation';
 
 const OrderHistoryTable = ({initOrdersData})=>{
-    const {userData} = useSelector((state)=>state.userAuth)
-    const ordersData = userData?.orderHistory ?? initOrdersData
+    const ordersData = initOrdersData
     const router = useRouter()
 
     return (
         <>
         {ordersData && ordersData.length > 0 ? (
-            <>
+            <div className="border-collapse flex flex-col gap-[10px]">
             {ordersData.map((data, index)=>{
                 return (
                     <>
-                    <div className="flex flex-cols md:grid grid-cols-[150px_1fr] border-collapse border-2 border-[var(--main-secondary-light)]">
-                        <p className="w-full flex items-center justify-center text-md font-semibold text-[var(--text-primary)]">{data.orderId}</p>
+                    <div className="flex flex-col md:grid md:grid-cols-[20%_1fr] border-2 border-[var(--main-secondary-light)]">
+                        <p className="w-full flex items-center justify-center p-2 border-b-2 md:border-r-2 border-[var(--main-secondary-light)] text-md font-semibold text-[var(--text-primary)]">{data.orderId}</p>
                         <ListProductTable key={index} {...data} />
                     </div>
                     </>
                 )
             })}
-            </>
+            </div>
         ) : (
             <>
             <div className="flex flex-col gap-4 items-center justify-center w-full p-4">

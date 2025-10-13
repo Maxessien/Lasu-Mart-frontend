@@ -38,7 +38,7 @@ const ClientShopPage = ({ initialShopData, serverSideWindowSize }) => {
               setOpenFilter(true)
             }} />
           )}
-          <ShopMain initialShopData={initialShopData.data} />
+          <ShopMain initialShopData={initialShopData} />
         </main>
       </div>
     </>

@@ -8,7 +8,7 @@ export const metadata = {
 
 const Shop = async () => {
   const userAgent = (await headers()).get("user-agent");
-  const isMobile = /Mobi|Android|iPhone/i.test(userAgent);
+  const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false;
   try {
     const products = await regApi.post("/product/get_products", {
       page: 1,
@@ -22,7 +22,7 @@ const Shop = async () => {
         order: "desc",
       },
     });
-    console.log(isMobile, "mobile")
+    console.log(isMobile, "mobile", products.data)
     return (
       <>
         <ClientShopPage

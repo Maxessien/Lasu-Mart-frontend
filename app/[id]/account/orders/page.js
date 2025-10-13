@@ -10,6 +10,7 @@ const OrderHistory = async()=>{
         const cookieStore = await cookies()
         const token = cookieStore.get("userSessionToken")
         const orderHistory = await authApi(token.value).get("/user/orders")
+	console.log(orderHistory)
         return <>
         <h1 className={accountHeadersStyles}>
             Orders
