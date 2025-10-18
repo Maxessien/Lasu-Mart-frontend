@@ -9,6 +9,7 @@ import { auth } from "../firebase/fb_config";
 import { setUserAuth } from "../src/store_slices/userAuthSlice";
 import Loader from "./../src/components/reusable_components/Loader";
 import { authApi } from "../src/axiosApiBoilerplates/authApi";
+import { ToastContainer } from "react-toastify";
 
 export default function AppClientWrapper({ children }) {
   const [userInfo, setUserInfo] = useState({});
@@ -96,7 +97,10 @@ export default function AppClientWrapper({ children }) {
           />
         </>
       ) : (
-        <>{children}</>
+        <>
+        {children}
+        <ToastContainer position="top-center" pauseOnHover newestOnTop theme="colored" />
+        </>
       )}
     </>
   );

@@ -2,10 +2,10 @@
 
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserAuth } from "../../store_slices/userAuthSlice";
+import { setUserAuth } from "../../../store_slices/userAuthSlice";
 import { useMutation } from "@tanstack/react-query";
-import { authApi } from "../../axiosApiBoilerplates/authApi";
-import Button from "../reusable_components/Buttons"
+import { authApi } from "../../../axiosApiBoilerplates/authApi";
+import Button from "../../reusable_components/Buttons"
 
 const EditProfilePhoto = () => {
   const [imgPreview, setImgPreview] = useState(null);

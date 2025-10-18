@@ -22,6 +22,9 @@
             &::placeholder{
                 color: rgb(128, 128, 128);
             }
+            &:disabled{
+                opacity: 0.6
+            }
         }
         &_error{
             color: red;

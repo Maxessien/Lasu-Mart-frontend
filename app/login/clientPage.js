@@ -38,9 +38,10 @@ const ClientLogin = () => {
           email
           password
           buttonText={isLoading ? "Signing In..." : "Sign In"}
+          isSubmitting={isLoading}
         />
       </AuthFormLayout>
-      <ToastContainer position="top-center" pauseOnHover theme="colored" />
+      {/* <ToastContainer position="top-center" pauseOnHover theme="colored" /> */}
     </main>
     </>
   );

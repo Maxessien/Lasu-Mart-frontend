@@ -15,7 +15,7 @@ const ClientRegister = () => {
     const router = useRouter()
 
 
-const registerUser = async ({ email, password, name }) => {
+const registerUser = async ({ email, password, name, phone }) => {
   const newUser = {
     email: email,
     displayName: name,
@@ -50,14 +50,15 @@ const registerUser = async ({ email, password, name }) => {
             password
             name
             buttonText={isPending ? "Signing Up..." : "Sign Up"}
+            isSubmitting={isPending}
           />
         </AuthFormLayout>
-        <ToastContainer
+        {/* <ToastContainer
           position="top-center"
           newestOnTop
           pauseOnHover
           theme="colored"
-        />
+        /> */}
       </main>
     </>
   );

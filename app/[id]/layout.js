@@ -6,9 +6,9 @@ import SignOutUser from './../../src/components/reusable_components/SignOutUser'
 
 const UserLayout = async ({children}) => {
   try {
-  const userData = await getUserServerSide();
-	if(!userData) throw new Error("User not logged in")
-    return React.cloneElement(children, {initUserData: userData})
+  const {user} = await getUserServerSide();
+	if(!user) throw new Error("User not logged in")
+    return children
   } catch (err) {
     console.log(err);
     return <SignOutUser />

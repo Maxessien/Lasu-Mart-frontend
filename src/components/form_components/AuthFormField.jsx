@@ -3,9 +3,10 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import "./scss/auth_form_field.scss";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const AuthFormField = ({
+  children,
   email = false,
   password = false,
   submitFunction,
@@ -13,6 +14,7 @@ const AuthFormField = ({
   phone = false,
   hasDefault = false,
   buttonText="",
+  isSubmitting=false,
 }) => {
   const {
     register,
@@ -100,8 +102,7 @@ const AuthFormField = ({
               {...register("phone", {
                 required: "This field is required",
                 minLength: {value: 10, message: "Phone number must be at least 10 digits"},
-                maxLength: {value: 11, message: "Phone number cannot be more than 11 digits"},
-                pattern: {value: /^[0-9]+$/, message: "Can only contain numbers"}
+                maxLength: {value: 15, message: "Phone number cannot be more than 15 digits"},
               })}
             />
             {errors.phone && (
@@ -139,8 +140,8 @@ const AuthFormField = ({
             )}
           </label>
         )}
-
-        <button type="submit" className="submit_button">{buttonText}</button>
+          {children && React.cloneElement(children, {registerFn: ()=>register(), errorsObj: errors})}
+        <button disabled={isSubmitting} type="submit" className="submit_button">{buttonText}</button>
       </form>
     </>
   );

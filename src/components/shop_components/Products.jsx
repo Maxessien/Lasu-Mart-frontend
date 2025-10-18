@@ -12,7 +12,7 @@ const Products = ({ pageNumber=1, initialProductsData }) => {
 
   const fetchProducts = async (pageNumber, filters) => {
     try {
-      const products = await regApi.post("/product/get_products", { page: pageNumber, ...filters })
+      const products = await regApi.post("/product", { page: pageNumber, ...filters })
       console.log(products);
       dispatch(setTotalPages(products.data.totalPages))
       return products.data.data;
@@ -48,17 +48,14 @@ const Products = ({ pageNumber=1, initialProductsData }) => {
         <h2>Shop</h2>
         <div className="shop_product_display">
           {productsData?.length > 0 ? (
-            productsData.map(({ name, price, discountPrice,productId }, index) => {
+            productsData.map(({ name, price, productId, images }, index) => {
               return (
                 <>
                   <ProductCards
                     key={`${name}-${index}`}
-                    imageUrl={`${name}.webp`}
+                    imageUrl={images[0].url}
                     name={name}
                     price={price}
-                    discountP={
-                      discountPrice < price && discountPrice !==0 ? discountPrice : undefined
-                    }
                     productId={productId}
                   />
                 </>

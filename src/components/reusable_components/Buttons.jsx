@@ -15,11 +15,11 @@ const sizeStyles = {
   large: "px-6 py-3 text-lg",
 };
 
-const baseStyles = "inline-flex items-center justify-center font-semibold";
+const baseStyles = "inline-flex items-center justify-center font-semibold disabled:opacity-[0.7]";
 
 const Button = ({
   children,
-  buttonFn = ()=> null,
+  buttonFn=undefined,
   size = "medium",
   type = "primary",
   rounded = "full",
@@ -37,7 +37,7 @@ const Button = ({
 
   return (
     <>
-      <button type={buttonType} disabled={isDisabled} onClick={()=>buttonFn()} className={allStyles}>
+      <button type={buttonType} disabled={isDisabled} onClick={buttonFn} className={allStyles}>
         {children}{" "}
         {/* {isLoading && (
           <Circles

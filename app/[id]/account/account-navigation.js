@@ -3,23 +3,43 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const AccountNavigation = () => {
+const AccountNavigation = ({isVendor, userId}) => {
   const pathName = usePathname();
 
-  const navigationDetails = [
+  const generalNavigation = [
     {
       name: "Profile",
-      path: "profile",
+      path: `/${userId}/account/profile`,
     },
     {
       name: "Order History",
-      path: "orders",
+      path: `/${userId}/account/orders`,
     },
     {
       name: "Settings",
-      path: "settings",
+      path: `/${userId}/account/settings`,
     },
   ];
+
+  const protectedNavs = [
+    {
+      name: "Dashboard",
+      path: `/${userId}/account/vendor/dashboard`,
+    },
+    {
+      name: "Products",
+      path: `/${userId}/account/vendor/products`,
+    }
+  ]
+
+  const navigationDetails = !isVendor ? [
+    ...generalNavigation, 
+    {
+      name:  "Sell Products",
+      path: `/${userId}/account/sell`,
+    }
+  ] : [...generalNavigation, ...protectedNavs]
+
 
   return (
     <>
@@ -31,7 +51,7 @@ const AccountNavigation = () => {
                 <Link
                   href={path}
                   className={`text-base font-semibold text-[var(--text-primary)] ${
-                    pathName === path ? "text-[var(--main-primary)]" : ""
+                    pathName?.split("/").pop() === path ? "text-[var(--main-primary)] border-b-[var(--main-primary)]" : ""
                   }`}
                 >
                   {name}

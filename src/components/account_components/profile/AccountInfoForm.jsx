@@ -1,7 +1,7 @@
 "use client"
 
-import { authApi } from "../../axiosApiBoilerplates/authApi"
-import { setUserAuth }  from "../../store_slices/userAuthSlice"
+import { authApi } from "../../../axiosApiBoilerplates/authApi"
+import { setUserAuth }  from "../../../store_slices/userAuthSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import { useMutation } from '@tanstack/react-query';
 import {useState}  from "react"
@@ -13,7 +13,7 @@ const AccountInfoForm = ()=>{
     const [isEditing, setIsEditing] = useState(false)
     const dispatch = useDispatch()
   const {formLabel, labelText, formInput, errorMessage} = formStyles
-    const {register, handleSubmit, reset, errors} = useForm({mode: "onTouched", defaultValues: userData})
+    const {register, handleSubmit, reset, formState: {errors}} = useForm({mode: "onTouched", defaultValues: userData})
 
     const updateAccount = async(data)=>{
         console.log(data)

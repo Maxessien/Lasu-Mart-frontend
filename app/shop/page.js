@@ -10,7 +10,7 @@ const Shop = async () => {
   const userAgent = (await headers()).get("user-agent");
   const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false;
   try {
-    const products = await regApi.post("/product/get_products", {
+    const products = await regApi.post("/product", {
       page: 1,
       category: [],
       priceRange: {

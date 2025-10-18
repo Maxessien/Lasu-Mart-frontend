@@ -1,22 +1,23 @@
 "use client"
 
 import { useForm } from "react-hook-form"
-import PaymentMethodToggle from "./PaymentMethodToggle"
+// import PaymentMethodToggle from "./PaymentMethodToggle"
 import Button from './../reusable_components/Buttons';
 import { authApi } from "../../axiosApiBoilerplates/authApi"
 import { useSelector } from 'react-redux';
+import { useMutation } from "@tanstack/react-query";
 
 const CheckoutForm = () => {
-  const {idToken} = useSelector((state)=>state.userAuth)
+  const {idToken, userData} = useSelector((state)=>state.userAuth)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      fullName: "",
-      email: "",
-      phone: "",
+      fullName: userData.displayName,
+      email: userData.email,
+      phone: userData.phoneNumber,
       address: "",
       paymentMethod: "delivery",
     },
@@ -32,6 +33,8 @@ const CheckoutForm = () => {
     }
   }
 
+  const {mutateAsync, isPending} = useMutation({mutateFn: (data)=>onSubmit(data)})
+
   // ✅ Reusable utility class groups for consistency
   const formLabel = "block font-semibold text-[var(--text-primary)] mb-[10px]"
   const inputField =
@@ -44,7 +47,7 @@ const errorMessage = "text-red-600 text-sm mt-[6px]"
         Checkout Details
       </h1>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form onSubmit={handleSubmit(mutateAsync)} className="space-y-5">
         {/* Full Name */}
         <div>
           <label className={formLabel}>Full Name</label>
@@ -105,10 +108,9 @@ const errorMessage = "text-red-600 text-sm mt-[6px]"
         </div>
 
         {/* Payment Method Toggle */}
-        <PaymentMethodToggle register={register} />
+        {/* <PaymentMethodToggle register={register} /> */}
 
-        {/* Submit Button */}
-        <Button buttonType="submit" rounded="md">Proceed To Payment</Button>
+        <Button isDisabled={isPending} buttonType="submit" rounded="md">{isPending ? "..." : "Proceed To Payment"}</Button>
       </form>
     </main>
   )

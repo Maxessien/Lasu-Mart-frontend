@@ -3,8 +3,8 @@
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
-import { authApi } from "../../axiosApiBoilerplates/authApi";
-import Button from './../reusable_components/Buttons';
+import { authApi } from "../../../axiosApiBoilerplates/authApi";
+import Button from '../../reusable_components/Buttons';
 import { formStyles } from "./formStyle";
 
 const ChangeAccountPasswordForm = () => {
