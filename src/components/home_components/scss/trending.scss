@@ -28,20 +28,13 @@
   }
   .product_display {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(rem(250), 1fr));
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(rem(200), rem(230)));
     gap: rem(20);
     @include media(large) {
       display: flex;
       flex-wrap: nowrap;
       justify-content: flex-start;
     }
-    & > * {
-      min-width: rem(250);
-      max-width: rem(320);
-      // @include media(rem(860), max-width, "true") {
-      //   max-width: rem(250);
-      // }
-    }
-    // }
   }
 }

@@ -82,15 +82,15 @@ const ProductCards = ({
         {!isPending ? (
           <>
             {vendorPhone && (
-              <Link
-                href={`https//wa.me/${vendorPhone}?text=${encodeURIComponent(
+              <a
+                href={`wa.me/${vendorPhone}?text=${encodeURIComponent(
                   `Hi there, I'm interested in the ${name} you listed on Lasu Mart.`
                 )}`}
                 target={"_blank"}
                 className="inline-flex items-center justify-center font-semibold bg-[var(--main-primary)] text-[var(--text-secondary-light)] hover:bg-[var(--main-primary-light)] px-4 py-2 text-base"
               >
                 <FaWhatsapp size={20} className="mr-[5px]" /> Chat on Whatsapp
-              </Link>
+              </a>
             )}
             <Button buttonFn={() => shopBtn("add")} rounded="md">
               <FaShoppingCart size={20} className="mr-[5px]" /> Add to Cart

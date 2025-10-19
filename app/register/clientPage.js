@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import AuthFormLayout from './../../src/components/form_components/AuthFormLayout';
 import {regApi} from "./../../src/axiosApiBoilerplates/regApi"
 import AuthFormField from './../../src/components/form_components/AuthFormField';
+import SwitchMethod from "../../src/components/form_components/SwitchMethod";
 
 export const metadata = {
   title: "Lasu Mart-Register"
@@ -18,6 +19,7 @@ const ClientRegister = () => {
 const registerUser = async ({ email, password, name, phone }) => {
   const newUser = {
     email: email,
+    phoneNumber: phone,
     displayName: name,
     password: password,
   };
@@ -47,6 +49,7 @@ const registerUser = async ({ email, password, name, phone }) => {
           <AuthFormField
             submitFunction={mutateAsync}
             email
+            phone
             password
             name
             buttonText={isPending ? "Signing Up..." : "Sign Up"}

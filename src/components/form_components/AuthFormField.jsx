@@ -94,17 +94,20 @@ const AuthFormField = ({
         {phone && (
           <label className="form_labels" htmlFor="phone">
             <p className="form_labels_names">phone</p>
-            <input
-              className="form_labels_inputs"
-              type="phone"
-              id="phone"
-              placeholder="Enter your phone number"
-              {...register("phone", {
-                required: "This field is required",
-                minLength: {value: 10, message: "Phone number must be at least 10 digits"},
-                maxLength: {value: 15, message: "Phone number cannot be more than 15 digits"},
-              })}
-            />
+            <div className="flex gap-2">
+              <div className="country_code">+234</div>
+              <input
+                className="form_labels_inputs"
+                type="phone"
+                id="phone"
+                placeholder="Enter your phone number"
+                {...register("phone", {
+                  required: "This field is required",
+                  minLength: {value: 10, message: "Phone number must be at least 10 digits"},
+                  maxLength: {value: 15, message: "Phone number cannot be more than 11 digits"},
+                })}
+              />
+            </div>
             {errors.phone && (
               <p className="form_labels_error">{errors.phone.message}</p>
             )}

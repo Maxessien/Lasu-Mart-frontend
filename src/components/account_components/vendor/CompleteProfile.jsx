@@ -56,7 +56,7 @@ const CompleteProfile = () => {
   };
 
   const { mutateAsync, isPending } = useMutation({
-    mutateFn: (data) => onSubmit(data),
+    mutationFn: (data) => onSubmit(data),
   });
 
   return (

@@ -8,6 +8,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../../firebase/fb_config.js";
+import {toast} from "react-toastify"
 
 const AuthFormLayout = ({ children, type }) => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const AuthFormLayout = ({ children, type }) => {
       console.log(res)
     } catch (error) {
       console.log(error);
+      toast.error("Failed to sign in")
     }
   };
   const facebookSignIn = async()=>{
@@ -29,6 +31,7 @@ const AuthFormLayout = ({ children, type }) => {
       console.log(res)
     } catch (error) {
       console.log(error)
+      toast.error("Failed to sign in")
     }
   }
   return (

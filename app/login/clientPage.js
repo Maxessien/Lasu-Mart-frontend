@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../../firebase/fb_config";
-import { findError } from './../../public/fbAuthErrors';
-import AuthFormLayout from './../../src/components/form_components/AuthFormLayout';
-import AuthFormField from './../../src/components/form_components/AuthFormField';
-
+import { findError } from "./../../public/fbAuthErrors";
+import AuthFormLayout from "./../../src/components/form_components/AuthFormLayout";
+import AuthFormField from "./../../src/components/form_components/AuthFormField";
+import SwitchMethod from "../../src/components/form_components/SwitchMethod";
 
 const ClientLogin = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const loginFormSubmit = async ({ email, password }) => {
     try {
@@ -19,7 +19,7 @@ const ClientLogin = () => {
       const user = await signInWithEmailAndPassword(auth, email, password);
       console.log(user);
       toast.success("Login Successful");
-      router.replace("/")
+      router.replace("/");
     } catch (err) {
       console.log(err);
       const errorInfo = findError(err.code);
@@ -31,18 +31,18 @@ const ClientLogin = () => {
 
   return (
     <>
-    <main>
-      <AuthFormLayout type={"login"}>
-        <AuthFormField
-          submitFunction={loginFormSubmit}
-          email
-          password
-          buttonText={isLoading ? "Signing In..." : "Sign In"}
-          isSubmitting={isLoading}
-        />
-      </AuthFormLayout>
-      {/* <ToastContainer position="top-center" pauseOnHover theme="colored" /> */}
-    </main>
+      <main>
+        <AuthFormLayout type={"login"}>
+          <AuthFormField
+            submitFunction={loginFormSubmit}
+            email
+            password
+            buttonText={isLoading ? "Signing In..." : "Sign In"}
+            isSubmitting={isLoading}
+          />
+        </AuthFormLayout>
+        {/* <ToastContainer position="top-center" pauseOnHover theme="colored" /> */}
+      </main>
     </>
   );
 };

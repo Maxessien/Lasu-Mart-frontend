@@ -33,7 +33,7 @@ const CheckoutForm = () => {
     }
   }
 
-  const {mutateAsync, isPending} = useMutation({mutateFn: (data)=>onSubmit(data)})
+  const {mutateAsync, isPending} = useMutation({mutationFn: (data)=>onSubmit(data)})
 
   // ✅ Reusable utility class groups for consistency
   const formLabel = "block font-semibold text-[var(--text-primary)] mb-[10px]"
@@ -42,7 +42,7 @@ const CheckoutForm = () => {
 const errorMessage = "text-red-600 text-sm mt-[6px]"
 
   return (
-    <main className="w-full max-w-[768px] mx-auto p-6 rounded-md shadow-[0px_0px_5px_var(--text-primary)] bg-[var(--text-secondary-light)]">
+    <section className="w-full max-w-[768px] mx-auto p-6 rounded-md shadow-[0px_0px_5px_var(--text-primary)] bg-[var(--text-secondary-light)]">
       <h1 className="text-2xl font-bold mb-6 text-center text-[var(--text-primary)]">
         Checkout Details
       </h1>
@@ -112,7 +112,7 @@ const errorMessage = "text-red-600 text-sm mt-[6px]"
 
         <Button isDisabled={isPending} buttonType="submit" rounded="md">{isPending ? "..." : "Proceed To Payment"}</Button>
       </form>
-    </main>
+    </section>
   )
 }
 

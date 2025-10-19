@@ -34,7 +34,7 @@ const EditProfilePhoto = () => {
   };
 
   const { mutateAsync, isPending } = useMutation({
-    mutateFn: (type) => submitImage(type),
+    mutationFn: (type) => submitImage(type),
   });
 
   return (

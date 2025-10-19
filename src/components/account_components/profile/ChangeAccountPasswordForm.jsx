@@ -26,7 +26,7 @@ const ChangeAccountPasswordForm = () => {
   };
 
   const { mutateAsync, isPending } = useMutation({
-    mutateFn: (data) => changePassword(data),
+    mutationFn: (data) => changePassword(data),
     onMutate: ()=>reset()
   });
 

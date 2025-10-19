@@ -13,7 +13,9 @@ const CheckoutPage = async ({ params }) => {
   }
   return (
     <>
+    <main>
       <CheckoutForm checkOutData={user?.cart} />
+    </main>
     </>
   );
 };

@@ -1,10 +1,10 @@
 @use "../../../assets/scss_reusable/functions_mixins.scss" as *;
 
 .form_page_section {
-  @include flex(center, center, rem(20), column);
+  @include flex(center, center, rem(15), column);
   margin: auto;
   background: var(--text-secondary-light);
-  padding: rem(25) rem(20);
+  padding: rem(15) rem(20);
   border-radius: rem(5);
   box-shadow: 2px 2px 12px -2px black;
   margin-top: rem(25);
@@ -12,7 +12,7 @@
   max-width: rem(480);
   h1 {
     font-weight: 700;
-    font-size: var(--font-4xl);
+    font-size: var(--font-3xl);
     color: var(--text-primary-light);
   }
   .link {
@@ -33,12 +33,12 @@
     width: 100%;
     button{
         @include flex(center, center, rem(5));
-        font-size: var(--font-lg);
+        font-size: var(--font-md);
         color: var(--text-primary-light);
         font-weight: 600;
         box-shadow: 1px 1px 5px -1.2px black;
         width: 100%;
-        padding: rem(10) rem(15);
+        padding: rem(10) rem(8);
         border-radius: rem(5);
         transition: all 150ms linear;
         &:hover{

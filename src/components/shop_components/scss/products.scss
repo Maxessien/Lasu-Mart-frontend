@@ -13,7 +13,11 @@
   }
   &_display {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(rem(200), 1fr));
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(rem(200), rem(240)));
     gap: rem(20);
+    @include media(small){
+      grid-template-columns: repeat(auto-fit, minmax(rem(100), rem(130)));
+    }
   }
 }
