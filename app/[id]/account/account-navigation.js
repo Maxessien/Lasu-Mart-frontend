@@ -36,7 +36,7 @@ const AccountNavigation = ({isVendor, userId}) => {
     ...generalNavigation, 
     {
       name:  "Sell Products",
-      path: `/${userId}/account/sell`,
+      path: `/${userId}/account/verify`,
     }
   ] : [...generalNavigation, ...protectedNavs]
 
@@ -44,14 +44,15 @@ const AccountNavigation = ({isVendor, userId}) => {
   return (
     <>
       <nav className="h-full">
-        <ul className="flex md:flex-col items-center justify-start h-full gap-3 w-full p-3 bg-[var(--text-secondary-light)]">
+        <ul className="flex md:flex-col overflow-x-auto items-center justify-start h-full gap-3 w-full p-3 bg-[var(--text-secondary-light)]">
           {navigationDetails.map(({ name, path }) => {
+            console.log(pathName, path)
             return (
               <li>
                 <Link
                   href={path}
-                  className={`text-base font-semibold text-[var(--text-primary)] ${
-                    pathName?.split("/").pop() === path ? "text-[var(--main-primary)] border-b-[var(--main-primary)]" : ""
+                  className={`text-lg font-semibold ${
+                    pathName === path ? "text-[var(--main-primary)] border-b-[2px] border-b-[var(--main-primary)]" : "text-[var(--text-primary)]"
                   }`}
                 >
                   {name}

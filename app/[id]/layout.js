@@ -1,4 +1,3 @@
-import React from "react";
 import { getUserServerSide } from "../../src/utils/authHelpers"
 import SignOutUser from './../../src/components/reusable_components/SignOutUser';
 

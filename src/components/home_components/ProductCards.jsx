@@ -87,17 +87,17 @@ const ProductCards = ({
                   `Hi there, I'm interested in the ${name} you listed on Lasu Mart.`
                 )}`}
                 target={"_blank"}
-                className="inline-flex items-center justify-center font-semibold bg-[var(--main-primary)] text-[var(--text-secondary-light)] hover:bg-[var(--main-primary-light)] px-4 py-2 text-base"
+                className="inline-flex items-center justify-center rounded-md w-full font-semibold bg-[var(--main-primary)] text-[var(--text-secondary-light)] hover:bg-[var(--main-primary-light)] px-4 py-2 text-base"
               >
-                <FaWhatsapp size={20} className="mr-[5px]" /> Chat on Whatsapp
+                <FaWhatsapp size={20}  className="mr-[5px]" /> Chat on Whatsapp
               </a>
             )}
-            <Button buttonFn={() => shopBtn("add")} rounded="md">
+            <Button width="full" buttonFn={() => shopBtn("add")} rounded="md">
               <FaShoppingCart size={20} className="mr-[5px]" /> Add to Cart
             </Button>
           </>
         ) : (
-          <Button>...</Button>
+          <Button width="full">...</Button>
         )}
       </div>
     </>

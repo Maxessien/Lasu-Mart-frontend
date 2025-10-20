@@ -28,8 +28,10 @@ const CheckoutForm = () => {
       const res = await authApi(idToken).post("/user/orders/add", data)
       await authApi(idToken).post("/user/update", {cart: []})
       console.log(res)
+      return res
     }catch(err){
       console.log(err)
+      throw err
     }
   }
 
