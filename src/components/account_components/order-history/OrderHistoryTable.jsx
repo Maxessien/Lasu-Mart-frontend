@@ -15,7 +15,7 @@ const OrderHistoryTable = ({initOrdersData})=>{
 
     const cancelOrder = async(id)=>{
         try{
-            const res = await authApi(idToken).post("/user/orders/cancel", {orderId: id})
+            const res = await authApi(idToken).delete(`/orders/user/${id}`)
             toast.success("Order cancelled")
             return res
         }catch(err){

@@ -119,7 +119,7 @@ const Filters = ({ closeFilterFn }) => {
         <Button
           type="secondary"
           rounded="md"
-          classNames="border-1 border-[var(--text-primary)] mr-2"
+          className="border-1 border-[var(--text-primary)] mr-2"
           buttonFn={() => {
             dispatch(resetFilter());
             reset();
@@ -130,7 +130,7 @@ const Filters = ({ closeFilterFn }) => {
         <Button
           rounded="md"
           buttonType="submit"
-          classNames="text-lg font-semibold"
+          className="text-lg font-semibold"
         >
           Apply Filters
         </Button>

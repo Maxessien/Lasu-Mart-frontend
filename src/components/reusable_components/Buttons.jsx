@@ -26,14 +26,14 @@ const Button = ({
   isLoading = false,
   isDisabled = false,
   width = "[max-content]",
-  classNames = "",
+  className = "",
   buttonType="button",
 }) => {
   const allStyles = `rounded-${rounded} ${baseStyles} ${sizeStyles[size]} ${
     variantStyles[type]
   } w-${width} ${isDisabled ? "opacity-50 cursor-not-allowed" : ""} ${
     isLoading ? "cursor-not-allowed" : ""
-  } ${classNames}`;
+  } ${className}`;
 
   return (
     <>

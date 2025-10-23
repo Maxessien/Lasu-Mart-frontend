@@ -16,13 +16,13 @@ const ProductCards = ({
   productId,
   vendorPhone="8114537444",
 }) => {
-  const { isLoggedIn, idToken } = useSelector((state) => state.userAuth);
+  const { isLoggedIn, idToken, userData: {userId} } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
 
   const router = useRouter();
   const addToCart = async () => {
     try {
-      const res = await authApi(idToken).post("user/cart/add", {
+      const res = await authApi(idToken).post(`user/${userId}/cart`, {
         productId: productId,
         quantity: 1,
       });
@@ -57,7 +57,7 @@ const ProductCards = ({
   return (
     <>
       <div className="flex flex-col gap-2 shadow-[0.4px_0.7px_6px_var(--text-primary)] rounded-sm px-3 py-2 bg-[var(--text-secondary-light)] justify-end">
-        <div className="w-26 sm:w-36 md:44 lg:52 xl:60 aspect-square mx-auto">
+        <div className="w-full aspect-square mx-auto">
           <img
             src={`${imageUrl}`}
             alt={`${name} image`}
@@ -81,17 +81,6 @@ const ProductCards = ({
         </p>
         {!isPending ? (
           <>
-            {vendorPhone && (
-              <a
-                href={`wa.me/${vendorPhone}?text=${encodeURIComponent(
-                  `Hi there, I'm interested in the ${name} you listed on Lasu Mart.`
-                )}`}
-                target={"_blank"}
-                className="inline-flex items-center justify-center rounded-md w-full font-semibold bg-[var(--main-primary)] text-[var(--text-secondary-light)] hover:bg-[var(--main-primary-light)] px-4 py-2 text-base"
-              >
-                <FaWhatsapp size={20}  className="mr-[5px]" /> Chat on Whatsapp
-              </a>
-            )}
             <Button width="full" buttonFn={() => shopBtn("add")} rounded="md">
               <FaShoppingCart size={20} className="mr-[5px]" /> Add to Cart
             </Button>

@@ -12,13 +12,11 @@ const CartListProductCards = ({
   productId,
 }) => {
   console.log(productId);
-  const { idToken } = useSelector((state) => state.userAuth);
+  const { idToken, userData: {userId} } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
   const deleteFromCart = async () => {
     try {
-      const res = await authApi(idToken).delete("/user/cart/remove", {
-        params: { productId: productId },
-      });
+      const res = await authApi(idToken).delete(`/user/${userId}/cart/${productId}`);
       console.log(res);
       dispatch(
         setUserAuth({
@@ -33,7 +31,7 @@ const CartListProductCards = ({
 
   const updateCartQuantity = async (value) => {
     try {
-      const res = await authApi(idToken).post("user/cart/add", {
+      const res = await authApi(idToken).post(`/user/${userId}/cart`, {
         productId: productId,
         quantity: value,
       });

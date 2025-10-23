@@ -14,10 +14,10 @@
   &_display {
     display: grid;
     margin: auto;
-    grid-template-columns: repeat(auto-fit, minmax(rem(200), rem(240)));
+    grid-template-columns: repeat(auto-fit, minmax(rem(250), rem(300)));
     gap: rem(20);
     @include media(small){
-      grid-template-columns: repeat(auto-fit, minmax(rem(100), rem(130)));
+      grid-template-columns: repeat(auto-fit, minmax(rem(150), rem(250)));
     }
   }
 }

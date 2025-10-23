@@ -1,0 +1,47 @@
+@use "../../../assets/scss_reusable/functions_mixins.scss" as *;
+
+.checkout_section{
+    width: 100%;
+    max-width: rem(768);
+    border-radius: rem(3);
+    background: var(--text-secondary-light);
+    padding: rem(15) rem(20);
+    margin: auto;
+    box-shadow: 0 0 rem(10) rem(-5) var(--text-primary-light);
+    h1{
+        font-size: rem(20);
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: rem(10);
+        width: 100%;
+        text-align: center;
+    }
+    .checkout_form{
+        display: flex;
+	flex-direction: column;
+        gap: rem(15);
+        &_wrapper{
+            @include flex(flex-start, stretch, rem(8), column);
+            &_label{
+                font-size: rem(18);
+                font-weight: 500;
+                color: var(--text-primary);
+            }
+            &_input{
+                width: 100%;
+                max-width: rem(540);
+                border-radius: rem(3);
+                padding: rem(5) rem(8);
+                font-size: rem(16);
+                font-weight: 500;
+                color: var(--text-primary);
+                box-shadow: inset 0 0 rem(10) rem(-5) var(--text-primary-light);
+            }
+            &_errors{
+                color: var(--text-errors);
+                font-size: rem(15);
+                font-weight: 400;
+            }
+        }
+    }
+}

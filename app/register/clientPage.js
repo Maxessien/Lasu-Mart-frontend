@@ -25,7 +25,7 @@ const registerUser = async ({ email, password, name, phone }) => {
   };
   console.log(newUser);
   try {
-    const res = await regApi.post("/user/register", newUser);
+    const res = await regApi.post("/auth/register", newUser);
     toast.success(res.data.message);
 
     console.log(res);

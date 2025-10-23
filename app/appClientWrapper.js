@@ -18,9 +18,7 @@ export default function AppClientWrapper({ children }) {
 
   const fetchLoggedInUser = async (userId, token) => {
     try {
-      const user = await authApi(token).get("/user/get", {
-        params: { uid: userId },
-      });
+      const user = await authApi(token).get(`/user/${userId}`);
       dispatch(setUserAuth({ stateProp: "userData", value: user.data }));
       return user.data;
     } catch (err) {
@@ -67,7 +65,7 @@ export default function AppClientWrapper({ children }) {
         try {
           const token = await user.getIdToken();
           await authApi(token).post(
-            "/user/set-cookie",
+            "/auth/login",
             { idToken: token },
             { withCredentials: true }
           );

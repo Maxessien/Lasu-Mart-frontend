@@ -61,6 +61,7 @@
     --main-tertiary-light: var(--white-200);
     --text-primary: var(--navy-900);
     --text-primary-light: var(--navy-800);
+    --text-errors: rgb(170, 0, 0);
     --text-secondary: var(--white-300);
     --text-secondary-light: var(--white-100);
   }
@@ -75,6 +76,7 @@
     --main-tertiary-light: var(--navy-800);
     --text-primary: var(--white-300);
     --text-primary-light: var(--white-200);
+    --text-errors: rgb(255, 0, 0);
     --text-secondary: var(--navy-800);
     --text-secondary-light: var(--navy-700);
   }

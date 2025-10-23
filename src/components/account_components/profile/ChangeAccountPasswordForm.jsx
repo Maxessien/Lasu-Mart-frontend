@@ -8,7 +8,7 @@ import Button from '../../reusable_components/Buttons';
 import { formStyles } from "./formStyle";
 
 const ChangeAccountPasswordForm = () => {
-  const { idToken } = useSelector((state) => state.userAuth);
+  const { idToken,  userData: {userId} } = useSelector((state) => state.userAuth);
   const { register, handleSubmit, errors, reset } = useForm({
     defaultValues: { newPassword: "", confirmNewPassword: "" },
   });
@@ -17,7 +17,7 @@ const ChangeAccountPasswordForm = () => {
 
   const changePassword = async ({newPassword}) => {
     try {
-      const res = await authApi(idToken).post("/user/update", {password: newPassword}, {params: {type: "authOnly"}});
+      const res = await authApi(idToken).post(`/user/${userId}`, {password: newPassword}, {params: {type: "authOnly"}});
       return res.data;
     } catch (err) {
       console.log(err);
@@ -78,7 +78,7 @@ const ChangeAccountPasswordForm = () => {
             <p className={errorMessage}>{errors.confirmNewPassword.message}</p>
           )}
         </label>
-          <Button buttonType="submit" classNames="w-full max-w-[540px]" rounded="md">{isPending? "Saving..." : "Change Password"}</Button>
+          <Button buttonType="submit" className="w-full max-w-[540px]" rounded="md">{isPending? "Saving..." : "Change Password"}</Button>
       </form>
     </>
   );

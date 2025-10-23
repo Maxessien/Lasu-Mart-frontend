@@ -28,7 +28,7 @@ const CheckoutSummary = ({initUserData}) => {
 
         {total ? (
           <>
-            <ul className="space-y-3 my-3 text-lg text-[var(--text-primary)] font-bold">
+            <ul className="flex justify-start align-start gap-4 my-3 text-lg text-[var(--text-primary)] font-bold">
               <li>Price: &#8358; {total.toFixed(2)}</li>
               <li>Charges: 10%</li>
               <li>

@@ -6,8 +6,13 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { authApi } from "../../../../src/axiosApiBoilerplates/authApi";
 import Button from "./../../../../src/components/reusable_components/Buttons";
+import { auth } from "../../../../firebase/fb_config"
+import { signOut } from "firebase/auth";
+import { useRouter } from 'next/navigation';
 
-const VerifyClientPage = ({ otpType }) => {
+
+const VerifyClientPage = ({ otpType, allVerified }) => {
+  const router = useRouter()
   const { userData, idToken } = useSelector((state) => state.userAuth);
   const [isLoading, setIsLoading] = useState(false);
   const [otpRequested, setOtpRequested] = useState(false);
@@ -20,9 +25,12 @@ const VerifyClientPage = ({ otpType }) => {
   const submitOtp = async (data) => {
     try {
       setIsLoading(true);
-      await authApi(idToken).post("/user/otp/verify", data);
+      await authApi(idToken).post("/auth/otp/verify", data);
+      const user = auth.currentUser
+      user ? await user.getIdToken(true) : await signOut(auth)
       toast.success("OTP verified successfully");
-	reset()
+	    reset();
+      if(allVerified) router.push(`/${userData.userId}/account/profile`)
     } catch (err) {
       console.log(err);
       toast.error("Invalid OTP");
@@ -33,7 +41,7 @@ const VerifyClientPage = ({ otpType }) => {
   const requestOtp = async (type, value) => {
     try {
       setIsLoading(true);
-      await authApi(idToken).post("/user/otp", { type: type, value: value });
+      await authApi(idToken).post("/auth/otp", { type: type, value: value });
       toast.success("OTP Sent");
       setOtpRequested(true);
     } catch (err) {
@@ -50,7 +58,7 @@ const VerifyClientPage = ({ otpType }) => {
       >
         <div className="flex gap-[10px]">
           <input
-		placeholder={"Enter OTP"}
+		        placeholder={"Enter OTP"}
             className="w-full max-w-[768px] text-base text-[var(--text-primary)] font-semibold px-2 py-1 rounded-md border-[2px] border-[var(--text-primary-light)]"
             type="text"
             {...register("otpValue", {

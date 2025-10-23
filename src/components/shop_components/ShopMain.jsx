@@ -23,7 +23,7 @@ const ShopMain = ({ initialShopData }) => {
         {initCurrentPages > 1 && (
           <Button
             type="primary"
-            classNames="text-lg font-bold p-2"
+            className="text-lg font-bold p-2"
             buttonFn={() => dispatch(prevPage())}
           >
             <MdArrowBack />
@@ -36,7 +36,7 @@ const ShopMain = ({ initialShopData }) => {
             return (
               <Button
                 size="small"
-                classNames="w-[35px] h-[35px] text-center"
+                className="w-[35px] h-[35px] text-center"
                 type={initCurrentPages === page + 1 ? "primary" : "secondary"}
                 buttonFn={() => dispatch(setPage(page + 1))}
               >
@@ -47,7 +47,7 @@ const ShopMain = ({ initialShopData }) => {
         {initCurrentPages < initTotalPages && (
           <Button
             type="primary"
-            classNames="text-lg font-bold"
+            className="text-lg font-bold"
             buttonFn={() => dispatch(nextPage())}
           >
             <MdArrowForward />

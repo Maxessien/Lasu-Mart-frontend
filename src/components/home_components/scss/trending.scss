@@ -35,6 +35,9 @@
       display: flex;
       flex-wrap: nowrap;
       justify-content: flex-start;
+    &>*{
+      min-width: rem(200)
+    }
     }
   }
 }

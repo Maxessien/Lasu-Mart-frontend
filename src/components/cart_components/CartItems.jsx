@@ -14,7 +14,7 @@ const CartItems = ({initUserData}) => {
   const clearCart = async () => {
     try {
       const res = await authApi(idToken).post(
-        "/user/update",
+        `/user/${UserData.userId}`,
         { cart: [] },
         { params: { type: "dbOnly" } }
       );

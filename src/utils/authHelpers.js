@@ -5,7 +5,7 @@ const getUserServerSide = async () => {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get("userSessionToken")
-    const user = token ? await authApi(token.value).get("/user/verify") : {data: null}
+    const user = token ? await authApi(token.value).get("/auth/verify") : {data: null}
     return {user: user?.data, token: token.value}
   } catch (err) {
     console.log(err)
@@ -13,4 +13,15 @@ const getUserServerSide = async () => {
   }
 };
 
-export {getUserServerSide}
+const getServerAuthToken = async () => {
+  try {
+    const cookieStore = await cookies()
+    const token = cookieStore.get("userSessionToken")
+    return token.value
+  } catch (err) {
+    console.log(err)
+	  return null
+  }
+};
+
+export {getUserServerSide, getServerAuthToken}

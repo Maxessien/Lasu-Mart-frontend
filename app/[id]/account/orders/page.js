@@ -7,8 +7,8 @@ import { getUserServerSide } from "../../../../src/utils/authHelpers.js";
 
 const OrderHistory = async()=>{
     try {
-        const {token} = await getUserServerSide()
-        const orderHistory = await authApi(token).get("/user/orders")
+        const {token, user} = await getUserServerSide()
+        const orderHistory = await authApi(token).get(`/orders/user/${user.uid}`)
 	console.log(orderHistory)
         return <>
         <h1 className={accountHeadersStyles}>

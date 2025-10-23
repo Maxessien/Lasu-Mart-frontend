@@ -49,7 +49,7 @@ const VerifyUserInfoPage = async ({ searchParams }) => {
 		<h2 className="text-2xl text-[var(--main-secondary)] font-bold">Email already verified</h2>
           </div>
         ) : (
-          <VerifyClientPage otpType="email" />
+          <VerifyClientPage otpType="email" allVerified={user.isVerified.phone} />
         )
       ) : (
         user.isVerified.phone ? (
@@ -60,7 +60,7 @@ const VerifyUserInfoPage = async ({ searchParams }) => {
 		<h2 className="text-2xl text-[var(--main-secondary)] font-bold">Phone number already verified</h2>
           </div>
         ) : (
-          <VerifyClientPage otpType="phoneNumber" />
+          <VerifyClientPage otpType="phoneNumber" allVerified={user.isVerified.email} />
         )
       )}
     </>
