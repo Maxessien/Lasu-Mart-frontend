@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import Button from './Buttons';
 import { FaEdit,  FaTrash } from "react-icons/fa"
 import { useRouter } from 'next/navigation';
@@ -47,10 +46,10 @@ const OrdersCompactCards = ({productTitle, deliveryStatus, price})=>{
 
     return (
         <Cards>
-            <div className="flex gap-2 justify-between">
-                <div className={`flex gap-[${5/16}rem]`}>
+            <div className="flex gap-2 items-center justify-between">
+                <div className={`flex items-center gap-2`}>
                     <span className="text-base text-var font-semibold">{productTitle}</span>
-                    <span className={`${statusBgStyles[deliveryStatus]} rounded-md px-[${3/16}rem] py-[${2/16}rem] text-white text-sm`}>{deliveryStatus}</span>
+                    <span className={`${statusBgStyles[deliveryStatus]} rounded-md px-2 py-1 text-center font-semibold text-white text-sm`}>{deliveryStatus}</span>
                 </div>
                 <span className="text-[var(--text-primary)] text-lg font-bold">{price}</span>
             </div>

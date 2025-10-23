@@ -37,7 +37,7 @@ const OrderHistoryTable = ({initOrdersData})=>{
                     <div className="flex flex-col md:grid md:grid-cols-[20%_1fr] border-2 border-[var(--main-secondary-light)]">
                         <div>
                             <p className="w-full flex items-center justify-center p-2 border-b-2 md:border-r-2 border-[var(--main-secondary-light)] text-md font-semibold text-[var(--text-primary)]">{data.orderId}</p>
-                            <Button isDisabled={isPending} buttonFn={()=>mutateAsync(data.orderId)}>Cancel Order</Button>
+                            <Button isDisabled={isPending} width='full' rounded="none" buttonFn={()=>mutateAsync(data.orderId)}>Cancel Order</Button>
                         </div>
                         <ListProductTable key={index} {...data} />
                     </div>

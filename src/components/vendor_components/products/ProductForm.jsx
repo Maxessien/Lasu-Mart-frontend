@@ -48,8 +48,6 @@ const ProductForm = ({ hasDefault, availableCategories }) => {
     },
   });
 
-  const fileRef = useRef(null);
-
   const submitFn = async (data) => {
     try {
 	console.log(data)

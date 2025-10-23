@@ -14,7 +14,6 @@ const ProductCards = ({
   price,
   discountPrice = undefined,
   productId,
-  vendorPhone="8114537444",
 }) => {
   const { isLoggedIn, idToken, userData: {userId} } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
