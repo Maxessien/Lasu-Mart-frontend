@@ -51,15 +51,13 @@ const ProductForm = ({ hasDefault, availableCategories }) => {
 
   const submitFn = async (data) => {
     try {
-	console.log(data)
       const formData = formatFormData(data);
-	for (let [key, value] of formData.entries()) console.log(key, value)
       const product = await authApi(idToken).post(
         params.pid === "new"
           ? "/product/vendor"
           : `/product/vendor/${hasDefault?.productId}`,
         formData,
-        ...(hasDefault?.productId && params.pid !== "new" ? {params: {productId: hasDefault?.productId}} : {})
+        {params: hasDefault?.productId && params.pid !== "new" ? {productId: hasDefault?.productId} : {}}
       );
       hasDefault = product.data;
       reRender((state) => state + 1);
@@ -208,7 +206,7 @@ const ProductForm = ({ hasDefault, availableCategories }) => {
 
         <Cards className="mt-2">
           <Button isDisabled={isPending} rounded="md" width="full" buttonType="submit">
-            {params.pid === "new" ? (isPending ? "Add Product" : "Adding...") : (isPending ? "Update Product" : "Updating...")}
+            {params.pid === "new" ? (!isPending ? "Add Product" : "Adding...") : (!isPending ? "Update Product" : "Updating...")}
           </Button>
         </Cards>
       </form>
