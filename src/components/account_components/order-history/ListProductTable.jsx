@@ -6,7 +6,7 @@ const StyledTr = ({children})=>{
     return <tr className="border-b-[var(--main-secondary-light)] border-b-2">{children}</tr>
 }
 
-const ListProductTable = ({name, price, quantityOrdered, createdAt, paymentStatus, deliveryStatus})=>{
+const ListProductTable = ({name, price, quantityOrdered, createdAt, deliveryStatus})=>{
     return (
         <>
         <table className="border-collaspe">
@@ -26,10 +26,6 @@ const ListProductTable = ({name, price, quantityOrdered, createdAt, paymentStatu
                 <StyledTr>
                     <StyledTd>Date Added</StyledTd>
                     <StyledTd>{createdAt}</StyledTd>
-                </StyledTr>
-                <StyledTr>
-                    <StyledTd>Payment Status</StyledTd>
-                    <StyledTd>{paymentStatus}</StyledTd>
                 </StyledTr>
                 <StyledTr>
                     <StyledTd>Delivery Status</StyledTd>

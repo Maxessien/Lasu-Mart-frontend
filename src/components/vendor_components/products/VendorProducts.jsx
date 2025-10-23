@@ -18,7 +18,7 @@ const VendorProducts = ({ products }) => {
       <PageHeader headerText={"Products"} />
       <Button
         buttonFn={() => router.push(`/${userId}/vendor/products/new`)}
-        className="block"
+        className="block mb-3"
         type="secondary"
       >
         Add New Products

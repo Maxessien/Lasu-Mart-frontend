@@ -17,7 +17,7 @@ const AccountNavigation = ({navigationDetails}) => {
               <li>
                 <Link
                   href={path}
-                  className={`text-xl font-semibold whitespace-nowrap ${
+                  className={`text-lg font-semibold whitespace-nowrap ${
                     pathName === path ? "text-[var(--main-primary)] border-b-[2px] border-b-[var(--main-primary)]" : "text-[var(--text-primary)]"
                   }`}
                 >
