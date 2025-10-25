@@ -7,12 +7,26 @@ import {
   VendorProductCard,
 } from "../../reusable_components/CardsLayouts";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { authApi } from "../../../axiosApiBoilerplates/authApi";
 
 const VendorProducts = ({ products }) => {
   const {
     userData: { userId },
+	idToken
   } = useSelector((state) => state.userAuth);
   const router = useRouter();
+	
+	const delFn = async(id)=>{
+		try{
+			await authApi(idToken).delete(`/product/vendor/${userId}`, {params: {productId: id}})
+			toast.success("Product deleted")
+			router.replace(router.asPath)
+		}catch(err){
+			console.log(err)
+			toast.error("Unable to delete product")
+		}
+	}
   return (
     <>
       <PageHeader headerText={"Products"} />
@@ -33,6 +47,7 @@ const VendorProducts = ({ products }) => {
                 price={price}
                 productId={productId}
                 imageUrl={images[0].url}
+		deleteFn={delFn}
               />
             );
           })}
