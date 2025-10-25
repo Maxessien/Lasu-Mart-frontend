@@ -13,15 +13,4 @@ const getUserServerSide = async () => {
   }
 };
 
-const getServerAuthToken = async () => {
-  try {
-    const cookieStore = await cookies()
-    const token = cookieStore.get("userSessionToken")
-    return token.value
-  } catch (err) {
-    console.log(err)
-	  return null
-  }
-};
-
-export {getUserServerSide, getServerAuthToken}
+export {getUserServerSide}
