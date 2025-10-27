@@ -1,3 +1,5 @@
+"use client"
+
 import Button from './Buttons';
 import { FaEdit,  FaTrash } from "react-icons/fa"
 import { useRouter } from 'next/navigation';

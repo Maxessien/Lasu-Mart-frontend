@@ -4,6 +4,10 @@ import { getUserServerSide } from "../../../src/utils/authHelpers"
 import { FaArrowLeft } from "react-icons/fa"
 import Link from "next/link"
 
+export const metadata = {
+    title: "Lasu Mart-Vendor"
+}
+
 
 const VendorAccountLayout = async({children})=>{
     const {user} = await getUserServerSide()

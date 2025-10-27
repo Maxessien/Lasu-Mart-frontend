@@ -42,3 +42,5 @@ const VendorOrdersTable = ({ordersData})=>{
         </>
     )
 }
+
+export default VendorOrdersTable
