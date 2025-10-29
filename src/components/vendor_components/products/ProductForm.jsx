@@ -78,7 +78,7 @@ const ProductForm = ({ hasDefault, availableCategories }) => {
 
   const deleteImage = async(id)=>{
     try{
-      await authApi(idToken).delete(`/product/vendor/${id}/image`, {params: {productId: hasDefault?.productId, publicId: id}})
+      await authApi(idToken).delete(`/product/${id}/image`, {params: {productId: hasDefault?.productId, publicId: id}})
       hasDefault.images = hasDefault.images.filter(({publicId})=>publicId !== id)
       toast.success("Image deleted")
     }catch(err){

@@ -7,9 +7,10 @@ export const metadata = {
 }
 
 const CheckoutPage = async ({ params }) => {
+	const idParams = await params
   const {user} = await getUserServerSide()
   if(!user || !user.cart || user.cart.length <= 0){
-    redirect(`/${params.id}/cart`)
+    redirect(`/${idParams.id}/cart`)
   }
   return (
     <>

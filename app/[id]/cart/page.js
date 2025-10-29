@@ -10,7 +10,7 @@ const Cart = async()=>{
   const {user} = await getUserServerSide()
     return (
       <>
-        <main className="md:grid md:grid-cols-[75%_25%] flex gap-3 w-screen px-6 py-5 min-h-[calc(100vh-200px)]">
+        <main className="md:grid md:grid-cols-[75%_25%] flex flex-col gap-3 w-screen px-6 py-5 min-h-[calc(100vh-200px)]">
           <CartItems initUserData={user} />
           <CheckoutSummary initUserData={user} />
         </main>

@@ -14,7 +14,9 @@ const VendorOrdersPage = async () => {
     <>
       <PageHeader headerText={"Orders"} />
       {orders?.data && orders?.data?.length > 0 ? (
+	<div className="w-full max-w-full overflow-x-auto">
         <VendorOrdersTable ordersData={orders.data} />
+	</div>
       ) : (
         <Cards>
           <p className="text-center text-[var(--main-secondary)] text-lg font-semibold">

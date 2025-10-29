@@ -19,9 +19,9 @@ const VendorProducts = ({ products }) => {
 	
 	const delFn = async(id)=>{
 		try{
-			await authApi(idToken).delete(`/product/vendor/${userId}`, {params: {productId: id}})
+			await authApi(idToken).delete(`/product/${id}`, {params: {productId: id}})
 			toast.success("Product deleted")
-			router.replace(router.asPath)
+			router.replace(`/${userId}/vendor/products`)
 		}catch(err){
 			console.log(err)
 			toast.error("Unable to delete product")
