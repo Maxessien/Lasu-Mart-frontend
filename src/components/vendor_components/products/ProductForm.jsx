@@ -57,7 +57,6 @@ const ProductForm = ({ hasDefault, availableCategories }) => {
           ? "/product/vendor"
           : `/product/vendor/${hasDefault?.productId}`,
         formData,
-        {params: hasDefault?.productId && params.pid !== "new" ? {productId: hasDefault?.productId} : {}}
       );
       hasDefault = product.data;
       reRender((state) => state + 1);

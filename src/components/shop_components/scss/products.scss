@@ -15,9 +15,10 @@
     display: grid;
     margin: auto;
     grid-template-columns: repeat(auto-fit, minmax(rem(250), rem(300)));
+    justify-content: space-between;
     gap: rem(20);
     @include media(small){
-      grid-template-columns: repeat(auto-fit, minmax(rem(150), rem(250)));
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }

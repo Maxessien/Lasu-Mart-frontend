@@ -3,14 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   filters: {
     category: [],
-    priceRange: {
-      min: 5,
-      max: 500000,
-    },
-    sortInfo: {
-      type: "createdAt",
-      order: "desc"
-    }
+    minPrice: 5,
+    maxPrice: 500000,
+    sortBy: "createdAt",
+    order: "desc"
   },
 };
 

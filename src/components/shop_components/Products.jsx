@@ -1,33 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
-import { regApi } from "../../axiosApiBoilerplates/regApi";
+import { useSelector, useDispatch } from "react-redux";
 import ProductCards from "../home_components/ProductCards";
 import Loader from "./../reusable_components/Loader";
 import "./scss/products.scss";
 import { setTotalPages } from "../../store_slices/productPageSlice";
+import { fetchAllProducts } from "../../utils/productsFectchingHelpers";
 
 const Products = ({ pageNumber=1, initialProductsData }) => {
   const { filters } = useSelector((state) => state.shopProductFilter);
   const dispatch = useDispatch()
 
-  const fetchProducts = async (pageNumber, filters) => {
-    try {
-      const products = await regApi.post("/product", { page: pageNumber, ...filters })
-      console.log(products);
-      dispatch(setTotalPages(products.data.totalPages))
-      return products.data.data;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  };
-
-  const { data, isFetching } = useQuery({
+  const { data: {data, totalPages}, isFetching } = useQuery({
     queryKey: ["products", pageNumber, filters],
-    queryFn: () => fetchProducts(pageNumber, filters),
+    queryFn: () => fetchAllProducts(pageNumber, filters),
     refetchOnReconnect: true,
     refetchOnWindowFocus: false,
-    initialData: initialProductsData
+    initialData: initialProductsData,
+    onSuccess: ()=>dispatch(setTotalPages(totalPages))
   });
 
 
@@ -44,6 +33,7 @@ const Products = ({ pageNumber=1, initialProductsData }) => {
 
   return (
     <>
+    {console.log(initialProductsData)}
       <section className="shop_product">
         <h2>Shop</h2>
         <div className="shop_product_display">

@@ -2,11 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import Button from "./../reusable_components/Buttons";
 import { FaShoppingCart, FaWhatsapp } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { authApi } from "../../axiosApiBoilerplates/authApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserAuth } from "../../store_slices/userAuthSlice";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { addToCart } from "../../utils/regHelpers";
 
 const ProductCards = ({
   imageUrl,
@@ -15,42 +14,37 @@ const ProductCards = ({
   discountPrice = undefined,
   productId,
 }) => {
-  const { isLoggedIn, idToken, userData: {userId} } = useSelector((state) => state.userAuth);
+  const {
+    isLoggedIn,
+    idToken,
+    userData: { userId },
+  } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
 
   const router = useRouter();
-  const addToCart = async () => {
-    try {
-      const res = await authApi(idToken).post(`user/${userId}/cart`, {
-        productId: productId,
-        quantity: 1,
-      });
-      console.log(res.data);
-      dispatch(
-        setUserAuth({
-          stateProp: "userData",
-          value: res.data,
-        })
-      );
-      return res.data;
-    } catch (err) {
-      console.log(err);
-      toast.error("Unable to add to cart, Try again later");
-      throw err;
-    }
-  };
 
   const shopBtn = async () => {
     if (isLoggedIn) {
       await mutateAsync();
-      toast.success("Added Succesfully");
     } else {
       router.push("/register");
     }
   };
 
-  const { mutateAsync, isPending } = useMutation({
-    mutationFn: () => addToCart(),
+  const { mutateAsync, isPending, data } = useMutation({
+    mutationFn: () => addToCart(idToken, userId, productId),
+    onSuccess: () => {
+      dispatch(
+        setUserAuth({
+          stateProp: "userData",
+          value: data,
+        })
+      );
+      toast.success("Added Succesfully");
+    },
+    onError: () => {
+      toast.error("Unable to add to cart, Try again later");
+    },
   });
 
   return (
@@ -80,7 +74,14 @@ const ProductCards = ({
         </p>
         {!isPending ? (
           <>
-            <Button width="full" buttonFn={() => shopBtn("add")} rounded="md">
+            <Button
+              buttonFn={() => router.push(`/shop/${productId}`)}
+              width="full"
+              rounded="md"
+            >
+              View Product
+            </Button>
+            <Button width="full" buttonFn={() => shopBtn()} rounded="md">
               <FaShoppingCart size={20} className="mr-[5px]" /> Add to Cart
             </Button>
           </>

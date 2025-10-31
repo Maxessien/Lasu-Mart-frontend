@@ -38,7 +38,7 @@ const VendorProducts = ({ products }) => {
         Add New Products
       </Button>
       {products && products.length > 0 ? (
-        <div className="grid grid-cols-[minmax(250px,300px)] max-w-[1440px]">
+        <div className="grid sm:grid-cols-[minmax(250px,300px)] max-w-[1440px]">
           {products.map(({ name, price, productId, images }) => {
             return (
               <VendorProductCard

@@ -6,7 +6,7 @@ import { getServerAuthToken } from "../../../../../src/utils/authHelpers"
 const ProductEditPage = async({params})=>{
     const productParams = await params
     const token = getServerAuthToken()
-    const {data} = productParams.pid !== "new" ? await authApi(token).get("/product/single", {params: {id: productParams.pid}}) : {data: undefined}
+    const {data} = productParams.pid !== "new" ? await authApi(token).get(`/product/single`, {params: {id: productParams.pid}}) : {data: undefined}
 	console.log(data, "product Data")
 
     return (

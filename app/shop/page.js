@@ -10,18 +10,14 @@ const Shop = async () => {
   const userAgent = (await headers()).get("user-agent");
   const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false;
   try {
-    const products = await regApi.post("/product", {
+    const products = await regApi.get("/product", {params: {
       page: 1,
       category: [],
-      priceRange: {
-        min: 5,
-        max: 500000,
-      },
-      sortInfo: {
-        type: "createdAt",
-        order: "desc",
-      },
-    });
+      minPrice: 5,
+      maxPrice: 500000,
+      sortBy: "createdAt",
+      order: "desc",
+    }});
     console.log(isMobile, "mobile", products.data)
     return (
       <>

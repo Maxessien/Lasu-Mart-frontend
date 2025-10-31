@@ -23,11 +23,11 @@ const Filters = ({ closeFilterFn }) => {
   ];
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      sortType: filters?.sortInfo?.type ?? "createdAt",
-      sortOrder: filters?.sortInfo?.order ?? "desc",
-      minPrice: filters?.priceRange?.min ?? 0,
-      maxPrice: filters?.priceRange?.max ?? 20,
-      // categories: filters.categories,
+      sortType: filters?.sortBy ?? "createdAt",
+      sortOrder: filters?.order ?? "desc",
+      minPrice: filters?.minPrice ?? 0,
+      maxPrice: filters?.maxPrice ?? 20,
+      categories: filters?.categories,
     },
   });
 
@@ -40,14 +40,10 @@ const Filters = ({ closeFilterFn }) => {
   }) => {
     dispatch(
       updateFilter({
-        sortInfo: {
-          type: sortType,
-          order: sortOrder,
-        },
-        priceRange: {
-          min: Number(minPrice),
-          max: Number(maxPrice),
-        },
+        sortBy: sortType,
+        order: sortOrder,
+        minPrice: Number(minPrice),
+        maxPrice: Number(maxPrice),
         category: categories,
       })
     );

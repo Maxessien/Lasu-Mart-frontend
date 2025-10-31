@@ -8,7 +8,7 @@ import { getProductCategpries } from "../../utils/productsFectchingHelpers";
 const ShopByCategory = ({initData}) => {
   const { data, isPending } = useQuery({
     queryKey: ["allProductCategories"],
-    queryFn: ()=> getProductCategpries(),
+    queryFn: async()=> await getProductCategpries(),
     initialData: initData
   });
   if (isPending) {
@@ -20,6 +20,7 @@ const ShopByCategory = ({initData}) => {
   }
   return (
     <>
+	{console.log(data, "comp")}
       <section className="home_section">
         <h2 className="home_section_header">Shop by category</h2>
 
@@ -28,7 +29,7 @@ const ShopByCategory = ({initData}) => {
             return (
               <>
                 <button key={index} className="category_block">
-                  {category}
+                  {category.name}
                 </button>
               </>
             );
