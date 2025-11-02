@@ -13,7 +13,7 @@ import { FaUpload, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import Button from "../../reusable_components/Buttons";
 import { authApi } from "../../../axiosApiBoilerplates/authApi";
-import { formatFormData } from "../../../utils/regHelpers";
+import { formatFormData } from "../../../utils/regHelperFns";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useMutation } from '@tanstack/react-query';

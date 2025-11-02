@@ -44,16 +44,16 @@ const ProductImageSlide = ({ images, productName }) => {
         )}
         {images?.map(({ url }) => {
           return (
-            <image
-              src={url}
-              alt={`${productName} image`}
-              className="snap-start object-cover w-full z-1"
-            />
+              <img
+                src={url}
+                alt={`${productName} image`}
+                className="snap-start object-cover w-full z-1"
+              />
           );
         })}
-        {containerScroll.position < 100 && (
+        {containerScroll.position < 100 && images?.length > 1 && (
           <Button
-            type="tertiary"
+            type="primary"
             buttonFn={() =>
               containerScroll.position < 100 ? scrollImage("backward") : null
             }

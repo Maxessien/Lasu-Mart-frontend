@@ -6,6 +6,7 @@ const getUserServerSide = async () => {
     const cookieStore = await cookies()
     const token = cookieStore.get("userSessionToken")
     const user = token ? await authApi(token.value).get("/auth/verify") : {data: null}
+    console.log(token, user)
     return {user: user?.data, token: token.value}
   } catch (err) {
     console.log(err)

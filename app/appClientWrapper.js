@@ -8,6 +8,7 @@ import { onAuthStateChanged, onIdTokenChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase/fb_config";
 import { setUserAuth } from "../src/store_slices/userAuthSlice";
 import Loader from "./../src/components/reusable_components/Loader";
+import { regApi } from "../src/axiosApiBoilerplates/regApi";
 import { authApi } from "../src/axiosApiBoilerplates/authApi";
 import { ToastContainer } from "react-toastify";
 
@@ -64,7 +65,7 @@ export default function AppClientWrapper({ children }) {
       if (user) {
         try {
           const token = await user.getIdToken();
-          await authApi(token).post(
+          await regApi.post(
             "/auth/login",
             { idToken: token },
             { withCredentials: true }

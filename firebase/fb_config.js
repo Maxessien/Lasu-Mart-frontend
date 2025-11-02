@@ -21,17 +21,4 @@ const app = initializeApp(firebaseConfig);
 // Auth
 const auth = getAuth(app);
 
-// Analytics (only if supported — avoids crash on localhost)
-// let analytics = null;
-// isSupported().then((yes) => {
-//   if (yes) {
-//     analytics = getAnalytics(app);
-//   }
-// });
-
-// Use emulator locally
-if (process.env.NODE_ENV === "development") {
-  connectAuthEmulator(auth, "http://127.0.0.1:9095");
-}
-
 export { auth };

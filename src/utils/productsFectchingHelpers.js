@@ -26,7 +26,7 @@ const fetchTrendingProducts = async () => {
 const getProductCategpries = async () => {
   try {
     const categories = await regApi.get("/category");
-	console.log(categories, "batttt")
+	// console.log(categories, "batttt")
     return categories.data || [];
   } catch (err) {
     console.log(err);

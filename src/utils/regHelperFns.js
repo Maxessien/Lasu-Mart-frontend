@@ -1,4 +1,5 @@
 import { authApi } from "../axiosApiBoilerplates/authApi";
+import { io } from "socket.io-client"
 
 const formatFormData = (data) => {
   const formData = new FormData();
@@ -23,4 +24,6 @@ const addToCart = async (token, userId, productId) => {
   }
 };
 
-export { formatFormData, addToCart };
+const initSocket = (nameSpace, token)=> io(`${process.env.NEXT_BACKEND_URL}${nameSpace}`, {auth: token})
+
+export { formatFormData, addToCart, initSocket };

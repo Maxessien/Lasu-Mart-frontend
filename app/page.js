@@ -14,7 +14,8 @@ const Home = async () => {
   try {
     const trendingProducts = await fetchTrendingProducts();
     const categories = await getProductCategpries();
-	console.log(categories, "cattt")
+  //   console.log(trendingProducts, 'hfhfhfhfhfhfhfhfhfhfhfhfhhfhfh')
+	// console.log(categories, "cattt")
     return (
       <>
         <main>

@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserAuth } from "../../store_slices/userAuthSlice";
 import { useRouter } from "next/navigation";
-import { addToCart } from "../../utils/regHelpers";
+import { addToCart } from "../../utils/regHelperFns";
 
 const ProductCards = ({
   imageUrl,
