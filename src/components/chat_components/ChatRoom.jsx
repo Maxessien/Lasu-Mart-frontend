@@ -8,10 +8,10 @@ import { Input } from "../reusable_components/FormLayouts";
 import Button from "../reusable_components/Buttons";
 import { useRouter } from "next/navigation";
 
-const ChatRoom = ({ messages, vendorName }) => {
+const ChatRoom = ({ chat }) => {
   const { userData, idToken } = useSelector((state) => state.userAuth);
   const [messageInput, setMessageInput] = useState("");
-  const [chatMessages, setChatMessages] = useState(messages);
+  const [chatMessages, setChatMessages] = useState(chat.messages);
   const router = useRouter()
   const chatSocket = initSocket("/chat", idToken);
 
@@ -38,7 +38,7 @@ const ChatRoom = ({ messages, vendorName }) => {
           <FaArrowLeft />
         </span>
         <h1 className="text-lg text-[var(--text-primary)] font-semibold">
-          {vendorName}
+          {chat.vendorBasicInfo.name}
         </h1>
       </header>
 

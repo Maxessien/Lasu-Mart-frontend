@@ -39,7 +39,7 @@ const ViewProductInfo = ({
       return;
     }
     try {
-      const { chatId } = await authApi(idToken).post("/chat", {
+      const { data: {chatId} } = await authApi(idToken).post("/chat", {
         message: messageForm.message,
         vendorId: vendorId,
       });

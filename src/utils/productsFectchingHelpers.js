@@ -15,7 +15,7 @@ const fetchAllProducts = async (pageNumber, filters) => {
 const fetchTrendingProducts = async () => {
   try {
     const products = await regApi.get("/product/trending");
-    console.log(products, "prod");
+    console.log(products.data, "prod");
     return products.data;
   } catch (err) {
     console.log(err);
