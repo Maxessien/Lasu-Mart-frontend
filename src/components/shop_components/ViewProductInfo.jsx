@@ -24,7 +24,7 @@ const ViewProductInfo = ({
   vendorId,
 }) => {
   //React and Next js hooks initailizations
-  const [messageForm, setMessageForm] = useState({ message: "", error: null, focused: false });
+  const [messageForm, setMessageForm] = useState({ message: ""});
   const textareaRef = useRef(null)
   const dispatch = useDispatch();
   const { idToken, userData } = useSelector((state) => state.userAuth);
@@ -33,7 +33,6 @@ const ViewProductInfo = ({
   //Functions and mutation Logic
   const isValid = (text) => text?.trim()?.length > 0;
   const chatWithVendor = async () => {
-    if (messageForm.error?.trim()?.length > 0) return
     if (!isValid(messageForm.message)){
       textareaRef.current.focus()
       return
@@ -48,11 +47,11 @@ const ViewProductInfo = ({
   };
   const { mutateAsync, isPending, data } = useMutation({
     mutationFn: () => addToCart(idToken, userData.userId, productId),
-    onSuccess: () => {
+    onSuccess: (resData) => {
       dispatch(
         setUserAuth({
           stateProp: "userData",
-          value: data,
+          value: resData,
         })
       );
       toast.success("Added Succesfully");
@@ -65,9 +64,10 @@ const ViewProductInfo = ({
   //Component UI
   return (
     <>
+	console.log(data, "in component")
       <section className="flex flex-col sm:flex-row bg-[var(--text-secondary-light)] sm:px-2 sm:py-3 sm:rounded-md gap-3">
         <ProductImageSlide images={images} productName={name} />
-        <div className="flex flex-col gap-2 px-2 sm:px-0">
+        <div className="flex flex-col gap-3 px-2 sm:px-0">
           <p className="text-lg text-[var(--text-primary-light)] font-semibold">
             {name}
           </p>
@@ -85,26 +85,25 @@ const ViewProductInfo = ({
             {description}
           </p>
           <label
-            className="flex flex-col justify-start w-full"
+            className="flex flex-col gap-1 justify-start w-full"
             htmlFor="message"
           >
             <span className="text-base font-semibold text-[var(--text-primary)]">
               Message Vendor
             </span>
             <textarea
-              className="text-base font-semibold text-[var(--text-primary)] w-full h-15 rounded-md border-1 border-[var(--main-secondary)]"
+              className="text-base font-semibold text-[var(--text-primary)] w-full h-15 px-2 py-1 rounded-md border-[2px] border-[var(--main-secondary)]"
               name="message"
               id="message"
               placeholder="Send Message"
               value={messageForm.message}
-              onFocus={setMessageForm((state)=>({...state, focused: true}))}
-              onBlur={setMessageForm((state)=>({...state, focused: false}))}
+              onFocus={()=>setMessageForm((state)=>({...state, focused: true}))}
+              onBlur={()=>setMessageForm((state)=>({...state, focused: false}))}
               onChange={({target: {value}})=>{
-                if(!isValid(value) && messageForm.focused) setMessageForm((state)=>({...state, error: "Message cannot be empty"})) 
+                setMessageForm((state)=>({...state, message: value})) 
               }}
               ref={textareaRef}
             ></textarea>
-            {messageForm.error && <><p className="text-base font-semibold text-[var(--text-errors)]">{messageForm.error}</p></>}
           </label>
           <p className="flex gap-2">
             <Button type="secondary" rounded="md">
