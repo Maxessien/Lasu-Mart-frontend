@@ -18,6 +18,7 @@ const getServerAuthToken = async () => {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get("userSessionToken")
+    console.log(token.value, "ssent")
     return token.value
   } catch (err) {
     console.log(err)

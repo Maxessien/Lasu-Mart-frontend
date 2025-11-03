@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // src/firebase/config.js
 
 import { initializeApp } from "firebase/app";
@@ -21,6 +20,9 @@ const app = initializeApp(firebaseConfig);
 // Auth
 const auth = getAuth(app);
 
-if (process.env.NODE_ENV === "development") connectAuthEmulator(auth, "http://127.0.0.1:9095")
+if (process.env.NODE_ENV === "development" && process.env.NXET_PUBLIC_APP_ENV==="development") {
+  console.log(process.env.NODE_ENV, process.env.NXET_PUBLIC_APP_ENV)
+  connectAuthEmulator(auth, "http://127.0.0.1:9095")
+}
 
 export { auth };

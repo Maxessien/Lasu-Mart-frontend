@@ -1,14 +1,18 @@
+"use client"
+
 import { useEffect, useState } from "react";
 import { FaArrowLeft, FaPaperPlane } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { initSocket } from "../../utils/regHelperFns";
 import { Input } from "../reusable_components/FormLayouts";
 import Button from "../reusable_components/Buttons";
+import { useRouter } from "next/navigation";
 
 const ChatRoom = ({ messages, vendorName }) => {
   const { userData, idToken } = useSelector((state) => state.userAuth);
   const [messageInput, setMessageInput] = useState("");
   const [chatMessages, setChatMessages] = useState(messages);
+  const router = useRouter()
   const chatSocket = initSocket("/chat", idToken);
 
   useEffect(() => {
@@ -30,7 +34,7 @@ const ChatRoom = ({ messages, vendorName }) => {
   return (
     <>
       <header className="bg-[var(--text-secondary-light)] px-2 py-3">
-        <span className="mr-3 text-lg font-semibold text-[var(--text-primary)]">
+        <span onClick={()=>router.push(`/${userData.uuserId}/chat`)} className="mr-3 text-lg font-semibold text-[var(--text-primary)]">
           <FaArrowLeft />
         </span>
         <h1 className="text-lg text-[var(--text-primary)] font-semibold">

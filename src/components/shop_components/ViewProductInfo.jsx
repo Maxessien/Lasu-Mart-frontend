@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { useRef } from "react";
 import { authApi } from "../../axiosApiBoilerplates/authApi";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const ViewProductInfo = ({
   hasMessaged,
@@ -24,30 +24,36 @@ const ViewProductInfo = ({
   vendorId,
 }) => {
   //React and Next js hooks initailizations
-  const [messageForm, setMessageForm] = useState({ message: ""});
-  const textareaRef = useRef(null)
+  const [messageForm, setMessageForm] = useState({ message: "" });
+  const textareaRef = useRef(null);
   const dispatch = useDispatch();
   const { idToken, userData } = useSelector((state) => state.userAuth);
-  const router = useRouter()
+  const router = useRouter();
 
   //Functions and mutation Logic
   const isValid = (text) => text?.trim()?.length > 0;
   const chatWithVendor = async () => {
-    if (!isValid(messageForm.message)){
-      textareaRef.current.focus()
-      return
+    console.log(!isValid(messageForm.message));
+    if (!isValid(messageForm.message)) {
+      textareaRef.current.focus();
+      return;
     }
     try {
-      const {chatId} = await authApi(idToken).post("/chat", {message: messageForm.message, vendorId: vendorId})
-      router.push(`/userId/chat/${chatId}`)
+      const { chatId } = await authApi(idToken).post("/chat", {
+        message: messageForm.message,
+        vendorId: vendorId,
+      });
+      console.log(chatId, "dhdhdhdhd")
+      router.push(`/${userData.userId}/chat/${chatId}`);
     } catch (err) {
-      console.log(err)
-      toast.error("Message not sent, try again later")
+      console.log(err);
+      toast.error("Message not sent, try again later");
     }
   };
   const { mutateAsync, isPending, data } = useMutation({
     mutationFn: () => addToCart(idToken, userData.userId, productId),
     onSuccess: (resData) => {
+      console.log(resData);
       dispatch(
         setUserAuth({
           stateProp: "userData",
@@ -64,7 +70,7 @@ const ViewProductInfo = ({
   //Component UI
   return (
     <>
-	console.log(data, "in component")
+      {console.log(data, "in component")}
       <section className="flex flex-col sm:flex-row bg-[var(--text-secondary-light)] sm:px-2 sm:py-3 sm:rounded-md gap-3">
         <ProductImageSlide images={images} productName={name} />
         <div className="flex flex-col gap-3 px-2 sm:px-0">
@@ -97,10 +103,8 @@ const ViewProductInfo = ({
               id="message"
               placeholder="Send Message"
               value={messageForm.message}
-              onFocus={()=>setMessageForm((state)=>({...state, focused: true}))}
-              onBlur={()=>setMessageForm((state)=>({...state, focused: false}))}
-              onChange={({target: {value}})=>{
-                setMessageForm((state)=>({...state, message: value})) 
+              onChange={({ target: { value } }) => {
+                setMessageForm((state) => ({ ...state, message: value }));
               }}
               ref={textareaRef}
             ></textarea>
@@ -110,7 +114,7 @@ const ViewProductInfo = ({
               <FaPhone />
             </Button>
             <Button
-              onClick={chatWithVendor}
+              buttonFn={() => chatWithVendor()}
               width="full"
               className="gap-2"
               rounded="md"
