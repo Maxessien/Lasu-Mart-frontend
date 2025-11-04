@@ -13,7 +13,7 @@ const ChatRoom = ({ chat }) => {
   const [messageInput, setMessageInput] = useState("");
   const [chatMessages, setChatMessages] = useState(chat.messages);
   const router = useRouter()
-  const chatSocket = initSocket("/chat", idToken);
+  const chatSocket = initSocket(`/chat?chatId=${chat.chatId}`, idToken);
 
   useEffect(() => {
     chatSocket.on("newMessage", (data) =>
@@ -24,7 +24,7 @@ const ChatRoom = ({ chat }) => {
   }, []);
 
   const sendMessage = () => {
-    if (!messageInput?.trim() || messageInput?.trim().length < 0) return;
+    if (!messageInput?.trim()) return;
     chatSocket.emit("newMessage", {
       senderId: userData.userId,
       senderName: userData.displayName,
@@ -33,8 +33,8 @@ const ChatRoom = ({ chat }) => {
   };
   return (
     <>
-      <header className="bg-[var(--text-secondary-light)] px-2 py-3">
-        <span onClick={()=>router.push(`/${userData.uuserId}/chat`)} className="mr-3 text-lg font-semibold text-[var(--text-primary)]">
+      <header className="bg-[var(--text-secondary-light)] flex gap-2 items-center px-2 py-1">
+        <span onClick={()=>router.push(`/${userData.userId}/chat`)} className="mr-3 text-lg font-semibold text-[var(--text-primary)]">
           <FaArrowLeft />
         </span>
         <h1 className="text-lg text-[var(--text-primary)] font-semibold">
@@ -42,38 +42,36 @@ const ChatRoom = ({ chat }) => {
         </h1>
       </header>
 
-      <main className="grid grid-row-[90%_10%]">
+      <main className="grid grid-rows-[90%_10%]">
         <div className="overflow-y-auto h-full">
-          <div className="transform h-max w-full px-2 translate-y-[100%]">
-            {chatMessages?.map(
-              ({ message, senderId, senderName, timeSent }) => {
-                return (
-                  <>
-                  <div className={`flex w-full ${userData.userId === senderId ? "items-end" : "items-start"}`}>
-                    <div className={`flex bg-[var(--text-secondary-light)] w-max max-w-[65%] px-2 py-1 rounded-md border-1 border-[var(--text-primary)] ${userData.userId === senderId ? "items-end" : "items-start"}`}>
-                      <p className="text-sm font-semibold text-[var(--text-primary)]">
-                        {userData.userId === senderId ? "You" : senderName}
-                      </p>
-                      <p className="text-base font-normal text-[var(--text-primary)]">
-                        {message}
-                      </p>
-                      <p className="text-sm font-normal text-[var(--main-secondary)]">
-                        {timeSent}
-                      </p>
-                    </div>
+          <div className="transform flex flex-col h-max w-full px-2 py-1 translate-y-[100%]">
+            {chatMessages?.map(({ message, senderId, senderName, timeSent }, idx) => {
+              const isMine = userData.userId === senderId;
+              return (
+                <div key={`${senderId}-${timeSent}-${idx}`} className={`flex w-full ${isMine ? "justify-end" : "justify-start"}`}>
+                  <div className={`flex flex-col gap-2 bg-[var(--text-secondary-light)] w-max max-w-[65%] px-2 py-1 rounded-md border-1 border-[var(--text-primary)] ${isMine ? "items-end text-right" : "items-start text-left"}`}>
+                    <p className="text-sm font-semibold text-[var(--text-primary)]">
+                      {isMine ? "You" : senderName}
+                    </p>
+                    <p className="text-base font-normal text-[var(--text-primary)]">
+                      {message}
+                    </p>
+                    <p className="text-sm font-normal text-[var(--main-secondary)]">
+                      {timeSent.toLocaleTimeString()}
+                    </p>
                   </div>
-                  </>
-                );
-              }
-            )}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="flex gap-2 bg-[var(--text-secondary-light)] p-2">
           <Input
             type="text"
             onChange={(e) => setMessageInput(e.target.value)}
+            className="h-max"
           />
-          <Button buttonFn={sendMessage}>
+          <Button className="h-max" buttonFn={sendMessage}>
             Send <FaPaperPlane />
           </Button>
         </div>

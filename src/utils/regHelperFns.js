@@ -24,6 +24,11 @@ const addToCart = async (token, userId, productId) => {
   }
 };
 
-const initSocket = (nameSpace, token)=> io(`${process.env.NEXT_BACKEND_URL}${nameSpace}`, {auth: token})
+// Use the public NEXT_PUBLIC_BACKEND_URL so the client connects to the correct backend.
+// Trim any trailing slash and append the namespace (e.g. /chat)
+const initSocket = (nameSpace, token) => {
+  const base = process.env.NEXT_PUBLIC_BACKEND_URL;
+  return io(`${base}${nameSpace}`, { auth: token });
+}
 
 export { formatFormData, addToCart, initSocket };

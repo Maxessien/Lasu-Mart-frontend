@@ -10,8 +10,10 @@ const ChatsLayout = async({children})=>{
 
     return (
         <>
-        <div className="md:grid md:grid-col-[65%_35%]">
+        <div className="md:grid md:gap-2 grid-cols-[70%_30%] w-screen">
+            <div className="md:border-[2px] border-[var(--text-primary)]">
             {children}
+            </div>
             <RecommendationSidebar products={recommended} layoutStyle="hidden md:block" />
         </div>
         </>
