@@ -1,7 +1,6 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 import { Cards } from "../reusable_components/CardsLayouts";
-
 
 const RecListProductCards = ({ name, price, productId, images }) => {
   const router = useRouter();
@@ -31,16 +30,22 @@ const RecListProductCards = ({ name, price, productId, images }) => {
   );
 };
 
-const RecommendationSidebar = ({ products, layoutStyle="" }) => {
+const RecommendationSidebar = ({ products, layoutStyle = "" }) => {
   return (
     <>
-      <aside className={`px-2 py-3 w-full h-full bg-[--text-secondary-light] ronded-md shadow-[0px_0px_8px_-3px_var(--text-primary)] ${layoutStyle}`}>
+      <aside
+        className={`px-2 py-3 w-full h-full bg-[--text-secondary-light] ronded-md shadow-[0px_0px_6px_-3px_var(--text-primary)] ${layoutStyle}`}
+      >
         <h1 className="text-lg font-semibold text-black">
           Recommended Products
         </h1>
-        {products.map((product) => (
-          <RecListProductCards {...product} />
-        ))}
+        <ul className="space-y-2">
+            {products.map((product) => (
+              <li>
+              <RecListProductCards {...product} />
+              </li>
+            ))}
+        </ul>
       </aside>
     </>
   );

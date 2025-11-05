@@ -1,20 +1,21 @@
 import { authApi } from "../../../../src/axiosApiBoilerplates/authApi"
 import ChatRoom from "../../../../src/components/chat_components/ChatRoom"
 import { getServerAuthToken } from "../../../../src/utils/authHelpers"
-import { notFound } from "next/navigation"
+import { notFound } from "next/navigation"  
 
 const ChatPage = async({params})=>{
     const {chatId} = await params
     if (!chatId) return notFound()
     const token = await getServerAuthToken()
-    console.log(token)
     const chat = await authApi(token).get(`/chat/${chatId}`)
     console.log(chat, "ghghghg")    
     if (!chat) return notFound()
 
     return (
         <>
-            <ChatRoom chat={chat.data} />
+            <div className="shadow-[0_0_7px_-3px_var(--main-secondary)] rounded-md w-full">
+                <ChatRoom chat={chat.data}/>
+            </div>
         </>
     )
 }

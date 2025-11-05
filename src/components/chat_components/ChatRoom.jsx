@@ -8,19 +8,24 @@ import { Input } from "../reusable_components/FormLayouts";
 import Button from "../reusable_components/Buttons";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useRef } from "react";
 
 const ChatRoom = ({ chat }) => {
   const { userData, idToken } = useSelector((state) => state.userAuth);
   const [messageInput, setMessageInput] = useState("");
   const [chatMessages, setChatMessages] = useState(chat.messages);
   const router = useRouter()
+  const chatContainerRef = useRef(null)
   // connect to the /chat namespace and pass chatId via query and idToken via auth
   const chatSocket = initSocket(`/chat`, idToken, { chatId: chat.chatId });
 
   useEffect(() => {
     chatSocket.on("connection", console.log("Connected"))
-    chatSocket.on("newMessage", (data) =>
-      setChatMessages((state) => [...state, data])
+    chatSocket.on("newMessage", (data) =>{
+      console.log(data, "new message")
+      setChatMessages(data)
+      // chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
+    }
     );
     chatSocket.on("serverError", (err) => {
       console.log(err)
@@ -50,8 +55,8 @@ const ChatRoom = ({ chat }) => {
       </header>
 
       <main className="grid grid-rows-[90%_10%]">
-        <div className="overflow-y-auto h-full">
-          <div className="transform flex flex-col h-max w-full px-2 py-1 translate-y-[100%]">
+        <div ref={chatContainerRef} className="overflow-y-auto py-3 h-full">
+          <div className="flex flex-col gap-3 h-full w-full px-2 py-1">
             {chatMessages?.map(({ message, senderId, senderName, timeSent }, idx) => {
               const isMine = userData.userId === senderId;
               const timeStamp = new Date(timeSent)
@@ -78,8 +83,9 @@ const ChatRoom = ({ chat }) => {
             type="text"
             onChange={(e) => setMessageInput(e.target.value)}
             className="h-max"
+            value={messageInput}
           />
-          <Button className="h-max" buttonFn={sendMessage}>
+          <Button className="h-max gap-2" buttonFn={sendMessage}>
             Send <FaPaperPlane />
           </Button>
         </div>
