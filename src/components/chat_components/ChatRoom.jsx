@@ -7,19 +7,25 @@ import { initSocket } from "../../utils/regHelperFns";
 import { Input } from "../reusable_components/FormLayouts";
 import Button from "../reusable_components/Buttons";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const ChatRoom = ({ chat }) => {
   const { userData, idToken } = useSelector((state) => state.userAuth);
   const [messageInput, setMessageInput] = useState("");
   const [chatMessages, setChatMessages] = useState(chat.messages);
   const router = useRouter()
-  const chatSocket = initSocket(`/chat?chatId=${chat.chatId}`, idToken);
+  // connect to the /chat namespace and pass chatId via query and idToken via auth
+  const chatSocket = initSocket(`/chat`, idToken, { chatId: chat.chatId });
 
   useEffect(() => {
+    chatSocket.on("connection", console.log("Connected"))
     chatSocket.on("newMessage", (data) =>
       setChatMessages((state) => [...state, data])
     );
-    chatSocket.on("serverError", (err) => console.log(err));
+    chatSocket.on("serverError", (err) => {
+      console.log(err)
+      toast.error("Unable to connect to chat")
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -30,6 +36,7 @@ const ChatRoom = ({ chat }) => {
       senderName: userData.displayName,
       message: messageInput,
     });
+    setMessageInput("")
   };
   return (
     <>
@@ -47,6 +54,7 @@ const ChatRoom = ({ chat }) => {
           <div className="transform flex flex-col h-max w-full px-2 py-1 translate-y-[100%]">
             {chatMessages?.map(({ message, senderId, senderName, timeSent }, idx) => {
               const isMine = userData.userId === senderId;
+              const timeStamp = new Date(timeSent)
               return (
                 <div key={`${senderId}-${timeSent}-${idx}`} className={`flex w-full ${isMine ? "justify-end" : "justify-start"}`}>
                   <div className={`flex flex-col gap-2 bg-[var(--text-secondary-light)] w-max max-w-[65%] px-2 py-1 rounded-md border-1 border-[var(--text-primary)] ${isMine ? "items-end text-right" : "items-start text-left"}`}>
@@ -57,7 +65,7 @@ const ChatRoom = ({ chat }) => {
                       {message}
                     </p>
                     <p className="text-sm font-normal text-[var(--main-secondary)]">
-                      {timeSent.toLocaleTimeString()}
+                      {timeStamp.toLocaleTimeString()}
                     </p>
                   </div>
                 </div>

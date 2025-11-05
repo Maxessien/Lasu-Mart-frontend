@@ -7,7 +7,7 @@ const AllChats = ({ userChats }) => {
   const router = useRouter()
   const { userData } = useSelector((state) => state.userAuth);
   console.log(userChats)
-  return (    
+  return (
     <>
       <div className="w-full max-w-[768px] rounded-md px-2 sm:px-3 py-3 bg-[var(--text-secondary-light)] shadow-[0_0_7px_-3px_var(--main-secondary)]">
         <ul className="flex flex-col gap-2 justify-start items-start">

@@ -22,7 +22,7 @@ const Shop = async () => {
     return (
       <>
         <ClientShopPage
-          initialShopData={products.data}
+          initialShopData={products?.data}
           serverSideWindowSize={isMobile}
         />
       </>

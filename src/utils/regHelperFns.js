@@ -26,9 +26,13 @@ const addToCart = async (token, userId, productId) => {
 
 // Use the public NEXT_PUBLIC_BACKEND_URL so the client connects to the correct backend.
 // Trim any trailing slash and append the namespace (e.g. /chat)
-const initSocket = (nameSpace, token) => {
-  const base = process.env.NEXT_PUBLIC_BACKEND_URL;
-  return io(`${base}${nameSpace}`, { auth: token });
-}
+const initSocket = (nameSpace, token, query = {}) => {
+  const base = "https://vigilant-engine-97wq5575r5pwfxww7-5050.app.github.dev";
+  return io(`${base}${nameSpace}`, {
+    auth: { token },
+    query,
+    transports: ["websocket", "polling"], // optional but helps in Codespaces
+  });
+};
 
 export { formatFormData, addToCart, initSocket };
