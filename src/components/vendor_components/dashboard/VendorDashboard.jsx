@@ -1,12 +1,12 @@
 "use client"
 
 import { Cards, OrdersCompactCards, PageHeader, StatsCard } from "../../reusable_components/CardsLayouts"
-import { FaArrowRight, FaBell, FaShoppingBag, FaShoppingCart } from "react-icons/fa"
+import { FaArrowRight, FaCheckCircle, FaClock, FaShoppingBag, FaShoppingCart } from "react-icons/fa"
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 
-const VendorDashboard = ({totalOrders=0, totalProducts=0, totalNotifications=0, recentOrders})=>{
+const VendorDashboard = ({totalOrders=0, totalProducts=0, pendingOrders=0, completedOrders=0, recentOrders=[]})=>{
     const {userData} = useSelector((state)=>state.userAuth)
     const router = useRouter()
     return (
@@ -15,7 +15,8 @@ const VendorDashboard = ({totalOrders=0, totalProducts=0, totalNotifications=0, 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-3">
             <StatsCard cardTitle={"Total Orders"} statsValue={totalOrders} statsIcon={<FaShoppingCart />} />
             <StatsCard cardTitle={"Total Products"} statsValue={totalProducts} statsIcon={<FaShoppingBag />} />
-            <StatsCard cardTitle={"Notifications"} statsValue={totalNotifications} statsIcon={<FaBell />} />
+            <StatsCard cardTitle={"Pending Orders"} statsValue={pendingOrders} statsIcon={<FaClock />} />
+            <StatsCard cardTitle={"Completed Orders"} statsValue={completedOrders} statsIcon={<FaCheckCircle />} />
         </div>
 
         <Cards>

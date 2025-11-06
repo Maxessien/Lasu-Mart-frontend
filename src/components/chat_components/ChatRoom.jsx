@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { FaArrowLeft, FaPaperPlane } from "react-icons/fa";
@@ -14,22 +14,21 @@ const ChatRoom = ({ chat }) => {
   const { userData, idToken } = useSelector((state) => state.userAuth);
   const [messageInput, setMessageInput] = useState("");
   const [chatMessages, setChatMessages] = useState(chat.messages);
-  const router = useRouter()
-  const chatContainerRef = useRef(null)
+  const router = useRouter();
+  const chatContainerRef = useRef(null);
   // connect to the /chat namespace and pass chatId via query and idToken via auth
   const chatSocket = initSocket(`/chat`, idToken, { chatId: chat.chatId });
 
   useEffect(() => {
-    chatSocket.on("connection", console.log("Connected"))
-    chatSocket.on("newMessage", (data) =>{
-      console.log(data, "new message")
-      setChatMessages(data)
+    chatSocket.on("connection", console.log("Connected"));
+    chatSocket.on("newMessage", (data) => {
+      console.log(data, "new message");
+      setChatMessages(data);
       // chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
-    }
-    );
+    });
     chatSocket.on("serverError", (err) => {
-      console.log(err)
-      toast.error("Unable to connect to chat")
+      console.log(err);
+      toast.error("Unable to connect to chat");
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -41,12 +40,15 @@ const ChatRoom = ({ chat }) => {
       senderName: userData.displayName,
       message: messageInput,
     });
-    setMessageInput("")
+    setMessageInput("");
   };
   return (
     <>
       <header className="bg-[var(--text-secondary-light)] flex gap-2 items-center px-2 py-1">
-        <span onClick={()=>router.push(`/${userData.userId}/chat`)} className="mr-3 text-lg font-semibold text-[var(--text-primary)]">
+        <span
+          onClick={() => router.push(`/${userData.userId}/chat`)}
+          className="mr-3 text-lg font-semibold text-[var(--text-primary)]"
+        >
           <FaArrowLeft />
         </span>
         <h1 className="text-lg text-[var(--text-primary)] font-semibold">
@@ -57,25 +59,38 @@ const ChatRoom = ({ chat }) => {
       <main className="grid grid-rows-[90%_10%]">
         <div ref={chatContainerRef} className="overflow-y-auto py-3 h-full">
           <div className="flex flex-col gap-3 h-full w-full px-2 py-1">
-            {chatMessages?.map(({ message, senderId, senderName, timeSent }, idx) => {
-              const isMine = userData.userId === senderId;
-              const timeStamp = new Date(timeSent)
-              return (
-                <div key={`${senderId}-${timeSent}-${idx}`} className={`flex w-full ${isMine ? "justify-end" : "justify-start"}`}>
-                  <div className={`flex flex-col gap-2 bg-[var(--text-secondary-light)] w-max max-w-[65%] px-2 py-1 rounded-md border-1 border-[var(--text-primary)] ${isMine ? "items-end text-right" : "items-start text-left"}`}>
-                    <p className="text-sm font-semibold text-[var(--text-primary)]">
-                      {isMine ? "You" : senderName}
-                    </p>
-                    <p className="text-base font-normal text-[var(--text-primary)]">
-                      {message}
-                    </p>
-                    <p className="text-sm font-normal text-[var(--main-secondary)]">
-                      {timeStamp.toLocaleTimeString()}
-                    </p>
+            {chatMessages?.map(
+              ({ message, senderId, senderName, timeSent }, idx) => {
+                const isMine = userData.userId === senderId;
+                const timeStamp = new Date(timeSent);
+                return (
+                  <div
+                    key={`${senderId}-${timeSent}-${idx}`}
+                    className={`flex w-full ${
+                      isMine ? "justify-end" : "justify-start"
+                    }`}
+                  >
+                    <div
+                      className={`flex flex-col gap-2 bg-[var(--text-secondary-light)] w-max max-w-[65%] px-2 py-1 rounded-md border-1 border-[var(--text-primary)] ${
+                        isMine
+                          ? "items-end text-right"
+                          : "items-start text-left"
+                      }`}
+                    >
+                      <p className="text-sm font-semibold text-[var(--text-primary)]">
+                        {isMine ? "You" : senderName}
+                      </p>
+                      <p className="text-base font-normal text-[var(--text-primary)]">
+                        {message}
+                      </p>
+                      <p className="text-sm font-normal text-[var(--main-secondary)]">
+                        {timeStamp.toLocaleTimeString()}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
         </div>
         <div className="flex gap-2 bg-[var(--text-secondary-light)] p-2">

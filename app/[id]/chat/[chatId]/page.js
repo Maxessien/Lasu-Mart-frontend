@@ -8,12 +8,11 @@ const ChatPage = async({params})=>{
     if (!chatId) return notFound()
     const token = await getServerAuthToken()
     const chat = await authApi(token).get(`/chat/${chatId}`)
-    console.log(chat, "ghghghg")    
     if (!chat) return notFound()
 
     return (
         <>
-            <div className="shadow-[0_0_7px_-3px_var(--main-secondary)] rounded-md w-full">
+            <div className="shadow-[0_0_7px_-3px_var(--main-secondary)] rounded-md h-full w-full">
                 <ChatRoom chat={chat.data}/>
             </div>
         </>
