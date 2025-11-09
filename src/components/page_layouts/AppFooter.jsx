@@ -1,5 +1,6 @@
 // import React from 'react'; import { Facebook, Twitter, Instagram } from 'lucide-react'
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import Link from "next/link"
 
 const AppFooter = () => {
   return (
@@ -25,19 +26,19 @@ const AppFooter = () => {
           <h3 className="font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/shop" className="hover:text-[var(--orange-400)]">
+              <Link href="/shop" className="hover:text-[var(--orange-400)]">
                 Shop All
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/categories" className="hover:text-[var(--orange-400)]">
+              <Link href="/categories" className="hover:text-[var(--orange-400)]">
                 Categories
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/about" className="hover:text-[var(--orange-400)]">
+              <Link href="/about" className="hover:text-[var(--orange-400)]">
                 About Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -46,19 +47,19 @@ const AppFooter = () => {
           <h3 className="font-semibold mb-4">Support</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/help" className="hover:text-[var(--orange-400)]">
+              <Link href="/help" className="hover:text-[var(--orange-400)]">
                 Help Center
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/contact" className="hover:text-[var(--orange-400)]">
+              <Link href="/contact" className="hover:text-[var(--orange-400)]">
                 Contact Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/returns" className="hover:text-[var(--orange-400)]">
+              <Link href="/returns" className="hover:text-[var(--orange-400)]">
                 Returns
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

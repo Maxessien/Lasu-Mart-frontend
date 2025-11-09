@@ -24,13 +24,13 @@ const AppHeaderNavigation = ({ navToggle = ()=>null, signOutFn }) => {
           >
             Shop
           </Link>
-          {isLoggedIn && <Link
+          {/* {isLoggedIn && <Link
             onClick={() => navToggle(false)}
             href={`/${userData.userId}/chat`}
             className={`header_navigation_links`}
           >
             Messages
-          </Link>}
+          </Link>} */}
           <Link
             href={"/contact"}
             onClick={() => navToggle(false)}
