@@ -26,7 +26,7 @@ const Products = ({ pageNumber=1, initialProductsData }) => {
   if (isFetching) {
     return (
       <>
-        <Loader size={"min-h-[50vh] w-full"} />
+        <Loader size={"min-h-[70vh] w-full"} />
       </>
     );
   }

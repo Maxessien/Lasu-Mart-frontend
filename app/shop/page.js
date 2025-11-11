@@ -8,11 +8,10 @@ export const metadata = {
 
 const Shop = async () => {
   const userAgent = (await headers()).get("user-agent");
-  const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false;
+  const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false; 
   try {
     const products = await regApi.get("/product", {params: {
       page: 1,
-      category: [],
       minPrice: 5,
       maxPrice: 500000,
       sortBy: "createdAt",
