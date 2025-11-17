@@ -1,0 +1,108 @@
+// import React from 'react'; import { Facebook, Twitter, Instagram } from 'lucide-react'
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import Link from "next/link"
+
+const AppFooter = () => {
+  return (
+    <footer className="bg-gray-900 text-gray-100 py-12">
+      <div className="w-full mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        {/* Branding */}{" "}
+        <div>
+          <h2 className="text-2xl font-semibold text-yellow-500">
+            <span className="text-white font-bold text-2xl">
+              Lasu
+            </span>
+            <span className="text-orange-400 font-bold text-2xl">
+              Mart
+            </span>
+          </h2>
+          <p className="mt-2 text-sm text-gray-400">
+            Connecting you with authentic handmade products from talented
+            artisans around the world.
+          </p>
+        </div>
+        {/* Quick Links */}
+        <div>
+          <h3 className="font-semibold mb-4">Quick Links</h3>
+          <ul className="space-y-2">
+            <li>
+              <Link href="/shop" className="hover:text-[var(--orange-400)]">
+                Shop All
+              </Link>
+            </li>
+            <li>
+              <Link href="/categories" className="hover:text-[var(--orange-400)]">
+                Categories
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:text-[var(--orange-400)]">
+                About Us
+              </Link>
+            </li>
+          </ul>
+        </div>
+        {/* Support */}
+        <div>
+          <h3 className="font-semibold mb-4">Support</h3>
+          <ul className="space-y-2">
+            <li>
+              <Link href="/help" className="hover:text-[var(--orange-400)]">
+                Help Center
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-[var(--orange-400)]">
+                Contact Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/returns" className="hover:text-[var(--orange-400)]">
+                Returns
+              </Link>
+            </li>
+          </ul>
+        </div>
+        {/* Socials */}
+        <div>
+          <h3 className="font-semibold mb-4">Follow Us</h3>
+          <div className="flex space-x-4">
+            <a
+              href="https://facebook.com"
+              aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--orange-400)] text-white"
+            >
+              <FaFacebook size={24} />
+            </a>
+            <a
+              href="https://twitter.com"
+              aria-label="Twitter"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--orange-400)] text-white"
+            >
+              <FaTwitter size={24} />
+            </a>
+            <a
+              href="https://instagram.com"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--orange-400)] text-white"
+            >
+              <FaInstagram size={24} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+        © 2024 Artisan. All rights reserved.
+      </div>
+    </footer>
+  );
+};
+
+export default AppFooter;
