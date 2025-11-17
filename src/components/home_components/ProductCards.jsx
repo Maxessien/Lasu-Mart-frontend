@@ -14,11 +14,9 @@ const ProductCards = ({
   discountPrice = undefined,
   productId,
 }) => {
-  const {
-    isLoggedIn,
-    idToken,
-    userData: { userId },
-  } = useSelector((state) => state.userAuth);
+  const { isLoggedIn, idToken, userData } = useSelector(
+    (state) => state.userAuth,
+  );
   const dispatch = useDispatch();
 
   const router = useRouter();
@@ -31,14 +29,14 @@ const ProductCards = ({
     }
   };
 
-  const { mutateAsync, isPending, data } = useMutation({
-    mutationFn: () => addToCart(idToken, userId, productId),
-    onSuccess: () => {
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: () => addToCart(idToken, userData.userId, productId),
+    onSuccess: (resData) => {
       dispatch(
         setUserAuth({
           stateProp: "userData",
-          value: data,
-        })
+          value: resData,
+        }),
       );
       toast.success("Added Succesfully");
     },

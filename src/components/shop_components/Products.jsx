@@ -10,17 +10,17 @@ const Products = ({ pageNumber=1, initialProductsData }) => {
   const { filters } = useSelector((state) => state.shopProductFilter);
   const dispatch = useDispatch()
 
-  const { data: {data, totalPages}, isFetching } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ["products", pageNumber, filters],
     queryFn: () => fetchAllProducts(pageNumber, filters),
     refetchOnReconnect: true,
     refetchOnWindowFocus: false,
     initialData: initialProductsData,
-    onSuccess: ()=>dispatch(setTotalPages(totalPages))
+    onSuccess: (resData)=>dispatch(setTotalPages(resData?.totalPages))
   });
 
 
-  const productsData = data ?? initialProductsData
+  const productsData = data?.data ?? initialProductsData.data
 
 
   if (isFetching) {

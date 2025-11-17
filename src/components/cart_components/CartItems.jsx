@@ -48,7 +48,7 @@ const CartItems = ({initUserData}) => {
           )}
         </header>
         {user?.cart?.length > 0 ? (
-          user?.cart.map(({ name, price, quantity, productId }, index) => {
+          user?.cart.map(({ name, price, quantity, productId, images }, index) => {
             return (
               <>
                 <div className="mb-3">
@@ -57,7 +57,7 @@ const CartItems = ({initUserData}) => {
                     name={name}
                     quantity={quantity}
                     price={price}
-                    imageUrl={`/images/${name}.webp`}
+                    images={images}
                     productId={productId}
                   />
                 </div>

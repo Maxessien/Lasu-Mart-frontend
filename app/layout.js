@@ -8,6 +8,7 @@ import AppHeader from "../src/components/page_layouts/AppHeader";
 export const dynamic = "force-dynamic"
 
 const RootLayout = async ({ children }) => {
+  console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
   return (
     <>
       <html lang="en">

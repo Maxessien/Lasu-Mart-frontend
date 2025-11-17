@@ -21,6 +21,7 @@ const ListProductTable = ({
   createdAt,
   deliveryStatus,
 }) => {
+  console.log(createdAt)
   const timeStamp = new Date(createdAt);
   return (
     <>

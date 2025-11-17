@@ -8,15 +8,15 @@ const CartListProductCards = ({
   name,
   quantity = 1,
   price,
-  imageUrl,
+  images,
   productId,
 }) => {
   console.log(productId);
-  const { idToken, userData: {userId} } = useSelector((state) => state.userAuth);
+  const { idToken, userData } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
   const deleteFromCart = async () => {
     try {
-      const res = await authApi(idToken).delete(`/user/${userId}/cart/${productId}`);
+      const res = await authApi(idToken).delete(`/user/${userData?.userId}/cart/${productId}`);
       console.log(res);
       dispatch(
         setUserAuth({
@@ -31,7 +31,7 @@ const CartListProductCards = ({
 
   const updateCartQuantity = async (value) => {
     try {
-      const res = await authApi(idToken).post(`/user/${userId}/cart`, {
+      const res = await authApi(idToken).post(`/user/${userData?.userId}/cart`, {
         productId: productId,
         quantity: value,
       });
@@ -56,7 +56,7 @@ const CartListProductCards = ({
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
           <div className="w-23 sm:w-32 md:40 lg:48 xl:56 aspect-square mx-auto">
             <img
-              src={`${imageUrl}`}
+              src={`${images[0].url}`}
               alt={`${name} image`}
               className="object-cover w-full h-full"
             />
