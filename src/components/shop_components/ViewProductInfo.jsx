@@ -168,7 +168,7 @@ const ViewProductInfo = ({
                 Phone Number:{" "}
               </span>
               <span className="text-base text-[var(--text-primary-light)] font-semibold">
-                {phoneNumber?.length > 0 ? phoneNumber : -}
+                {phoneNumber?.length > 0 ? phoneNumber:"-"}
               </span>
             </p>
           </div>
