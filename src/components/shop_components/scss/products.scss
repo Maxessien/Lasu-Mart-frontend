@@ -13,12 +13,14 @@
   }
   &_display {
     display: grid;
+    width: 100%;
+    max-width: 1200;
     margin: auto;
     grid-template-columns: repeat(auto-fit, minmax(rem(250), rem(300)));
     justify-content: space-between;
     gap: rem(20);
-    @include media(small){
-      grid-template-columns: repeat(2, 1fr);
+    &>*{
+        margin: auto;
     }
   }
 }
