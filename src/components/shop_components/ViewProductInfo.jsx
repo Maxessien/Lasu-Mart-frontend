@@ -18,7 +18,7 @@ const ViewProductInfo = ({
   name,
   description,
   price,
-  vendorContact: { email, phone },
+  vendorContact: { email, phoneNumber },
   ratings,
   productId,
   vendorId,
@@ -90,7 +90,7 @@ const ViewProductInfo = ({
           <p className="text-base text-[var(--main-secondary)] font-semibold">
             {description}
           </p>
-          <label
+          {/**<label
             className="flex flex-col gap-1 justify-start w-full"
             htmlFor="message"
           >
@@ -108,12 +108,12 @@ const ViewProductInfo = ({
               }}
               ref={textareaRef}
             ></textarea>
-          </label>
+          </label>**/}
           <p className="flex gap-2">
             <Button type="secondary" rounded="md">
               <FaPhone />
             </Button>
-            <Button
+            {/**<Button
               buttonFn={() => chatWithVendor()}
               width="full"
               className="gap-2"
@@ -121,8 +121,7 @@ const ViewProductInfo = ({
             >
               <FaComment />
               {hasMessaged ? "Chat with Vendor" : "Send Message"}
-            </Button>
-          </p>
+            </Button>**/}
           <Button
             buttonFn={() => mutateAsync()}
             className="gap-2"
@@ -137,6 +136,21 @@ const ViewProductInfo = ({
               </>
             )}
           </Button>
+          </p>
+          {/**<Button
+            buttonFn={() => mutateAsync()}
+            className="gap-2"
+            rounded="md"
+            width="full"
+          >
+            {isPending ? (
+              "..."
+            ) : (
+              <>
+                <FaShoppingCart /> Add to Cart
+              </>
+            )}
+          </Button>**/}
           <div className="space-y-1">
             <h2 className="text-xl text-[var(--text-primary)] font-semibold">
               Contact Info
@@ -154,7 +168,7 @@ const ViewProductInfo = ({
                 Phone Number:{" "}
               </span>
               <span className="text-base text-[var(--text-primary-light)] font-semibold">
-                {phone}
+                {phoneNumber?.length > 0 ? phoneNumber : -}
               </span>
             </p>
           </div>
