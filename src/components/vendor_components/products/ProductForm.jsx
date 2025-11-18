@@ -79,6 +79,7 @@ const ProductForm = ({ hasDefault, availableCategories }) => {
     try{
       await authApi(idToken).delete(`/product/${id}/image`, {params: {productId: hasDefault?.productId, publicId: id}})
       hasDefault.images = hasDefault.images.filter(({publicId})=>publicId !== id)
+      reRender((state) => state + 1);
       toast.success("Image deleted")
     }catch(err){
       console.log(err)
@@ -147,9 +148,9 @@ const ProductForm = ({ hasDefault, availableCategories }) => {
         </FormBlocks>
             <Cards className="flex gap-3 justify-start">
               {hasDefault?.images?.length > 0 && hasDefault.images.map(({url, publicId})=>{
-                <div className="flex gap-2">
+                return <div className="flex flex-col gap-2">
                   <img className="w-full max-w-20" src={url} />
-                  <Button buttonFn={()=>deleteImage(publicId)} rounded="md" width="full"><FaTrash /></Button>
+                  <Button buttonFn={()=>deleteImage(publicId)} rounded="md" width="full"><FaTrash /> {" "} Remove Image</Button>
                 </div>
               })}
             </Cards>
