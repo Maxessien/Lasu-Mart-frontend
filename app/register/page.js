@@ -7,7 +7,7 @@ export const metadata = {
   title: "Lasu Mart-Register"
 }
 
-const Register = ()=>{
+const Register = async ()=>{
     const {user} = await getUserServerSide()
     if (user) {
         redirect("/")
