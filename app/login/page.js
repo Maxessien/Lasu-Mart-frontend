@@ -1,4 +1,6 @@
 import ClientLogin from "./clientPage"
+import {redirect} from "next/navigation"
+import {getUserServerSide} from "../../src/utils/authHelpers"
 
 
 export const metadata = {
@@ -6,6 +8,11 @@ export const metadata = {
 }
 
 const Login = ()=>{
+    const {user} = await getUserServerSide()
+    if (user) {
+        redirect("/")
+        return
+    }
 	return (
 		<>
 		<ClientLogin />
