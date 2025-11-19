@@ -53,6 +53,7 @@ export default function AppClientWrapper({ children }) {
           dispatch(setUserAuth({ stateProp: "isLoggedIn", value: true }));
           dispatch(setUserAuth({ stateProp: "idToken", value: idToken }));
         } else {
+            await regApi.delete("/auth/logout", {withCredentials: true})
           dispatch(setUserAuth({ stateProp: "isLoggedIn", value: false }));
           dispatch(setUserAuth({ stateProp: "idToken", value: "" }));
           dispatch(setUserAuth({ stateProp: "userData", value: {} }));
