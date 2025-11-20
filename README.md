@@ -56,6 +56,7 @@ Each folder separates **presentation**, **state**, and **fetching logic** so the
 
 ---
 
+
 ## ⚙️ Quick local setup (frontend-only)
 ```bash
 # 1. Clone the repo
@@ -78,6 +79,7 @@ npm run dev
 
 # 5. Build for production
 npm run build && npm run start
+
 
 
 ---
@@ -148,14 +150,15 @@ Keep PRs focused — one logical change per PR speeds review and merge.
 
 ---
 
-👨🏽‍💻 Developer
+👨💻 Developer
 
 Max Essien — solo full-stack builder and creator of LASU Mart.
 This repo is the frontend client: clean, modular, and built to scale.
 
+---
 
-
-
+## **View Full Progress Tracker**
+**[progress.md](progress.md)**
 
 ---
 
