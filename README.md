@@ -56,6 +56,11 @@ Each folder separates **presentation**, **state**, and **fetching logic** so the
 
 ---
 
+## **View Full Progress Tracker**
+**[progress.md](progress.md)**
+
+---
+
 
 ## ⚙️ Quick local setup (frontend-only)
 ```bash
@@ -155,10 +160,6 @@ Keep PRs focused — one logical change per PR speeds review and merge.
 Max Essien — solo full-stack builder and creator of LASU Mart.
 This repo is the frontend client: clean, modular, and built to scale.
 
----
-
-## **View Full Progress Tracker**
-**[progress.md](progress.md)**
 
 ---
 
