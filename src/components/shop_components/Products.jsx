@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useSelector, useDispatch } from "react-redux";
 import ProductCards from "../home_components/ProductCards";
 import Loader from "./../reusable_components/Loader";
 import "./scss/products.scss";
@@ -7,20 +6,9 @@ import { setTotalPages } from "../../store_slices/productPageSlice";
 import { fetchAllProducts } from "../../utils/productsFectchingHelpers";
 
 const Products = ({ pageNumber=1, initialProductsData }) => {
-  const { filters } = useSelector((state) => state.shopProductFilter);
-  const dispatch = useDispatch()
-
-  const { data, isFetching } = useQuery({
-    queryKey: ["products", pageNumber, filters],
-    queryFn: () => fetchAllProducts(pageNumber, filters),
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: false,
-    initialData: initialProductsData,
-    onSuccess: (resData)=>dispatch(setTotalPages(resData?.totalPages))
-  });
 
 
-  const productsData = data?.data ?? initialProductsData.data
+  const productsData = initialProductsData
 
 
   if (isFetching) {

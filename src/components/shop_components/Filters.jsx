@@ -8,12 +8,12 @@ import {
   updateFilter,
 } from "../../store_slices/shopProductsFiltersSlice";
 import { setPage } from "../../store_slices/productPageSlice";
+import { useRouter, usePathname } from "next/navigatiom"
 
 const Filters = ({ closeFilterFn }) => {
+    const router = useRouter()
+    const path = usePathname
   const { currentSize } = useSelector((state) => state.screenSize);
-  const { filters } = useSelector((state) => state.shopProductFilter);
-  const dispatch = useDispatch();
-  console.log(filters);
   const categories = [
     "fashion",
     "food",
@@ -23,11 +23,11 @@ const Filters = ({ closeFilterFn }) => {
   ];
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      sortType: filters?.sortBy ?? "createdAt",
-      sortOrder: filters?.order ?? "desc",
-      minPrice: filters?.minPrice ?? 0,
-      maxPrice: filters?.maxPrice ?? 20,
-      categories: filters?.categories,
+      sortType: "createdAt",
+      sortOrder: "desc",
+      minPrice: 0,
+      maxPrice: 200000,
+      categories: categories,
     },
   });
 
@@ -38,17 +38,9 @@ const Filters = ({ closeFilterFn }) => {
     maxPrice,
     categories,
   }) => {
-    dispatch(
-      updateFilter({
-        sortBy: sortType,
-        order: sortOrder,
-        minPrice: Number(minPrice),
-        maxPrice: Number(maxPrice),
-        category: categories,
-      })
-    );
     dispatch(setPage(1));
     closeFilterFn ? closeFilterFn() : null;
+    router.push(`/shop?cat=${categories.reduce(curr, acc)=>curr + "+" + acc}&sort=${sortType}&order=${sortOrder}&price=${minPrice}-${maxPrice}&page=1`)
   };
 
   return (

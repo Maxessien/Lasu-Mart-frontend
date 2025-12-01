@@ -6,7 +6,8 @@ export const metadata = {
   title: "Lasu Mart-Shop"
 }
 
-const Shop = async () => {
+const Shop = async (searchParams) => {
+    const {cat, sort, order, price, page} = await searchParams
   const userAgent = (await headers()).get("user-agent");
   const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false; 
   try {
