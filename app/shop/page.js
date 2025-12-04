@@ -1,24 +1,48 @@
 import { regApi } from "../../src/axiosApiBoilerplates/regApi";
 import { headers } from "next/headers";
-import ClientShopPage from "./clientPage"
+import ClientShopPage from "./clientPage";
+import { notFound } from "next/navigation";
 
 export const metadata = {
-  title: "Lasu Mart-Shop"
-}
+  title: "Lasu Mart-Shop",
+};
 
 const Shop = async (searchParams) => {
-    const {cat, sort, order, price, page} = await searchParams
+  const sParams = await searchParams;
+  const { price, page, search, cat, order, sort } = sParams;
   const userAgent = (await headers()).get("user-agent");
-  const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false; 
+  const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false;
+  const acceptableValues = {
+    order: ["asc", "desc"],
+    sort: ["createdAt", "ratings", "price"],
+    cat: ["fashion", "food", "electronics", "sports", "accessories"],
+  };
+  const formattedPrice = price.split("-").length;
+  if (
+    !["order", "cat", "sort"].every((value) =>
+      acceptableValues[value].includes(sParams[value])
+    ) ||
+    formattedPrice !== 3 ||
+    Number(formattedPrice[0]) < 5 ||
+    Number(formattedPrice[2]) > 500000 ||
+    Number(formattedPrice[0]) > Number(formattedPrice[2]) ||
+    page < 1
+  )
+    return notFound();
+    
   try {
-    const products = await regApi.get("/product", {params: {
-      page: 1,
-      minPrice: 5,
-      maxPrice: 500000,
-      sortBy: "createdAt",
-      order: "desc",
-    }});
-    console.log(isMobile, "mobile", products.data)
+    const products = await regApi.get(search?.length > 0 && typeof search === "string" ? "/product/search" : "/product", {
+      params: {
+        page: page,
+        minPrice: Number(formattedPrice[0]) || 5,
+        maxPrice: Number(formattedPrice[2]) || 500000,
+        sortBy: sort || "createdAt",
+        order: order || "desc",
+        category: cat.split("+") ?? false,
+        ...(search?.length > 0 && typeof search === "string" ? {searchTerm: search} : {})
+      },
+    });
+    console.log(isMobile, "mobile", products.data);
     return (
       <>
         <ClientShopPage

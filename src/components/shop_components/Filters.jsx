@@ -3,16 +3,12 @@ import Button from "../reusable_components/Buttons";
 import "./scss/filters.scss";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  resetFilter,
-  updateFilter,
-} from "../../store_slices/shopProductsFiltersSlice";
 import { setPage } from "../../store_slices/productPageSlice";
-import { useRouter, usePathname } from "next/navigatiom"
+import { useRouter } from "next/navigatiom"
 
 const Filters = ({ closeFilterFn }) => {
     const router = useRouter()
-    const path = usePathname
+    const dispatch = useDispatch()
   const { currentSize } = useSelector((state) => state.screenSize);
   const categories = [
     "fashion",
@@ -20,7 +16,7 @@ const Filters = ({ closeFilterFn }) => {
     "electronics",
     "sports",
     "accessories",
-  ];
+  ] ;
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       sortType: "createdAt",
@@ -40,7 +36,7 @@ const Filters = ({ closeFilterFn }) => {
   }) => {
     dispatch(setPage(1));
     closeFilterFn ? closeFilterFn() : null;
-    router.push(`/shop?cat=${categories.reduce(curr, acc)=>curr + "+" + acc}&sort=${sortType}&order=${sortOrder}&price=${minPrice}-${maxPrice}&page=1`)
+    router.push(`/shop?cat=${categories.join("+")}&sort=${sortType}&order=${sortOrder}&price=${minPrice}-${maxPrice}&page=1`)
   };
 
   return (
@@ -109,8 +105,8 @@ const Filters = ({ closeFilterFn }) => {
           rounded="md"
           className="border-1 border-[var(--text-primary)] mr-2"
           buttonFn={() => {
-            dispatch(resetFilter());
             reset();
+            router.push("/shop")
           }}
         >
           Reset
