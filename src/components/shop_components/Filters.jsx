@@ -4,7 +4,7 @@ import "./scss/filters.scss";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../store_slices/productPageSlice";
-import { useRouter } from "next/navigatiom"
+import { useRouter } from "next/navigation"
 
 const Filters = ({ closeFilterFn }) => {
     const router = useRouter()
