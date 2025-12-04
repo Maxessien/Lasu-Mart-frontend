@@ -11,18 +11,21 @@ import { useSelector } from "react-redux";
 import Button from "../reusable_components/Buttons";
 import { useEffect, useState } from "react";
 import Link from "next/link"
+import { useRouter } from "next/navigation";
 
 const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
   const [accountDropDowm, setAccountDropDown] = useState(false);
   const { currentSize } = useSelector((state) => state.screenSize);
   const { isLoggedIn, userData } = useSelector((state) => state.userAuth);
   const { register, handleSubmit } = useForm();
+  const router = useRouter()
 
   const user = userData
   const loggedIn = isLoggedIn
 
   const submitSearchQuery = (data) => {
-    console.log(data);
+    if (!data.searchQuery || data?.searchQuery?.length < 1 || typeof data?.searchQuery !== "string") return
+    router.push(`/shop?search=${data.searchQuery}`)
   };
 
   useEffect(() => {
@@ -53,9 +56,9 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
               type="text"
               {...register("searchQuery")}
               placeholder="Search products"
-              className="rounded-full border-[--text-primary-light] border-3 lg:w-lg pl-8 py-1 text-base font-semibold text-[var(--text-primary-light)]"
+              className="rounded-full border-[--text-primary-light] border-3 lg:w-lg pl-8 py-1 focus:border-[--main-primary] text-base font-semibold text-[var(--text-primary-light)]"
             />
-            <button className="absolute top-0 h-full left-1 text-[var(--text-primary-light)] text-lg rounded-full p-2">
+            <button type="submit" className="absolute top-0 h-full left-1 hover:text-[var(--main-primary)] text-[var(--text-primary-light)] text-lg rounded-full p-2">
               <FaSearch />
             </button>
           </form>

@@ -4,12 +4,12 @@ import "./scss/filters.scss";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../store_slices/productPageSlice";
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Filters = ({ closeFilterFn }) => {
-    const router = useRouter()
-    const dispatch = useDispatch()
-    const searchParams = useSearchParams()
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
   const { currentSize } = useSelector((state) => state.screenSize);
   const categories = [
     "fashion",
@@ -37,19 +37,25 @@ const Filters = ({ closeFilterFn }) => {
   }) => {
     dispatch(setPage(1));
     closeFilterFn ? closeFilterFn() : null;
-    router.push(`/shop?cat=${categories.join("+")}&sort=${sortType}&order=${sortOrder}&price=${minPrice}-${maxPrice}&page=1`)
+    router.push(
+      `/shop${
+        searchParams.get("search")?.length > 0 &&
+        typeof searchParams.get("search") === "string"
+          ? `?search${searchParams.get("search")}&`
+          : "?"
+      }cat=${categories.join(
+        "+"
+      )}&sort=${sortType}&order=${sortOrder}&price=${minPrice}-${maxPrice}&page=1`
+    );
   };
 
   return (
     <>
-      <form
-        className={`filter_form`}
-        onSubmit={handleSubmit(submitFilter)}
-      >
+      <form className={`filter_form`} onSubmit={handleSubmit(submitFilter)}>
         {currentSize <= 768 && (
           <Button
             size="small"
-            buttonFn={() => closeFilterFn ? closeFilterFn() : null}
+            buttonFn={() => (closeFilterFn ? closeFilterFn() : null)}
           >
             <FaTimes />
           </Button>
@@ -107,7 +113,7 @@ const Filters = ({ closeFilterFn }) => {
           className="border-1 border-[var(--text-primary)] mr-2"
           buttonFn={() => {
             reset();
-            router.push("/shop")
+            router.push("/shop");
           }}
         >
           Reset

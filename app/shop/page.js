@@ -39,6 +39,7 @@ const Shop = async ({searchParams}) => {
   )
     return notFound();
   if (cat && !cat.split(" ").every((value)=>acceptableValues.cat.includes(value))) return notFound();
+  if (search && search.length < 1 && typeof search !== "string") return notFound();
   try {
     const products = await regApi.get(
       search?.length > 0 && typeof search === "string"

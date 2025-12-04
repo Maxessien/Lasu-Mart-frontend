@@ -2,6 +2,8 @@
 
 .shop_product {
   width: 100%;
+  max-width: rem(1200);
+    margin: auto;
   padding: rem(25) rem(20);
   h2{
     font-size: rem(30);
@@ -13,11 +15,11 @@
   }
   &_display {
     display: grid;
-    width: 100%;
-    max-width: rem(1200);
+    width: max-content;
+    max-width: 100%;
     margin: auto;
     grid-template-columns: repeat(auto-fit, minmax(rem(250), rem(300)));
-    justify-content: space-between;
+    justify-content: start;
     gap: rem(20);
     @include media(small){
         justify-content: center;
