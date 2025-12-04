@@ -9,7 +9,7 @@ export const metadata = {
 
 const Shop = async (searchParams) => {
   const sParams = await searchParams;
-  const { price, page, search, cat, order, sort } = sParams;
+  const { price="5-500000", page=1, search, cat, order="createdAt", sort="desc" } = sParams;
   const userAgent = (await headers()).get("user-agent");
   const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false;
   const acceptableValues = {
@@ -19,7 +19,7 @@ const Shop = async (searchParams) => {
   };
   const formattedPrice = price.split("-").length;
   if (
-    !["order", "cat", "sort"].every((value) =>
+    !["order", "sort"].every((value) =>
       acceptableValues[value].includes(sParams[value])
     ) ||
     formattedPrice !== 3 ||
@@ -29,7 +29,7 @@ const Shop = async (searchParams) => {
     page < 1
   )
     return notFound();
-    
+  if (cat && !acceptableValues.cat.includes(cat)) return notFound();
   try {
     const products = await regApi.get(search?.length > 0 && typeof search === "string" ? "/product/search" : "/product", {
       params: {
