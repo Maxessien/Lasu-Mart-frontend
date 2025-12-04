@@ -7,9 +7,17 @@ export const metadata = {
   title: "Lasu Mart-Shop",
 };
 
-const Shop = async (searchParams) => {
+const Shop = async ({searchParams}) => {
   const sParams = await searchParams;
-  const { price="5-500000", page=1, search, cat, order="createdAt", sort="desc" } = sParams;
+  console.log(sParams)
+  const {
+    price = "10-400000",
+    page = 1,
+    search,
+    cat,
+    order = "desc",
+    sort = "createdAt",
+  } = sParams;
   const userAgent = (await headers()).get("user-agent");
   const isMobile = /Mobi|Android|iPhone/i.test(userAgent) || false;
   const acceptableValues = {
@@ -17,31 +25,39 @@ const Shop = async (searchParams) => {
     sort: ["createdAt", "ratings", "price"],
     cat: ["fashion", "food", "electronics", "sports", "accessories"],
   };
-  const formattedPrice = price.split("-").length;
+  const formattedPrice = price.split("-");
+  console.log(cat?.split(" "))
   if (
     !["order", "sort"].every((value) =>
-      acceptableValues[value].includes(sParams[value])
+      acceptableValues[value].includes(value === "sort" ? sort : order)
     ) ||
-    formattedPrice !== 3 ||
+    formattedPrice.length !== 2 ||
     Number(formattedPrice[0]) < 5 ||
-    Number(formattedPrice[2]) > 500000 ||
-    Number(formattedPrice[0]) > Number(formattedPrice[2]) ||
+    Number(formattedPrice[1]) > 500000 ||
+    Number(formattedPrice[0]) > Number(formattedPrice[1]) ||
     page < 1
   )
     return notFound();
-  if (cat && !acceptableValues.cat.includes(cat)) return notFound();
+  if (cat && !cat.split(" ").every((value)=>acceptableValues.cat.includes(value))) return notFound();
   try {
-    const products = await regApi.get(search?.length > 0 && typeof search === "string" ? "/product/search" : "/product", {
-      params: {
-        page: page,
-        minPrice: Number(formattedPrice[0]) || 5,
-        maxPrice: Number(formattedPrice[2]) || 500000,
-        sortBy: sort || "createdAt",
-        order: order || "desc",
-        category: cat.split("+") ?? false,
-        ...(search?.length > 0 && typeof search === "string" ? {searchTerm: search} : {})
-      },
-    });
+    const products = await regApi.get(
+      search?.length > 0 && typeof search === "string"
+        ? "/product/search"
+        : "/product",
+      {
+        params: {
+          page: page,
+          minPrice: Number(formattedPrice[0]) || 5,
+          maxPrice: Number(formattedPrice[2]) || 500000,
+          sortBy: sort || "createdAt",
+          order: order || "desc",
+          category: cat?.split(" ") ?? false,
+          ...(search?.length > 0 && typeof search === "string"
+            ? { searchTerm: search }
+            : {}),
+        },
+      }
+    );
     console.log(isMobile, "mobile", products.data);
     return (
       <>

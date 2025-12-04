@@ -4,11 +4,12 @@ import "./scss/filters.scss";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../store_slices/productPageSlice";
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 const Filters = ({ closeFilterFn }) => {
     const router = useRouter()
     const dispatch = useDispatch()
+    const searchParams = useSearchParams()
   const { currentSize } = useSelector((state) => state.screenSize);
   const categories = [
     "fashion",
@@ -16,14 +17,14 @@ const Filters = ({ closeFilterFn }) => {
     "electronics",
     "sports",
     "accessories",
-  ] ;
+  ];
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      sortType: "createdAt",
-      sortOrder: "desc",
-      minPrice: 0,
-      maxPrice: 200000,
-      categories: categories,
+      sortType: searchParams.get("sort") || "createdAt",
+      sortOrder: searchParams.get("order") || "desc",
+      minPrice: searchParams.get("price")?.split("-")[0] || 5,
+      maxPrice: searchParams.get("price")?.split("-")[1] || 400000,
+      categories: searchParams.get("cat") || categories,
     },
   });
 

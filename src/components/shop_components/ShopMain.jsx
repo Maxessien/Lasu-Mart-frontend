@@ -16,7 +16,7 @@ const ShopMain = ({ initialShopData }) => {
   return (
     <>
       <Products
-        initialProductsData={initialShopData}
+        initialProductsData={initialShopData?.data}
         pageNumber={initCurrentPages}
       />  
       <div className="flex items-center pb-8 justify-center gap-3 mt-4 w-full">

@@ -1,27 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import ProductCards from "../home_components/ProductCards";
-import Loader from "./../reusable_components/Loader";
 import "./scss/products.scss";
-import { setTotalPages } from "../../store_slices/productPageSlice";
-import { fetchAllProducts } from "../../utils/productsFectchingHelpers";
 
-const Products = ({ pageNumber=1, initialProductsData }) => {
-
-
-  const productsData = initialProductsData
-
-
-  if (isFetching) {
-    return (
-      <>
-        <Loader size={"min-h-[70vh] w-full"} />
-      </>
-    );
-  }
+const Products = ({ initialProductsData }) => {
+  const productsData = initialProductsData;
 
   return (
     <>
-    {console.log(initialProductsData)}
+      {console.log(initialProductsData)}
       <section className="shop_product">
         <h2>Shop</h2>
         <div className="shop_product_display">
