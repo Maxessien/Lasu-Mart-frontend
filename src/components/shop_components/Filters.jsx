@@ -41,7 +41,7 @@ const Filters = ({ closeFilterFn }) => {
       `/shop${
         searchParams.get("search")?.length > 0 &&
         typeof searchParams.get("search") === "string"
-          ? `?search${searchParams.get("search")}&`
+          ? `?search=${searchParams.get("search")}&`
           : "?"
       }cat=${categories.join(
         "+"

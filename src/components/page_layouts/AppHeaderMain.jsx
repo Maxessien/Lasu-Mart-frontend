@@ -17,7 +17,7 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
   const [accountDropDowm, setAccountDropDown] = useState(false);
   const { currentSize } = useSelector((state) => state.screenSize);
   const { isLoggedIn, userData } = useSelector((state) => state.userAuth);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm({defaultValues: {searchQuery: ""}});
   const router = useRouter()
 
   const user = userData
@@ -26,6 +26,7 @@ const AppHeaderMain = ({ navToggle, navState, signOutFn }) => {
   const submitSearchQuery = (data) => {
     if (!data.searchQuery || data?.searchQuery?.length < 1 || typeof data?.searchQuery !== "string") return
     router.push(`/shop?search=${data.searchQuery}`)
+    reset()
   };
 
   useEffect(() => {
